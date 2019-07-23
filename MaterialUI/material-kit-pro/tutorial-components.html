@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" href="assets/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Components Documentation - Material Kit by Creative Tim</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+	<!--     Fonts and icons     -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+	<!-- CSS Files -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/material-kit.css?v=1.2.1" rel="stylesheet"/>
+	<link href="assets/assets-for-demo/demo.css" rel="stylesheet" />
+
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+	<style>
+		pre.prettyprint{
+		    background-color: #eee;
+		    border: 0px;
+		    margin-bottom: 60px;
+		    margin-top: 30px;
+		    padding: 20px;
+		    text-align: left;
+		}
+		.str{
+		    color: #05AE0E;
+		}
+		.tag, .pln, .kwd{
+		    color: #3472F7;
+		}
+		.atn{
+		    color: #2C93FF;
+		}
+		.pln{
+		    color: #333;
+		}
+		.com{
+		    color: #999;
+		}
+		.space-top{
+		    margin-top: 50px;
+		}
+		.area-line{
+		    border: 1px solid #999;
+		    border-left: 0;
+		    border-right: 0;
+		    color: #666;
+		    display: block;
+		    margin-top: 20px;
+		    padding: 8px 0;
+		    text-align: center;
+		}
+		.area-line a{
+		    color: #666;
+		}
+		.container-fluid{
+		    padding-right: 15px;
+		    padding-left: 15px;
+		}
+		.table-shopping .td-name{
+			min-width: 130px;
+		}
+		.pick-class-label{
+            border-radius: 8px;
+            border: 1px solid #999;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 75%;
+            font-weight: bold;
+            line-height: 1;
+            margin-right: 10px;
+            padding: 23px;
+            text-align: center;
+            vertical-align: baseline;
+            white-space: nowrap;
+        }
+
+	</style>
+</head>
+
+<body class="components-page">
+
+<nav class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll" color-on-scroll="200" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button id="menu-toggle" type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar bar1"></span>
+        <span class="icon-bar bar2"></span>
+        <span class="icon-bar bar3"></span>
+      </button>
+      <a href="https://www.creative-tim.com">
+           <div class="logo-container">
+                <div class="logo">
+                    <img src="assets/img/logo.png" alt="Creative Tim Logo">
+                </div>
+                <div class="brand">
+                    Creative Tim
+                </div>
+            </div>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+		<ul  class="nav navbar-nav navbar-right">
+			<li>
+				<a href="https://github.com/creativetimofficial/material-kit-pro/issues">
+					<i class="fa fa-github-alt"></i> Report Issue
+				</a>
+			</li>
+			<li>
+				<a href="http://demos.creative-tim.com/material-dashboard/examples/dashboard.html">Get Material Dashboard</a>
+			</li>
+    	</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	<div class="page-header header-filter" style="background-image: url('assets/img/bg0.jpg');">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<h1 class="title">Material Kit PRO</h1>
+					<h3 class="category">v1.2.1</h3>
+					<h4 class="description text-center">We are constantly doing updates for you.</h4>
+					<a href="http://demos.creative-tim.com/material-kit-pro/tutorial-components.html?ref=local-documentation-mk" class="btn btn-neutral btn-lg btn-round btn-fill" target="_blank">View Documentation</a>
+					<!-- <h1 class="title">Tutorial and Componenets</h1>
+					<h3>Documentation for v1.2.0</h3> -->
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer footer-transparent">
+	        <div class="container">
+	            <nav class="pull-left">
+	                <ul>
+						<li>
+							<a href="http://www.creative-tim.com">
+								Creative Tim
+							</a>
+						</li>
+						<li>
+							<a href="http://presentation.creative-tim.com">
+							   About Us
+							</a>
+						</li>
+						<li>
+							<a href="http://blog.creative-tim.com">
+							   Blog
+							</a>
+						</li>
+						<li>
+							<a href="http://www.creative-tim.com/license">
+								Licenses
+							</a>
+						</li>
+	                </ul>
+	            </nav>
+	            <div class="social-area pull-right">
+	                <a class="btn btn-social btn-twitter btn-simple" href="https://twitter.com/CreativeTim">
+	                    <i class="fa fa-twitter"></i>
+	                </a>
+	                <a class="btn btn-social btn-facebook btn-simple" href="https://www.facebook.com/CreativeTim">
+	                    <i class="fa fa-facebook-square"></i>
+	                </a>
+	                <a class="btn btn-social btn-google btn-simple" href="https://plus.google.com/+CreativetimPage">
+	                    <i class="fa fa-google-plus"></i>
+	                </a>
+	            </div>
+	            <div class="copyright">
+	                &copy; <script>document.write(new Date().getFullYear())</script> Creative Tim, made with love
+	            </div>
+	        </div>
+	    </footer>
+	</div>
+
+<!-- Classic Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-simple">Nice Button</button>
+				<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  End Modal -->
+
+<!-- small modal -->
+<div class="modal fade" id="smallAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-small ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5>Are you sure you want to do this? </h5>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-simple" data-dismiss="modal">Never mind</button>
+        <button type="button" class="btn btn-success btn-simple">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--    end small modal -->
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="card card-signup card-plain">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+
+					<div class="header header-primary text-center">
+						<h4 class="card-title">Log in</h4>
+						<div class="social-line">
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-facebook-square"></i>
+							</a>
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-twitter"></i>
+							</a>
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-google-plus"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<form class="form" method="" action="">
+						<p class="description text-center">Or Be Classical</p>
+						<div class="card-content">
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">face</i>
+								</span>
+								<input type="text" class="form-control" placeholder="First Name...">
+							</div>
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">email</i>
+								</span>
+								<input type="text" class="form-control" placeholder="Email...">
+							</div>
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">lock_outline</i>
+								</span>
+								<input type="password" placeholder="Password..." class="form-control" />
+							</div>
+
+							<!-- If you want to add a checkbox to this form, uncomment this code
+
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="optionsCheckboxes" checked>
+									Subscribe to newsletter
+								</label>
+							</div> -->
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer text-center">
+					<a href="#pablo" class="btn btn-primary btn-simple btn-wd btn-lg">Get Started</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  End Modal -->
+
+<!-- notice modal -->
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-notice">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+        <h5 class="modal-title" id="myModalLabel">How Do You Become an Affiliate?</h5>
+      </div>
+      <div class="modal-body">
+        <div class="instruction">
+            <div class="row">
+                <div class="col-md-8">
+                     <strong>1. Register</strong>
+                     <p>The first step is to create an account at <a href="http://www.creative-tim.com/">Creative Tim</a>. You can choose a social network or go for the classic version, whatever works best for you.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="picture">
+                        <img src="assets/img/dg1.jpg" alt="Thumbnail Image"  class="img-rounded img-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="instruction">
+            <div class="row">
+                <div class="col-md-8">
+                        <strong>2. Apply</strong>
+                        <p>The first step is to create an account at <a href="http://www.creative-tim.com/">Creative Tim</a>. You can choose a social network or go for the classic version, whatever works best for you.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="picture">
+                        <img src="assets/img/dg2.jpg" alt="Thumbnail Image"  class="img-rounded img-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>If you have more questions, don't hesitate to contact us or send us a tweet @creativetim. We're here to help!</p>
+      </div>
+      <div class="modal-footer text-center">
+            <button type="button" class="btn btn-info btn-round" data-dismiss="modal">Sounds good!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end notice modal -->
+
+<!-- Register Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-signup">
+	    <div class="modal-content">
+			<div class="card card-signup card-plain">
+				<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+					<h2 class="modal-title card-title text-center" id="myModalLabel">Register</h2>
+		      	</div>
+		      	<div class="modal-body">
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<div class="info info-horizontal">
+								<div class="icon icon-rose">
+									<i class="material-icons">timeline</i>
+								</div>
+								<div class="description">
+									<h4 class="info-title">Marketing</h4>
+									<p class="description">
+										We've created the marketing campaign of the website. It was a very interesting collaboration.
+									</p>
+								</div>
+							</div>
+
+							<div class="info info-horizontal">
+								<div class="icon icon-primary">
+									<i class="material-icons">code</i>
+								</div>
+								<div class="description">
+									<h4 class="info-title">Fully Coded in HTML5</h4>
+									<p class="description">
+										We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
+									</p>
+								</div>
+							</div>
+
+							<div class="info info-horizontal">
+								<div class="icon icon-info">
+									<i class="material-icons">group</i>
+								</div>
+								<div class="description">
+									<h4 class="info-title">Built Audience</h4>
+									<p class="description">
+										There is also a Fully Customizable CMS Admin Dashboard for this product.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-5">
+							<div class="social text-center">
+								<button class="btn btn-just-icon btn-round btn-twitter">
+									<i class="fa fa-twitter"></i>
+								</button>
+								<button class="btn btn-just-icon btn-round btn-dribbble">
+									<i class="fa fa-dribbble"></i>
+								</button>
+								<button class="btn btn-just-icon btn-round btn-facebook">
+									<i class="fa fa-facebook"> </i>
+								</button>
+								<h4> or be classical </h4>
+							</div>
+
+							<form class="form" method="" action="">
+								<div class="card-content">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+										<input type="text" class="form-control" placeholder="First Name...">
+									</div>
+
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">email</i>
+										</span>
+										<input type="text" class="form-control" placeholder="Email...">
+									</div>
+
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">lock_outline</i>
+										</span>
+										<input type="password" placeholder="Password..." class="form-control" />
+									</div>
+
+									<!-- If you want to add a checkbox to this form, uncomment this code -->
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" name="optionsCheckboxes" checked>
+											I agree to the <a href="#something">terms and conditions</a>.
+										</label>
+									</div>
+								</div>
+								<div class="modal-footer text-center">
+									<a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+								</div>
+							</form>
+						</div>
+					</div>
+		      	</div>
+			</div>
+	    </div>
+	</div>
+</div>
+<!--  End Modal -->
+
+</body>
+	<!--   Core JS Files   -->
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/material.min.js"></script>
+
+	<!--    Plugin for Date Time Picker and Full Calendar Plugin   -->
+	<script src="assets/js/moment.min.js"></script>
+
+	<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/   -->
+	<script src="assets/js/nouislider.min.js" type="text/javascript"></script>
+
+	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker   -->
+	<script src="assets/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+
+	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select   -->
+	<script src="assets/js/bootstrap-selectpicker.js" type="text/javascript"></script>
+
+	<!--	Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/   -->
+	<script src="assets/js/bootstrap-tagsinput.js"></script>
+
+	<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
+	<script src="assets/js/jasny-bootstrap.min.js"></script>
+
+	<!--    Plugin For Google Maps   -->
+	<script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+
+
+
+	<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
+	<script src="assets/js/material-kit.js?v=1.2.1" type="text/javascript"></script>
+
+    <script>
+        var header_height;
+        var fixed_section;
+        var floating = false;
+
+        $().ready(function(){
+            suggestions_distance = $("#suggestions").offset();
+            pay_height = $('.fixed-section').outerHeight();
+
+			$(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
+
+			// the body of this function is in assets/material-kit.js
+			materialKit.initSliders();
+			materialKit.initFormExtendedDatetimepickers();
+        });
+    </script>
+
+</html>
