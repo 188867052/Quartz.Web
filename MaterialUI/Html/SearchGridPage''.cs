@@ -141,7 +141,8 @@
             }
 
             var theadTag = TagHelper.Create(Tag.thead, TagHelper.Create(Tag.tr, thead.ToString()));
-            var tbodyTag = TagHelper.Create(Tag.tbody, tbody.ToString());
+            string tbodyHtml = tbody.ToString();
+            var tbodyTag = string.IsNullOrEmpty(tbodyHtml) ? TagHelper.Create(Tag.tbody) : TagHelper.Create(Tag.tbody, tbodyHtml);
             var table = TagHelper.Create(Tag.table, new TagAttribute(Attr.Class, "table table-striped"), theadTag, tbodyTag);
             var responsive = TagHelper.Div("table-responsive", table);
             responsive.PostElement.AppendHtml(new Pagination().ToHtml());
