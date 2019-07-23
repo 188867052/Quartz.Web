@@ -146,12 +146,12 @@
             var databaseModel = databaseModelFactory.Create(AppSettings.Connection, new List<string>(), new List<string>());
             Model model = (Model)scaffoldingModelFactory.Create(databaseModel, false);
 
-            this.DbContextCode = dbContextGenerator.WriteCode(model, $"MaterialKit.{folder}", "MaterialKitContext", AppSettings.Connection, false, false);
+            this.DbContextCode = dbContextGenerator.WriteCode(model, $"{nameof(MaterialUI)}.{folder}", $"{nameof(MaterialUI)}Context", AppSettings.Connection, false, false);
             this.EntityCodeList = new List<string>();
             this.ModelBuilderEntities = new List<string>();
             foreach (var entityType in model.GetEntityTypes())
             {
-                var entityCode = entityTypeGenerator.WriteCode(entityType, $"MaterialKit.{folder}", false);
+                var entityCode = entityTypeGenerator.WriteCode(entityType, $"{nameof(MaterialUI)}.{folder}", false);
                 this.EntityCodeList.Add(entityCode);
             }
 
@@ -167,7 +167,7 @@
                 this.directory = Path.Combine(Environment.CurrentDirectory, folder);
             }
 
-            this.WriteCode(databaseModel, $"MaterialKit.{folder}");
+            this.WriteCode(databaseModel, $"{nameof(MaterialUI)}.{folder}");
         }
 
         internal void WriteCode(DatabaseModel databaseModel, string @namespace)
@@ -192,10 +192,14 @@
             sb.AppendLine("        public static Dictionary<string, string> Mapping = new Dictionary<string, string>");
             sb.AppendLine("        {");
             var tables = databaseModel.Tables.OrderBy(o => o.Name).ToList();
-            foreach (var item in tables)
+            foreach (var table in tables)
             {
-                string entityName = entityNames[tables.IndexOf(item)];
-                sb.AppendLine($"            {{ \"{entityName}\", \"{item.Name}\" }},");
+                string entityName = entityNames[tables.IndexOf(table)];
+                sb.AppendLine($"            {{ \"{entityName}\", \"{table.Name}\" }},");
+                foreach (var column in table.Columns)
+                {
+                    sb.AppendLine($"            {{ \"{entityName}.{GetPerpertyNameByName(entityName, column.Name)}\", \"{column.Name}\" }},");
+                }
             }
 
             sb.AppendLine("        };");
@@ -222,6 +226,36 @@
             var entityCode = this.EntityCodeList.FirstOrDefault(o => this.Predicate(o, entityName));
             string perperty = Regex.Match(entityCode, $"public[ ][^ ]+[ ]{perpertyName} {{ get; set; }}").Value;
             return perperty;
+        }
+
+        // TODO: it is better to get name from OnModelCreating method.
+        internal string GetPerpertyNameByName(string entityName, string columnName)
+        {
+            TryGetString(this.DbContextCode, $"modelBuilder.Entity<{entityName}", @";
+            });", out string entityCode);
+
+            bool success = TryGetString(entityCode, "entity.Property(e => e.", $"HasColumnName(\"{columnName}\")", out string resultstr);
+            if (success)
+            {
+                return resultstr.Split(')')[0];
+            }
+            return columnName;
+        }
+
+        private bool TryGetString(string input, string start, string end, out string str)
+        {
+            input = start + input.Split(start).LastOrDefault(o => o.Contains(end));
+            int beginIndex = input.LastIndexOf(start) + start.Length;
+            int endIndex = input.IndexOf(end, beginIndex);
+            if (endIndex > 0)
+            {
+                str = input.Substring(beginIndex, endIndex - beginIndex);
+                return true;
+            }
+
+            str = "";
+
+            return false;
         }
 
         internal void AddNamespaces(string entityName, string @namespace)

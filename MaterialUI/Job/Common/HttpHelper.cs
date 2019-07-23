@@ -69,7 +69,8 @@
             }
         }
 
-        public async Task<HttpResponseMessage> PostAsync<T>(string url, T content, Dictionary<string, string> headers = null) where T : class
+        public async Task<HttpResponseMessage> PostAsync<T>(string url, T content, Dictionary<string, string> headers = null)
+            where T : class
         {
             return await this.PostAsync(url, JsonConvert.SerializeObject(content), headers);
         }

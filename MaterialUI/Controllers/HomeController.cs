@@ -9,7 +9,7 @@ namespace MaterialUI.Controllers
     [ResponseCache(Duration = 3600)]
     public class HomeController : StandardController
     {
-        public HomeController(IGetHtml getHtml, MaterialKitContext dbContext)
+        public HomeController(IGetHtml getHtml, MaterialUIContext dbContext)
             : base( dbContext)
         {
             this.getHtml = getHtml;

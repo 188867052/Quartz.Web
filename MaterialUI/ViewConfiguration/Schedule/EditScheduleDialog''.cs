@@ -1,10 +1,10 @@
 ﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
-    using Entity;
     using Enums;
     using Html.TextBoxs;
     using Javascript;
+    using MaterialUI.Entity;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
     using Routes;
     using Resource = Resources.EditScheduleConfigurationResource;

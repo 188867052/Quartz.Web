@@ -162,7 +162,6 @@
 
                 if (config.UsePascalCase)
                 {
-
                     sw.WriteLine(prefix + "[JsonProperty(\"{0}\")]", field.JsonMemberName);
                 }
 
@@ -189,7 +188,6 @@
 
             foreach (var field in type.Fields)
             {
-
                 string variable = null;
                 if (field.Type.MustCache)
                 {

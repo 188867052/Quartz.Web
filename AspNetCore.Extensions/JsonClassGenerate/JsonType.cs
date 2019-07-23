@@ -7,7 +7,6 @@
 
     public class JsonType
     {
-
         private JsonType(IJsonClassGeneratorConfig generator)
         {
             this.generator = generator;
@@ -16,7 +15,6 @@
         public JsonType(IJsonClassGeneratorConfig generator, JToken token)
             : this(generator)
         {
-
             Type = GetFirstTypeEnum(token);
 
             if (Type == JsonTypeEnum.Array)
@@ -41,7 +39,6 @@
 
         public static JsonType GetCommonType(IJsonClassGeneratorConfig generator, JToken[] tokens)
         {
-
             if (tokens.Length == 0) return new JsonType(generator, JsonTypeEnum.NonConstrained);
 
             var common = new JsonType(generator, tokens[0]).MaybeMakeNullable(generator);

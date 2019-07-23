@@ -5,7 +5,6 @@ namespace MaterialUI.Controllers
     using System.IO;
     using System.Linq;
     using System.Web;
-    using AppSettingManager;
     using AspNetCore.Extensions;
     using AspNetCore.Extensions.JsonClassGenerate;
     using MaterialUI.Entity;
@@ -23,7 +22,7 @@ namespace MaterialUI.Controllers
         private readonly IConfiguration configuration;
         private readonly IHostingEnvironment env;
 
-        public GeneratorController(IConfiguration configuration, IHostingEnvironment hostingEnvironment, MaterialKitContext materialKitContext)
+        public GeneratorController(IConfiguration configuration, IHostingEnvironment hostingEnvironment, MaterialUIContext materialKitContext)
             : base(materialKitContext)
         {
             this.configuration = configuration;
@@ -35,7 +34,7 @@ namespace MaterialUI.Controllers
         public IActionResult ShowClass()
         {
             var generatedCode = RouteHelper.Generate(AppSettingManager.AppSettings.Instance.BaseAddress).Result;
-            string path = Directory.GetFiles(this.env.WebRootPath, "Routes.Generated.cs", SearchOption.AllDirectories).FirstOrDefault();
+            string path = Directory.GetFiles(this.env.ContentRootPath, "Routes.Generated.cs", SearchOption.AllDirectories).FirstOrDefault();
             System.IO.File.WriteAllText(path, generatedCode);
             string html = this.HigntLightHtml(HttpUtility.HtmlEncode(generatedCode), "cs");
             return this.HtmlResult(html);
@@ -46,7 +45,7 @@ namespace MaterialUI.Controllers
         public IActionResult GenerateEnum()
         {
             var generatedCode = EnumHelper.Generate();
-            string path = Directory.GetFiles(this.env.WebRootPath, "Enums.Generated.cs", SearchOption.AllDirectories).FirstOrDefault();
+            string path = Directory.GetFiles(this.env.ContentRootPath, "Enums.Generated.cs", SearchOption.AllDirectories).FirstOrDefault();
             System.IO.File.WriteAllText(path, generatedCode);
             string html = this.HigntLightHtml(HttpUtility.HtmlEncode(generatedCode), "cs");
             return this.HtmlResult(html);
@@ -57,7 +56,7 @@ namespace MaterialUI.Controllers
         public IActionResult ShowScript()
         {
             var generatedCode = ScriptHelper.GenerateScript(this.env.WebRootPath);
-            string path = Directory.GetFiles(this.env.WebRootPath, "Files.Generated.cs", SearchOption.AllDirectories).FirstOrDefault();
+            string path = Directory.GetFiles(this.env.ContentRootPath, "Files.Generated.cs", SearchOption.AllDirectories).FirstOrDefault();
             System.IO.File.WriteAllText(path, generatedCode);
 
             string html = this.HigntLightHtml(HttpUtility.HtmlEncode(generatedCode), "cs");

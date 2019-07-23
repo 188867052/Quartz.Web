@@ -5,8 +5,8 @@ namespace MaterialUI.Framework
     using System.Text;
     using System.Threading.Tasks;
     using AspNetCore.Extensions;
-    using MaterialUI.Controllers;
     using MaterialUI.Entity;
+    using MaterialUI.Controllers;
     using MaterialUI.Files;
     using MaterialUI.Html;
     using MaterialUI.Html.Buttons;
@@ -28,12 +28,12 @@ namespace MaterialUI.Framework
         protected IGetHtml getHtml;
         protected IScheduler scheduler;
 
-        protected StandardController(MaterialKitContext dbContext)
+        protected StandardController(MaterialUIContext dbContext)
         {
             this.DbContext = dbContext;
         }
 
-        public MaterialKitContext DbContext { get; }
+        public MaterialUIContext DbContext { get; }
 
         protected IActionResult HtmlResult(string html)
         {
@@ -90,7 +90,7 @@ namespace MaterialUI.Framework
                 html = html.Replace("{{Checkbox}}", Checkbox.Generate());
                 html = html.Replace("{{RadioButton}}", RadioButton.Generate());
                 html = html.Replace("{{ToggleButton}}", ToggleButton.Generate());
-                html = html.Replace("{{Pagination}}", new Pagination().ToHtml());
+                html = html.Replace("{{Pagination}}", new Pagination().ToHtml(1, 10, 100));
                 html = html.Replace("{{Dropdown}}", new Dropdown().ToHtml());
                 html = html.Replace("{{Textarea}}", new Textarea().ToHtml());
                 html = html.Replace("{{SelectPicker}}", new SingleSelect().ToHtml());

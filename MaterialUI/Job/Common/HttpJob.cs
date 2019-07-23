@@ -76,7 +76,7 @@
                 }
                 else
                 {
-                    MaterialKitContext db = new MaterialKitContext();
+                    MaterialUIContext db = new MaterialUIContext();
                     db.Log.Add(new MaterialUI.Entity.Log()
                     {
                         CreateTime = DateTime.Now,

@@ -53,7 +53,7 @@
         private static string GetConvertedFileNamespace(string name)
         {
             string relativeName = GetRelativeName(name);
-            IEnumerable<string> list0 = new List<string>() { "MaterialKit", "Files" };
+            IEnumerable<string> list0 = new List<string>() { nameof(MaterialUI), "Files" };
             IList<string> list = relativeName.Split('.', '-', '/').Where(o => !string.IsNullOrEmpty(o)).ToList();
             list0 = list0.Concat(list);
             return string.Join(".", list0.Select(o => char.ToUpper(o[0]) + o.Substring(1)));

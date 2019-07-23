@@ -35,7 +35,8 @@
             return expression.Body.GetName();
         }
 
-        public static string GetPropertyName<T, TEnumType>(this Expression<Func<T, TEnumType>> expression) where TEnumType : Enum
+        public static string GetPropertyName<T, TEnumType>(this Expression<Func<T, TEnumType>> expression)
+            where TEnumType : Enum
         {
             return expression.Body.GetName();
         }

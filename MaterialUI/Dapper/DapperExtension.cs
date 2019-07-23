@@ -1,35 +1,78 @@
 ﻿namespace MaterialUI.Dapper
 {
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Linq;
     using AppSettingManager;
     using global::Dapper;
+    using global::Dapper.Common;
     using MaterialUI.Entity;
-    using Microsoft.EntityFrameworkCore;
 
     public partial class DapperExtension
     {
         private static IDbConnection Connection => new SqlConnection(AppSettings.Connection);
 
+        private static IDbContext DbContext => DbContextFactory.GetDbContext(nameof(DataSourceType.SqlServer));
+
         static DapperExtension()
         {
-            var properties = typeof(MaterialKitContext).GetProperties();
-            foreach (var property in properties)
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+            DbContextFactory.AddDataSource(new DataSource()
             {
-                if (property.ToString().Contains(typeof(DbSet<>).FullName))
-                {
-                    var type = property.PropertyType.GenericTypeArguments[0];
-                    SqlMapper.SetTypeMap(type, new ColumnAttributeTypeMapper(type));
-                }
+                SourceType = DataSourceType.SqlServer,
+                Source = () => Connection,
+                UseProxy = true,
+                Name = DataSourceType.SqlServer.ToString(),
+            });
+        }
+
+        // TODO: Table name may not be id.
+        public static T Find<T>(int id)
+        {
+            using (Connection)
+            {
+                string tableName = MetaData.Mapping[typeof(T).Name];
+                string sql = $"SELECT * FROM {tableName} WHERE id=@id";
+                return Connection.QueryFirstOrDefault<T>(sql, new { id });
             }
         }
 
-        // TODO: may not work when rule changed.
-        internal static string ToProperty(string field)
+        public static IEnumerable<T> FindAll<T>()
         {
-            var array = field.Split('_');
-            return array.Aggregate<string, string>(default, (current, item) => current + char.ToUpper(item[0]) + item.Substring(1));
+            using (Connection)
+            {
+                string tableName = MetaData.Mapping[typeof(T).Name];
+                string sql = $"SELECT * FROM {tableName}";
+                return Connection.Query<T>(sql);
+            }
+        }
+
+        public static int Count<T>()
+            where T : class
+        {
+            return Query<T>().Count();
+        }
+
+        public static IQueryable<T> Page<T>(int index, int count, out int total)
+            where T : class
+        {
+            return Query<T>().Page(index, count, out total);
+        }
+
+        public static IQueryable<T> Query<T>()
+        where T : class
+        {
+            return DbContext.From<T>();
+        }
+
+        public static IEnumerable<T> Page<T>(int size)
+        {
+            using (Connection)
+            {
+                string tableName = MetaData.Mapping[typeof(T).Name];
+                string sql = $"SELECT TOP {size} * FROM {tableName}";
+                return Connection.Query<T>(sql);
+            }
         }
     }
 }

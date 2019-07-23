@@ -8,7 +8,6 @@
     [DebuggerDisplay("MemberName = {MemberName}/{JsonMemberName}")]
     public class FieldInfo
     {
-
         public FieldInfo(IJsonClassGeneratorConfig generator, string jsonMemberName, JsonType type, bool usePascalCase, IList<object> Examples)
         {
             this.generator = generator;
@@ -44,19 +43,16 @@
                     innermost.GetReaderName(),
                     -1,
                     innermost.GetTypeName(),
-                    field.Type.GetTypeName()
-                    );
+                    field.Type.GetTypeName());
             }
             else if (field.Type.Type == JsonTypeEnum.Dictionary)
             {
-
                 return string.Format("({1})JsonClassHelper.ReadDictionary<{2}>(JsonClassHelper.GetJToken<JObject>({0}, \"{3}\"))",
                     jobject,
                     field.Type.GetTypeName(),
                     field.Type.InternalType.GetTypeName(),
                     field.JsonMemberName,
-                    field.Type.GetTypeName()
-                    );
+                    field.Type.GetTypeName());
             }
             else
             {

@@ -228,9 +228,9 @@ namespace MaterialUI.Routes
         public const string ModifyJob = "/Schedule/ModifyJob";
 
         /// <summary>
-        /// <see cref="Controllers.ScheduleController.GetJobLogs"/>
+        /// <see cref="Controllers.ScheduleController.LogDialog"/>
         /// </summary>
-        public const string GetJobLogs = "/Schedule/GetJobLogs";
+        public const string GetJobLogs = "/Schedule/LogDialog";
 
         /// <summary>
         /// <see cref="Controllers.ScheduleController.StartSchedule"/>

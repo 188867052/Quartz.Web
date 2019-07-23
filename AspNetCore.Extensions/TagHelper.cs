@@ -180,7 +180,6 @@
 
         public static IHtmlContent Content(params IHtmlContent[] htmlContent)
         {
-
             TagHelperOutput tagHelperOutput = new TagHelperOutput("div",
                                                                   new TagHelperAttributeList { },
                                                                   getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
@@ -205,7 +204,6 @@
 
         public static IHtmlContent Combine(params string[] content)
         {
-
             TagHelperOutput tagHelperOutput = new TagHelperOutput("div",
                                                                   new TagHelperAttributeList { },
                                                                   getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));

@@ -2,7 +2,9 @@ namespace XUnitTest
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Linq;
+    using Dapper.Common;
     using MaterialUI.Entity;
     using MaterialUI.GridConfigurations.Schedule;
     using MaterialUI.Html.Buttons;
@@ -18,6 +20,15 @@ namespace XUnitTest
         [Fact]
         public void ManualRotatingCards()
         {
+            string str = $@"                entity.Property(e => e.Name)
+                    .HasName(Icon_name_unique)
+                    .IsUnique(); ";
+            string begin = "entity.Property(e => e.";
+            string end = "Icon_name_unique";
+            int beginIndex = str.IndexOf(begin) + begin.Length;
+            int endIndex = str.IndexOf(end);
+            string resultstr = str.Substring(beginIndex, endIndex - beginIndex);
+
             var modal = new ManualRotatingCard();
             var a = modal.ToHtml();
         }
@@ -110,13 +121,6 @@ namespace XUnitTest
         }
 
         [Fact]
-        public void Pagination()
-        {
-            var modal = new Pagination();
-            var a = modal.ToHtml();
-        }
-
-        [Fact]
         public void Dropdown()
         {
             var modal = new Dropdown();
@@ -161,7 +165,7 @@ namespace XUnitTest
         [Fact]
         public void Schedule()
         {
-            MaterialKitContext dbContext = new MaterialKitContext();
+            MaterialUIContext dbContext = new MaterialUIContext();
             var model = dbContext.TaskSchedule.Take(1).ToList();
             ScheduleGridConfiguration<TaskSchedule> grid = new ScheduleGridConfiguration<TaskSchedule>(model);
             var html = grid.Render();

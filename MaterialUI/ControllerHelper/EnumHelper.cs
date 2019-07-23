@@ -7,14 +7,14 @@
 
     internal static class EnumHelper
     {
-        private static readonly MaterialKitContext Context = null;
+        private static readonly MaterialUIContext Context = null;
         private static IList<EnumInfo> info = new List<EnumInfo>();
 
         static EnumHelper()
         {
-            Context = new MaterialKitContext();
-            List<TriggerType> list3 = Context.TriggerType.ToList();
-            foreach (var item in list3)
+            Context = new MaterialUIContext();
+            List<TriggerType> list = Context.TriggerType.ToList();
+            foreach (var item in list)
             {
                 info.Add(new EnumInfo() { EnumName = nameof(TriggerType), PropertyName = item.Name, Id = item.Id });
             }
@@ -24,7 +24,7 @@
         {
             StringBuilder sb = new StringBuilder();
             var group = info.GroupBy(o => o.EnumName);
-            sb.AppendLine($"namespace MaterialKit.Enums");
+            sb.AppendLine($"namespace {nameof(MaterialUI)}.Enums");
             sb.AppendLine("{");
             for (int i = 0; i < group.Count(); i++)
             {

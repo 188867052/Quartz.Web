@@ -29,10 +29,13 @@
 
     public class ScheduleController : StandardController
     {
-        public ScheduleController(MaterialKitContext dbContext)
+        private readonly LogDialog logDialog;
+
+        public ScheduleController(MaterialUIContext dbContext, LogDialog logDialog)
             : base(dbContext)
         {
             this.scheduler = SchedulerCenter.Instance.Scheduler;
+            this.logDialog = logDialog;
         }
 
         public string GetTime()
@@ -173,14 +176,9 @@
         /// <summary>
         /// 获取job日志.
         /// </summary>
-        public async Task<IActionResult> GetJobLogs(int id)
+        public async Task<IActionResult> LogDialog(int id)
         {
-            var entity = this.DbContext.TaskSchedule.Find(id);
-
-            IJobDetail jobDetail = await this.scheduler.GetJobDetail(entity.JobKey);
-            List<string> list = jobDetail.JobDataMap[Constant.LogList] as List<string>;
-            LogDialog dialog = new LogDialog(list);
-            return this.HtmlResult(dialog.Render());
+            return this.Dialog(this.logDialog);
         }
 
         /// <summary>

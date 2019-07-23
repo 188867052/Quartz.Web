@@ -100,7 +100,7 @@
                             where string.Compare(tt.OriginalName, tt.AssignedName, StringComparison.InvariantCultureIgnoreCase) == 0
                             select tt).ToList();
 
-            // If we replace references to classes (Say "Wombats2" with "Womnbats", we need to know it has 
+            // If we replace references to classes (Say "Wombats2" with "Womnbats", we need to know it has
             // happen4ed and we need to fix the fields. This is the list of translations.
             var typeNameReplacements = new Dictionary<string, string>();
 
@@ -236,7 +236,6 @@
                     var propName = prop.Name;
                     if (jsonFields.TryGetValue(propName, out fieldType))
                     {
-
                         var commonType = fieldType.GetCommonType(currentType);
 
                         jsonFields[propName] = commonType;

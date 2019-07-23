@@ -69,7 +69,7 @@
             }
 
             var tableHtml = $"<div class=\"table-responsive\"><table class=\"table table-striped\"><thead><tr>{thead}</tr></thead><tbody>{tbody}</tbody></table></div>";
-            var pagination = new Pagination().ToHtml();
+            var pagination = new Pagination().ToHtml(1, 10, 100);
             return tableHtml + pagination;
         }
 

@@ -1,15 +1,14 @@
 namespace MaterialUI
 {
     using System;
-    using System.IO;
     using Core.Extension.DependencyInjection;
     using DependencyInjection.Analyzer;
     using EntityFrameworkCore.SqlProfile;
     using MaterialUI.Entity;
     using MaterialUI.Html;
     using MaterialUI.Html.TextBoxs;
+    using MaterialUI.ViewConfiguration.Schedule;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -44,18 +43,18 @@ namespace MaterialUI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<MaterialKitContext>(options =>
+            services.AddDbContext<MaterialUIContext>(options =>
             {
                 options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlProfile(); // Add when use SqlServer
             });
-
             services.AddSingleton(typeof(IGetHtml), typeof(GetHtml));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDependencyInjectionAnalyzer();
             JsonExtension.AddService(services);
             services.AddRouteAnalyzer();
             services.AddSingleton(typeof(EmptyColumn<,>));
+            services.AddScoped(typeof(LogDialog));
 
             ServiceProvider = services.BuildServiceProvider();
         }
@@ -92,7 +91,7 @@ namespace MaterialUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Components}/{id?}");
+                    template: "{controller=Schedule}/{action=Index}/{id?}");
             });
         }
 
@@ -135,30 +134,6 @@ namespace MaterialUI
                    a.RollingFile("File/logs/log-{Date}-All.txt");
                })
           .CreateLogger();
-        }
-    }
-
-    public static class ExceptionHandlingExtensions
-    {
-        public static void UseMyExceptionHandler(this IApplicationBuilder app, ILoggerFactory loggerFactory)
-        {
-            app.UseExceptionHandler(builder =>
-            {
-                builder.Run(async context =>
-                {
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    context.Response.ContentType = "application/json";
-                    var ex = context.Features.Get<IExceptionHandlerFeature>();
-                    if (ex != null)
-                    {
-                        var logger = loggerFactory.CreateLogger("BlogDemo.Api.Extensions.ExceptionHandlingExtensions");
-                        logger.LogDebug(500, ex.Error, ex.Error.Message);
-                    }
-
-                    await context.Response.WriteAsync(ex?.Error?.Message ?? "an error occure");
-                    await context.Response.WriteAsync(ex?.Error?.StackTrace ?? "an error occure");
-                });
-            });
         }
     }
 }
