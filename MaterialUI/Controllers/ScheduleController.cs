@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,16 +8,16 @@
     using Core.Extension;
     using Dapper;
     using global::Dapper;
-    using MaterialKit.Entity;
-    using MaterialKit.Enums;
-    using MaterialKit.Framework;
-    using MaterialKit.GridConfigurations.Schedule;
-    using MaterialKit.Job;
-    using MaterialKit.Job.Common;
-    using MaterialKit.Job.Entity;
-    using MaterialKit.Models;
-    using MaterialKit.SearchFilterConfigurations;
-    using MaterialKit.ViewConfiguration.Schedule;
+    using MaterialUI.Entity;
+    using MaterialUI.Enums;
+    using MaterialUI.Framework;
+    using MaterialUI.GridConfigurations.Schedule;
+    using MaterialUI.Job;
+    using MaterialUI.Job.Common;
+    using MaterialUI.Job.Entity;
+    using MaterialUI.Models;
+    using MaterialUI.SearchFilterConfigurations;
+    using MaterialUI.ViewConfiguration.Schedule;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
     using Microsoft.Data.Sqlite;

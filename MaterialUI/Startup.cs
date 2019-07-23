@@ -1,13 +1,13 @@
-namespace MaterialKit
+namespace MaterialUI
 {
     using System;
     using System.IO;
     using Core.Extension.DependencyInjection;
     using DependencyInjection.Analyzer;
     using EntityFrameworkCore.SqlProfile;
-    using MaterialKit.Entity;
-    using MaterialKit.Html;
-    using MaterialKit.Html.TextBoxs;
+    using MaterialUI.Entity;
+    using MaterialUI.Html;
+    using MaterialUI.Html.TextBoxs;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Hosting;

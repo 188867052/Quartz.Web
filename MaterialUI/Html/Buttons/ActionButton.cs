@@ -1,9 +1,9 @@
-﻿namespace MaterialKit.Html.Buttons
+﻿namespace MaterialUI.Html.Buttons
 {
     using System;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.GridColumn;
+    using MaterialUI.Html.GridColumn;
 
     public class ActionButton<T> : ColumnButtonBase<T>
     {

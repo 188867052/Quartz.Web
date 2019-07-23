@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using MaterialKit.Enums;
+using MaterialUI.Enums;
 using Quartz;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-namespace MaterialKit.Entity
+namespace MaterialUI.Entity
 {
     public partial class TaskSchedule
     {

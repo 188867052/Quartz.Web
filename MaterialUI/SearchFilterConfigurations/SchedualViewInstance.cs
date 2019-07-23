@@ -1,6 +1,6 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
-    using MaterialKit.Javascript;
+    using MaterialUI.Javascript;
 
     public class SchedualViewInstance : ViewInstanceConstruction
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using System;
 
-namespace MaterialKit.Models
+namespace MaterialUI.Models
 {
     public class SchedulePostModel
     {

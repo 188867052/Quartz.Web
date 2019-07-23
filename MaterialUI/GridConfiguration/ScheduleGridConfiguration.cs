@@ -1,11 +1,11 @@
-﻿namespace MaterialKit.GridConfigurations.Schedule
+﻿namespace MaterialUI.GridConfigurations.Schedule
 {
     using System.Collections.Generic;
-    using MaterialKit.Entity;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.GridColumn;
-    using MaterialKit.Routes;
-    using MaterialKit.ViewConfiguration.Schedule;
+    using MaterialUI.Entity;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.GridColumn;
+    using MaterialUI.Routes;
+    using MaterialUI.ViewConfiguration.Schedule;
 
     public class ScheduleGridConfiguration<T> : GridConfiguration<T>
         where T : TaskSchedule

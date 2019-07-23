@@ -1,4 +1,4 @@
-namespace MaterialKit.Enums
+namespace MaterialUI.Enums
 {
     public enum TriggerTypeEnum
     {

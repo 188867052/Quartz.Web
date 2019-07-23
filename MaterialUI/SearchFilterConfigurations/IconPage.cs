@@ -1,14 +1,14 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialKit.Dapper;
-    using MaterialKit.Entity;
-    using MaterialKit.Html;
-    using MaterialKit.Html.Inputs;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Javascript;
+    using MaterialUI.Dapper;
+    using MaterialUI.Entity;
+    using MaterialUI.Html;
+    using MaterialUI.Html.Inputs;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
 
     public class IconPage : PageBase

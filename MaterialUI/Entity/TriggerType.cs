@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MaterialKit.Entity
+namespace MaterialUI.Entity
 {
     public partial class TriggerType
     {

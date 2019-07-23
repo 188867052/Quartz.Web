@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
-using MaterialKit.Enums;
+using MaterialUI.Enums;
 using Quartz;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-namespace MaterialKit.Entity
+namespace MaterialUI.Entity
 {
     public partial class MaterialKitContext : DbContext
     {

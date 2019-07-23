@@ -1,4 +1,4 @@
-namespace MaterialKit.Routes
+namespace MaterialUI.Routes
 {
     /// <summary>
     /// <see cref="Controllers.GeneratorController"/>

@@ -1,8 +1,8 @@
-namespace MaterialKit.Controllers
+namespace MaterialUI.Controllers
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Dialog.Demo;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Dialog.Demo;
+    using MaterialUI.Html.Tags;
 
     public class SchedulePage
     {

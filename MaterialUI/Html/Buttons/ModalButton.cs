@@ -1,8 +1,8 @@
-﻿namespace MaterialKit.Html.Buttons
+﻿namespace MaterialUI.Html.Buttons
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Javascript;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Javascript;
 
     public class ModalButton : SimpleButton
     {

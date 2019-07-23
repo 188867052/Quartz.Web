@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Dapper
+﻿namespace MaterialUI.Dapper
 {
     using System;
     using System.Linq;

@@ -1,6 +1,6 @@
-﻿namespace MaterialKit.ViewConfiguration
+﻿namespace MaterialUI.ViewConfiguration
 {
-    using MaterialKit.Javascript;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
 
     public class LargeReplaceColumn<TModel, TPostModel> : LargeColumn<TModel, TPostModel>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace MaterialKit.Entity
+namespace MaterialUI.Entity
 {
     public partial class Log
     {

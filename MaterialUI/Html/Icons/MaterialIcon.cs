@@ -1,7 +1,7 @@
-namespace MaterialKit.Html.Icons
+namespace MaterialUI.Html.Icons
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using TagHelper = AspNetCore.Extensions.TagHelper;
 

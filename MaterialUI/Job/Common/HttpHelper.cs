@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Job.Common
+﻿namespace MaterialUI.Job.Common
 {
     using System;
     using System.Collections.Generic;

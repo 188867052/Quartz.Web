@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Javascript
+﻿namespace MaterialUI.Javascript
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
 
     /// <summary>

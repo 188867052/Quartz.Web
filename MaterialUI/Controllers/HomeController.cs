@@ -1,9 +1,9 @@
-namespace MaterialKit.Controllers
+namespace MaterialUI.Controllers
 {
-    using MaterialKit.Entity;
-    using MaterialKit.Files;
-    using MaterialKit.Framework;
-    using MaterialKit.Html;
+    using MaterialUI.Entity;
+    using MaterialUI.Files;
+    using MaterialUI.Framework;
+    using MaterialUI.Html;
     using Microsoft.AspNetCore.Mvc;
 
     [ResponseCache(Duration = 3600)]

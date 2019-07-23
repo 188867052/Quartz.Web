@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.ViewConfiguration.Schedule
+﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using Entity;
@@ -7,7 +7,7 @@
     using Javascript;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
     using Routes;
-    using Resource = MaterialUI.Resources.EditScheduleConfigurationResource;
+    using Resource = Resources.EditScheduleConfigurationResource;
 
     public class EditScheduleDialog<TModel, TPostModel> : EditDialogBase<TModel, TPostModel>
         where TPostModel : TaskSchedule

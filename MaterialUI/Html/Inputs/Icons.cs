@@ -1,11 +1,11 @@
-﻿namespace MaterialKit.Html.Inputs
+﻿namespace MaterialUI.Html.Inputs
 {
     using System.Collections.Generic;
     using System.Text;
     using AspNetCore.Extensions;
-    using MaterialKit.Entity;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Entity;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
 
     public class HtmlIcons
     {

@@ -1,20 +1,20 @@
 ﻿namespace MaterialUI.SearchFilterConfigurations
 {
     using System.Collections.Generic;
-    using MaterialKit.Controllers;
-    using MaterialKit.Entity;
-    using MaterialKit.Files.Js;
-    using MaterialKit.Html;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.GridColumn;
-    using MaterialKit.Html.TextBoxs;
-    using MaterialKit.Javascript;
-    using MaterialKit.Models;
-    using MaterialKit.Routes;
-    using MaterialKit.ViewConfiguration;
-    using MaterialKit.ViewConfiguration.Schedule;
+    using MaterialUI.Controllers;
+    using MaterialUI.Entity;
+    using MaterialUI.Files.Js;
+    using MaterialUI.Html;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.GridColumn;
+    using MaterialUI.Html.TextBoxs;
+    using MaterialUI.Javascript;
+    using MaterialUI.Models;
+    using MaterialUI.Routes;
+    using MaterialUI.ViewConfiguration;
+    using MaterialUI.ViewConfiguration.Schedule;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-    using Resource = MaterialUI.Resources.EditScheduleConfigurationResource;
+    using Resource = Resources.EditScheduleConfigurationResource;
 
     public class SchedualGridSearch<TModel, TPostModel> : GridSearchPage<TModel, TPostModel>
          where TPostModel : SchedulePostModel

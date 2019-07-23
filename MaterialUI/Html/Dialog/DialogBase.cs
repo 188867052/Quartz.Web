@@ -1,11 +1,11 @@
-﻿namespace MaterialKit.Html.Dialog
+﻿namespace MaterialUI.Html.Dialog
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 

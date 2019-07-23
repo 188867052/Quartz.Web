@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Html.DropDowns
+﻿namespace MaterialUI.Html.DropDowns
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
 
     public class DropDownToggle
     {

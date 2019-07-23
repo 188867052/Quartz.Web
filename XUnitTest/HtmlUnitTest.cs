@@ -3,14 +3,14 @@ namespace XUnitTest
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using MaterialKit.Entity;
-    using MaterialKit.GridConfigurations.Schedule;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.Checkbox;
-    using MaterialKit.Html.Dialog.Demo;
-    using MaterialKit.Html.Inputs;
-    using MaterialKit.Html.RadioButtons;
-    using MaterialKit.Html.Tables;
+    using MaterialUI.Entity;
+    using MaterialUI.GridConfigurations.Schedule;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.Checkbox;
+    using MaterialUI.Html.Dialog.Demo;
+    using MaterialUI.Html.Inputs;
+    using MaterialUI.Html.RadioButtons;
+    using MaterialUI.Html.Tables;
     using Xunit;
 
     public class HtmlUnitTest

@@ -1,10 +1,10 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
 
     internal static class SortingTagHelper
     {

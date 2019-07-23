@@ -1,8 +1,8 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System.Threading.Tasks;
     using Host.Model;
-    using MaterialKit.Job.Entity;
+    using MaterialUI.Job.Entity;
     using Microsoft.AspNetCore.Mvc;
     using MimeKit;
     using Newtonsoft.Json;

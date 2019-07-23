@@ -1,12 +1,12 @@
-﻿namespace MaterialKit.Html.Dialog
+﻿namespace MaterialUI.Html.Dialog
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Javascript;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
 
     public abstract class ConfirmDialogConfiguration : IDialogConfiguration

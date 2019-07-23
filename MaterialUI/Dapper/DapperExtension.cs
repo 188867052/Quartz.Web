@@ -1,11 +1,11 @@
-﻿namespace MaterialKit.Dapper
+﻿namespace MaterialUI.Dapper
 {
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
     using AppSettingManager;
     using global::Dapper;
-    using MaterialKit.Entity;
+    using MaterialUI.Entity;
     using Microsoft.EntityFrameworkCore;
 
     public partial class DapperExtension

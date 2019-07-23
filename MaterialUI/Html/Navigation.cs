@@ -1,10 +1,10 @@
-namespace MaterialKit.Html
+namespace MaterialUI.Html
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.DropDowns;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Routes;
+    using MaterialUI.Html.DropDowns;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Routes;
     using Route.Generator;
     using TagHelper = AspNetCore.Extensions.TagHelper;
 

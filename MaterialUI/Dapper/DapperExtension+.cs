@@ -1,8 +1,8 @@
-﻿namespace MaterialKit.Dapper
+﻿namespace MaterialUI.Dapper
 {
     using System.Collections.Generic;
     using global::Dapper;
-    using MaterialKit.Entity;
+    using MaterialUI.Entity;
 
     public partial class DapperExtension
     {

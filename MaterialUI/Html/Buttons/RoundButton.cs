@@ -1,4 +1,4 @@
-namespace MaterialKit.Html.Buttons
+namespace MaterialUI.Html.Buttons
 {
     public class RoundButton : Button
     {

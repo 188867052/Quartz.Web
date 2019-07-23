@@ -1,10 +1,10 @@
-﻿namespace MaterialKit.ViewConfiguration.Schedule
+﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.Dialog;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.Dialog;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
     using Newtonsoft.Json;
     using System.Collections.Generic;

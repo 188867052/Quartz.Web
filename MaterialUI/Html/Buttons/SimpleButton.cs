@@ -1,9 +1,9 @@
-﻿namespace MaterialKit.Html.Buttons
+﻿namespace MaterialUI.Html.Buttons
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Javascript;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
 
     public class SimpleButton

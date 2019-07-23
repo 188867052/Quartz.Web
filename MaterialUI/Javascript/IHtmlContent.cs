@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Javascript
+﻿namespace MaterialUI.Javascript
 {
     using Microsoft.AspNetCore.Html;
 

@@ -1,4 +1,4 @@
-namespace MaterialKit.Models
+namespace MaterialUI.Models
 {
     public class ErrorViewModel
     {

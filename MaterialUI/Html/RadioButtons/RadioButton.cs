@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Html.RadioButtons
+﻿namespace MaterialUI.Html.RadioButtons
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
 
     public class RadioButton
     {

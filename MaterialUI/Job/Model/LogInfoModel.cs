@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Job.Model
+﻿namespace MaterialUI.Job.Model
 {
     using System;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;

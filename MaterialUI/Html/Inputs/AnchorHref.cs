@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Html.Inputs
+﻿namespace MaterialUI.Html.Inputs
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public class AnchorHref

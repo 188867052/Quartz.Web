@@ -1,12 +1,12 @@
-﻿namespace MaterialKit.Html.GridColumn
+﻿namespace MaterialUI.Html.GridColumn
 {
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Text;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Javascript;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Javascript;
 
     public class ActionGridColumn<T> : BaseGridColumn<T>
     {

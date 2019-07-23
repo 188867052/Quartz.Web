@@ -1,10 +1,10 @@
-﻿namespace MaterialKit.Html.GridColumn
+﻿namespace MaterialUI.Html.GridColumn
 {
     using System;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
 
     public abstract class ColumnButtonBase<T>
     {

@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Job.Common
+﻿namespace MaterialUI.Job.Common
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,9 @@
     using System.Threading.Tasks;
     using System.Web;
     using Host.Model;
-    using MaterialKit.Controllers;
-    using MaterialKit.Entity;
-    using MaterialKit.Job.Model;
+    using MaterialUI.Controllers;
+    using MaterialUI.Entity;
+    using MaterialUI.Job.Model;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using Quartz;
@@ -77,7 +77,7 @@
                 else
                 {
                     MaterialKitContext db = new MaterialKitContext();
-                    db.Log.Add(new MaterialKit.Entity.Log()
+                    db.Log.Add(new MaterialUI.Entity.Log()
                     {
                         CreateTime = DateTime.Now,
                         LogLevel = LogLevel.Information,

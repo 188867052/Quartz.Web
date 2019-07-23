@@ -1,6 +1,6 @@
-﻿namespace MaterialKit.Html
+﻿namespace MaterialUI.Html
 {
-    using MaterialKit.Javascript;
+    using MaterialUI.Javascript;
 
     public class FrameworkViewInstance : ViewInstanceConstruction
     {

@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Scaffolding
+﻿namespace MaterialUI.Scaffolding
 {
     using System;
     using System.ComponentModel;

@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Html.TextBoxs
+﻿namespace MaterialUI.Html.TextBoxs
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Javascript;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
 
     public class EmptyColumn<TModel, TPostModel> : IColumn<TModel, TPostModel>

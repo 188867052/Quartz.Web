@@ -1,12 +1,12 @@
-﻿namespace MaterialKit.ViewConfiguration.Schedule
+﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.Dialog;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Javascript;
-    using MaterialKit.Routes;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.Dialog;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Javascript;
+    using MaterialUI.Routes;
     using Microsoft.AspNetCore.Html;
 
     public class DeleteConfiguration : DialogBase

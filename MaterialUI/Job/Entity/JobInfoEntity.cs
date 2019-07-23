@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Job.Entity
+﻿namespace MaterialUI.Job.Entity
 {
     using System.Collections.Generic;
 

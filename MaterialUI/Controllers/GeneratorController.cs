@@ -1,4 +1,4 @@
-namespace MaterialKit.Controllers
+namespace MaterialUI.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,11 +8,11 @@ namespace MaterialKit.Controllers
     using AppSettingManager;
     using AspNetCore.Extensions;
     using AspNetCore.Extensions.JsonClassGenerate;
-    using MaterialKit.Entity;
-    using MaterialKit.Files;
-    using MaterialKit.Framework;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Routes;
+    using MaterialUI.Entity;
+    using MaterialUI.Files;
+    using MaterialUI.Framework;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Routes;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;

@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.ViewConfiguration
+﻿namespace MaterialUI.ViewConfiguration
 {
     using System;
     using System.Linq;

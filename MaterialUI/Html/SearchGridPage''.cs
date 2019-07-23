@@ -1,15 +1,15 @@
-﻿namespace MaterialKit.Html
+﻿namespace MaterialUI.Html
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.GridColumn;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Inputs;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.ViewConfiguration;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.GridColumn;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Inputs;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.ViewConfiguration;
     using Microsoft.AspNetCore.Html;
 
     public abstract class GridSearchPage<TModel, TPostModel> : PageBase

@@ -1,22 +1,22 @@
-namespace MaterialKit.Framework
+namespace MaterialUI.Framework
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using AspNetCore.Extensions;
-    using MaterialKit.Controllers;
-    using MaterialKit.Entity;
-    using MaterialKit.Files;
-    using MaterialKit.Html;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.Checkbox;
-    using MaterialKit.Html.Dialog;
-    using MaterialKit.Html.Dialog.Demo;
-    using MaterialKit.Html.Inputs;
-    using MaterialKit.Html.RadioButtons;
-    using MaterialKit.Html.Tables;
-    using MaterialKit.Job.Common;
+    using MaterialUI.Controllers;
+    using MaterialUI.Entity;
+    using MaterialUI.Files;
+    using MaterialUI.Html;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.Checkbox;
+    using MaterialUI.Html.Dialog;
+    using MaterialUI.Html.Dialog.Demo;
+    using MaterialUI.Html.Inputs;
+    using MaterialUI.Html.RadioButtons;
+    using MaterialUI.Html.Tables;
+    using MaterialUI.Job.Common;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc;
     using Quartz;

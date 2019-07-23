@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Html.Buttons
+﻿namespace MaterialUI.Html.Buttons
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
     using Newtonsoft.Json;
 
     public class SubmitButton : SimpleButton

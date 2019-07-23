@@ -1,10 +1,10 @@
-namespace MaterialKit.Html
+namespace MaterialUI.Html
 {
     using System;
     using AspNetCore.Extensions;
-    using MaterialKit.Files;
-    using MaterialKit.Files.Css.Font.Awesome;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Files;
+    using MaterialUI.Files.Css.Font.Awesome;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 

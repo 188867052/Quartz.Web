@@ -1,6 +1,6 @@
 ﻿namespace Host.Model
 {
-    using MaterialKit.Job.Entity;
+    using MaterialUI.Job.Entity;
 
     public class SendMailModel
     {

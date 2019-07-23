@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System.Collections.Generic;
     using System.IO;

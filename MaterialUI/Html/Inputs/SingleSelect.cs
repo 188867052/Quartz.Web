@@ -1,7 +1,7 @@
-﻿namespace MaterialKit.Html.Inputs
+﻿namespace MaterialUI.Html.Inputs
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
 
     public class SingleSelect
     {

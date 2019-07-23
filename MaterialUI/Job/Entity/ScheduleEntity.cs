@@ -1,8 +1,8 @@
-﻿namespace MaterialKit.Job.Entity
+﻿namespace MaterialUI.Job.Entity
 {
     using System;
-    using MaterialKit.Enums;
-    using MaterialKit.Job.Common;
+    using MaterialUI.Enums;
+    using MaterialUI.Job.Common;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
     public class ScheduleEntity

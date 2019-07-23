@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Html.GridColumn
+﻿namespace MaterialUI.Html.GridColumn
 {
     using AspNetCore.Extensions;
 

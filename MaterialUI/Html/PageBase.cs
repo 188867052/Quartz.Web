@@ -1,12 +1,12 @@
-﻿namespace MaterialKit.Html
+﻿namespace MaterialUI.Html
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialKit.Files;
-    using MaterialKit.Files.Css.Font.Awesome;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Javascript;
+    using MaterialUI.Files;
+    using MaterialUI.Files.Css.Font.Awesome;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
 
     public abstract class PageBase

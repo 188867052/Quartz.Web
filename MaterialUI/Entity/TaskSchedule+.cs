@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Entity
+﻿namespace MaterialUI.Entity
 {
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Quartz;

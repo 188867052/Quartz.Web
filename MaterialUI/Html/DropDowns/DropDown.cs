@@ -1,8 +1,8 @@
-namespace MaterialKit.Html.DropDowns
+namespace MaterialUI.Html.DropDowns
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Tags;
 
     public class DropDown
     {

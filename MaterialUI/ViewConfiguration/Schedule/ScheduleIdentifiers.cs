@@ -1,6 +1,6 @@
-﻿namespace MaterialKit.ViewConfiguration.Schedule
+﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
-    using MaterialKit.Javascript;
+    using MaterialUI.Javascript;
 
     public static class ScheduleIdentifiers
     {

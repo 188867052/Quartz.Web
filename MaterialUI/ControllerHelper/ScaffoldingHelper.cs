@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using System.Text.RegularExpressions;
     using System.Xml.Serialization;
     using AppSettingManager;
-    using MaterialKit.Scaffolding;
+    using MaterialUI.Scaffolding;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Diagnostics;

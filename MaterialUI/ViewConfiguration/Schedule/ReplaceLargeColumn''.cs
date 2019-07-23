@@ -1,15 +1,15 @@
-﻿namespace MaterialKit.ViewConfiguration.Schedule
+﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialKit.Entity;
-    using MaterialKit.Enums;
-    using MaterialKit.Html.TextBoxs;
-    using MaterialKit.Javascript;
+    using MaterialUI.Entity;
+    using MaterialUI.Enums;
+    using MaterialUI.Html.TextBoxs;
+    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
     using Microsoft.Extensions.DependencyInjection;
     using Quartz;
-    using Resource = MaterialUI.Resources.EditScheduleConfigurationResource;
+    using Resource = Resources.EditScheduleConfigurationResource;
 
     public class ReplaceLargeColumn<TModel, TPostModel>
         where TPostModel : TaskSchedule

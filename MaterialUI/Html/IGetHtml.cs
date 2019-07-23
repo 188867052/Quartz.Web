@@ -1,4 +1,4 @@
-namespace MaterialKit.Html
+namespace MaterialUI.Html
 {
     public interface IGetHtml
     {

@@ -1,4 +1,4 @@
-namespace MaterialKit.Html
+namespace MaterialUI.Html
 {
     using System.IO;
     using Microsoft.AspNetCore.Hosting;

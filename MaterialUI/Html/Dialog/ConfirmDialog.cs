@@ -1,9 +1,9 @@
-﻿namespace MaterialKit.Html.Dialog
+﻿namespace MaterialUI.Html.Dialog
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
-    using MaterialKit.Routes;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
+    using MaterialUI.Routes;
 
     public class ConfirmDeleteDialog
     {

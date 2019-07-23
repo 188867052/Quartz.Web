@@ -1,11 +1,11 @@
-﻿namespace MaterialKit.ViewConfiguration.Schedule
+﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Dialog;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Dialog;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 

@@ -1,9 +1,9 @@
-﻿namespace MaterialKit.Controllers
+﻿namespace MaterialUI.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using MaterialKit.Entity;
+    using MaterialUI.Entity;
 
     internal static class EnumHelper
     {

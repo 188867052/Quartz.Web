@@ -1,8 +1,8 @@
-namespace MaterialKit.Html.Buttons
+namespace MaterialUI.Html.Buttons
 {
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Icons;
-    using MaterialKit.Html.Tags;
+    using MaterialUI.Html.Icons;
+    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public class Button

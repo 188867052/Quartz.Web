@@ -1,4 +1,4 @@
-namespace MaterialKit
+namespace MaterialUI
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;

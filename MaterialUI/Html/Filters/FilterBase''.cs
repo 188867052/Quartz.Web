@@ -1,9 +1,9 @@
-﻿namespace MaterialKit.Html.Filters
+﻿namespace MaterialUI.Html.Filters
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialKit.ViewConfiguration;
+    using MaterialUI.ViewConfiguration;
     using Microsoft.AspNetCore.Html;
 
     public abstract class FilterBase<TModel, TPostModel> : IDialogConfiguration

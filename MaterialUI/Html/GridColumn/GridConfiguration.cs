@@ -1,11 +1,11 @@
-﻿namespace MaterialKit.Html.GridColumn
+﻿namespace MaterialUI.Html.GridColumn
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using AspNetCore.Extensions;
-    using MaterialKit.Html.Buttons;
-    using MaterialKit.Html.Inputs;
+    using MaterialUI.Html.Buttons;
+    using MaterialUI.Html.Inputs;
     using Microsoft.AspNetCore.Html;
 
     public abstract class GridConfiguration<T>

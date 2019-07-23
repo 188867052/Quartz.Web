@@ -1,4 +1,4 @@
-﻿namespace MaterialKit.Job.Common
+﻿namespace MaterialUI.Job.Common
 {
     public class BaseResult
     {
