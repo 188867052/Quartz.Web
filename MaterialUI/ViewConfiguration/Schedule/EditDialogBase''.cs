@@ -6,6 +6,7 @@
     using MaterialUI.Html.Dialog;
     using MaterialUI.Html.Icons;
     using MaterialUI.Html.Tags;
+    using MaterialUI.Shared;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -16,11 +17,33 @@
             this.Model = model;
         }
 
-        public bool IsEdit => this.Model != null;
+        public override IHtmlContent Render()
+        {
+            Check.NotEmpty(this.Container.ToList(), nameof(this.Container));
 
-        public TModel Model { get; }
+            var tag = (TagHelperOutput)this.Container.Last();
+            tag.Content.AppendHtml(this.Header);
+            tag.Content.AppendHtml(this.Body);
+            foreach (TagHelperOutput item in this.Container.SkipLast(1).Reverse())
+            {
+                item.Content.SetHtmlContent(tag);
+                if (item.Attributes.Any(o => o.Value.ToString() == "modal-content"))
+                {
+                    item.Content.AppendHtml(this.Footer);
+                }
 
-        public override IList<IHtmlContent> Container => new List<IHtmlContent>
+                tag = item;
+            }
+
+            tag.Content.AppendHtml(this.Script);
+            return tag;
+        }
+
+        protected bool IsEdit => this.Model != null;
+
+        protected TModel Model { get; }
+
+        protected override IList<IHtmlContent> Container => new List<IHtmlContent>
         {
             AspNetCore.Extensions.TagHelper.Create(Tag.div, this.OutsideAttributes),
             AspNetCore.Extensions.TagHelper.Create(Tag.div, new TagAttribute(Attr.Class, "modal-dialog modal-signup")),
@@ -28,7 +51,7 @@
             AspNetCore.Extensions.TagHelper.Create(Tag.div, new TagAttribute(Attr.Class, "card card-signup card-plain")),
         };
 
-        public override IHtmlContent Footer
+        protected override IHtmlContent Footer
         {
             get
             {
@@ -45,7 +68,7 @@
             }
         }
 
-        public override IHtmlContent Body
+        protected override IHtmlContent Body
         {
             get
             {
@@ -71,7 +94,7 @@
             }
         }
 
-        public override IHtmlContent Header
+        protected override IHtmlContent Header
         {
             get
             {
@@ -87,28 +110,6 @@
                 var header = AspNetCore.Extensions.TagHelper.Create(Tag.div, new TagAttribute(Attr.Class, "modal-header"), button, h3);
                 return header;
             }
-        }
-
-        public override IHtmlContent Render()
-        {
-            Check.NotEmpty(this.Container.ToList(), nameof(this.Container));
-
-            var tag = (TagHelperOutput)this.Container.Last();
-            tag.Content.AppendHtml(this.Header);
-            tag.Content.AppendHtml(this.Body);
-            foreach (TagHelperOutput item in this.Container.SkipLast(1).Reverse())
-            {
-                item.Content.SetHtmlContent(tag);
-                if (item.Attributes.Any(o => o.Value.ToString() == "modal-content"))
-                {
-                    item.Content.AppendHtml(this.Footer);
-                }
-
-                tag = item;
-            }
-
-            tag.Content.AppendHtml(this.Script);
-            return tag;
         }
 
         protected abstract void CreateColumns(IList<LargeColumn<TModel, TPostModel>> columns);

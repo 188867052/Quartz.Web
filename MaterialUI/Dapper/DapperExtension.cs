@@ -60,9 +60,15 @@
         }
 
         public static IQueryable<T> Query<T>()
-        where T : class
+            where T : class
         {
             return DbContext.From<T>();
+        }
+
+        public static int Insert<T>(T entity)
+            where T : class
+        {
+            return DbContext.From<T>().Insert(entity);
         }
 
         public static IEnumerable<T> Page<T>(int size)

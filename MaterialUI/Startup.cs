@@ -5,6 +5,7 @@ namespace MaterialUI
     using DependencyInjection.Analyzer;
     using EntityFrameworkCore.SqlProfile;
     using MaterialUI.Entity;
+    using MaterialUI.Framework;
     using MaterialUI.Html;
     using MaterialUI.Html.TextBoxs;
     using MaterialUI.ViewConfiguration.Schedule;
@@ -18,8 +19,6 @@ namespace MaterialUI
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Route.Generator;
-    using Serilog;
-    using Serilog.Events;
 
     public class Startup
     {
@@ -35,7 +34,7 @@ namespace MaterialUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            this.LogConfig();
+            LoggerHelper.LogConfig();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -93,47 +92,6 @@ namespace MaterialUI
                     name: "default",
                     template: "{controller=Schedule}/{action=Index}/{id?}");
             });
-        }
-
-        private void LogConfig()
-        {
-            Serilog.Log.Logger = new LoggerConfiguration()
-           .Enrich.FromLogContext()
-           .MinimumLevel.Debug()
-           .MinimumLevel.Override("System", LogEventLevel.Information)
-           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-           .WriteTo.Logger(lg => lg.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Debug).WriteTo.Async(
-               a =>
-               {
-                   a.RollingFile("File/logs/log-{Date}-Debug.txt");
-               }))
-           .WriteTo.Logger(lg => lg.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Information).WriteTo.Async(
-               a =>
-               {
-                   a.RollingFile("File/logs/log-{Date}-Information.txt");
-               }))
-           .WriteTo.Logger(lg => lg.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Warning).WriteTo.Async(
-               a =>
-               {
-                   a.RollingFile("File/logs/log-{Date}-Warning.txt");
-               }))
-           .WriteTo.Logger(lg => lg.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Error).WriteTo.Async(
-               a =>
-               {
-                   a.RollingFile("File/logs/log-{Date}-Error.txt");
-               }))
-           .WriteTo.Logger(lg => lg.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Fatal).WriteTo.Async(
-               a =>
-               {
-                   a.RollingFile("File/logs/log-{Date}-Fatal.txt");
-               }))
-           // 所有情况
-           .WriteTo.Logger(lg => lg.Filter.ByIncludingOnly(p => true)).WriteTo.Async(
-               a =>
-               {
-                   a.RollingFile("File/logs/log-{Date}-All.txt");
-               })
-          .CreateLogger();
         }
     }
 }

@@ -10,6 +10,7 @@
 
         private static Table Build(Type type)
         {
+            string key = MetaData.Mapping[$"{type.Name}.PrimaryKey"];
             if (!Database.Exists(e => e.CSharpType == type))
             {
                 var properties = type.GetProperties();
@@ -21,7 +22,7 @@
                         ColumnKey = ColumnKey.None,
                         ColumnName = MetaData.Mapping[$"{type.Name}.{item.Name}"],
                         CSharpName = item.Name,
-                        Identity = false,
+                        Identity = key == item.Name,
                     });
                 }
 

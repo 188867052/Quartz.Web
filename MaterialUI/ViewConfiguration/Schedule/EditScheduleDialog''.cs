@@ -18,9 +18,9 @@
         {
         }
 
-        public override string Title => this.IsEdit ? Resource.EditTitle : Resource.AddTitle;
+        protected override string Title => this.IsEdit ? Resource.EditTitle : Resource.AddTitle;
 
-        public override Identifier Identifier => ScheduleIdentifiers.EditDialogIdentifier;
+        protected override Identifier Identifier => ScheduleIdentifiers.EditDialogIdentifier;
 
         protected override void CreateColumns(IList<LargeColumn<TModel, TPostModel>> columns)
         {

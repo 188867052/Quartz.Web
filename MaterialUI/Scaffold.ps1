@@ -1,1 +1,0 @@
-Scaffold-DbContext -Force "Data Source=.;App=EntityFrameworkCore;Initial Catalog=MaterialKit;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer -o Entity

@@ -2,9 +2,7 @@ namespace XUnitTest
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Linq;
-    using Dapper.Common;
     using MaterialUI.Entity;
     using MaterialUI.GridConfigurations.Schedule;
     using MaterialUI.Html.Buttons;

@@ -103,7 +103,7 @@ namespace MaterialUI.Controllers
         [Route(GeneratorRoute.Scaffold)]
         public IActionResult Scaffold()
         {
-            IList<string> changedFiles = ScaffoldingHelper.Scaffolding(this.env.ContentRootPath, "Entity");
+            IList<string> changedFiles = ScaffoldingHelper.Scaffolding( "Entity");
             string html = this.HigntLightHtml(HttpUtility.HtmlEncode(string.Join(Environment.NewLine, changedFiles)), "cs");
             return this.HtmlResult(html);
         }

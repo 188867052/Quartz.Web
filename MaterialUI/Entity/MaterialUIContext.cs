@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 using MaterialUI.Enums;
 using Quartz;
+using Quartz;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace MaterialUI.Entity
@@ -20,33 +21,19 @@ namespace MaterialUI.Entity
         }
 
         public virtual DbSet<Icon> Icon { get; set; }
-
         public virtual DbSet<Log> Log { get; set; }
-
         public virtual DbSet<QrtzBlobTriggers> QrtzBlobTriggers { get; set; }
-
         public virtual DbSet<QrtzCalendars> QrtzCalendars { get; set; }
-
         public virtual DbSet<QrtzCronTriggers> QrtzCronTriggers { get; set; }
-
         public virtual DbSet<QrtzFiredTriggers> QrtzFiredTriggers { get; set; }
-
         public virtual DbSet<QrtzJobDetails> QrtzJobDetails { get; set; }
-
         public virtual DbSet<QrtzLocks> QrtzLocks { get; set; }
-
         public virtual DbSet<QrtzPausedTriggerGrps> QrtzPausedTriggerGrps { get; set; }
-
         public virtual DbSet<QrtzSchedulerState> QrtzSchedulerState { get; set; }
-
         public virtual DbSet<QrtzSimpleTriggers> QrtzSimpleTriggers { get; set; }
-
         public virtual DbSet<QrtzSimpropTriggers> QrtzSimpropTriggers { get; set; }
-
         public virtual DbSet<QrtzTriggers> QrtzTriggers { get; set; }
-
         public virtual DbSet<TaskSchedule> TaskSchedule { get; set; }
-
         public virtual DbSet<TriggerType> TriggerType { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -571,5 +558,6 @@ namespace MaterialUI.Entity
                     .HasColumnName("name")
                     .HasMaxLength(50);
             });
-        }    }
+        }
+    }
 }

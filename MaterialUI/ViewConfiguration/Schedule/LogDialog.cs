@@ -5,20 +5,20 @@
     using Javascript;
     using MaterialUI.Dapper;
     using MaterialUI.Entity;
+    using MaterialUI.GridConfiguration;
     using MaterialUI.Html.Buttons;
     using MaterialUI.Html.Dialog;
-    using MaterialUI.SearchFilterConfigurations;
     using Microsoft.AspNetCore.Html;
 
     public class LogDialog : DialogBase
     {
-        public override Identifier Identifier => ScheduleIdentifiers.LogDialogIdentifier;
+        protected override Identifier Identifier => ScheduleIdentifiers.LogDialogIdentifier;
 
-        public override string Title => "日志";
+        protected override string Title => "日志";
 
-        public override int Width { get; } = 80;
+        protected override int Width { get; } = 80;
 
-        public IHtmlContent Grid
+        protected IHtmlContent Grid
         {
             get
             {
@@ -29,15 +29,9 @@
             }
         }
 
-        public override IHtmlContent Body
-        {
-            get
-            {
-                return TagHelper.Div("modal-body", this.Grid);
-            }
-        }
+        protected override IHtmlContent Body => TagHelper.Div("modal-body", this.Grid);
 
-        public override IHtmlContent Footer
+        protected override IHtmlContent Footer
         {
             get
             {

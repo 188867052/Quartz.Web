@@ -657,11 +657,10 @@
 
         public string BuildInsert()
         {
-            var sql = string.Format("INSERT INTO {0} ({1}) VALUES ({2})",
-                this.table.TableName,
-                string.Join(",", this.table.Columns.FindAll(f => f.Identity == false && !this.filters.Exists(e => e == f.ColumnName)).Select(s => s.ColumnName)),
-                string.Join(",", this.table.Columns.FindAll(f => f.Identity == false && !this.filters.Exists(e => e == f.ColumnName)).Select(s => string.Format("@{0}", s.CSharpName))));
-            return sql;
+            var colums = this.table.Columns.FindAll(f => f.Identity == false && !this.filters.Exists(e => e == f.ColumnName));
+            string @params = string.Join(",", colums.Select(s => s.ColumnName));
+            string values = string.Join(",", colums.Select(s => string.Format("@{0}", s.CSharpName)));
+            return $"INSERT INTO {this.table.TableName} ({@params}) VALUES ({values})";
         }
 
         public string BuildUpdate(bool allColumn = true)

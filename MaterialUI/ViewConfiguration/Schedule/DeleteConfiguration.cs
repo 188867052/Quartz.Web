@@ -18,13 +18,13 @@
             this.id = id;
         }
 
-        public override string Title => "删除";
+        protected override string Title => "删除";
 
-        public override int Width { get; } = 20;
+        protected override int Width { get; } = 20;
 
-        public override Identifier Identifier => ScheduleIdentifiers.DeleteDialogIdentifier;
+        protected override Identifier Identifier => ScheduleIdentifiers.DeleteDialogIdentifier;
 
-        public override IHtmlContent Body
+        protected override IHtmlContent Body
         {
             get
             {
@@ -34,7 +34,7 @@
             }
         }
 
-        public override IHtmlContent Footer
+        protected override IHtmlContent Footer
         {
             get
             {

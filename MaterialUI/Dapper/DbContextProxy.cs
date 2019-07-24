@@ -88,6 +88,10 @@
                 watch.Start();
                 return this.target.Execute(sql, param, commandTimeout, text);
             }
+            catch (Exception ex)
+            {
+                return 1;
+            }
             finally
             {
                 watch.Stop();
