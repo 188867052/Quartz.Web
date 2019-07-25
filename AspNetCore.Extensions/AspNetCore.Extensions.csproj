@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="..\Shared\Check.cs" />
+    <Compile Remove="..\Shared\SetCompatibilityVersionExtension.cs" />
     <Compile Remove="..\Shared\TagAttribute.cs" />
     <Compile Remove="..\Shared\TagHelper.cs" />
   </ItemGroup>

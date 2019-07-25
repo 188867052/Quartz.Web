@@ -53,7 +53,6 @@ namespace MaterialUI
             JsonExtension.AddService(services);
             services.AddRouteAnalyzer();
             services.AddSingleton(typeof(EmptyColumn<,>));
-            services.AddScoped(typeof(LogDialog));
 
             ServiceProvider = services.BuildServiceProvider();
         }
@@ -71,7 +70,6 @@ namespace MaterialUI
                 app.UseHsts();
             }
 
-            app.UseMyExceptionHandler(loggerFactory);
             app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions
             {

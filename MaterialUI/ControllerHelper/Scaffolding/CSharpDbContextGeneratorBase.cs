@@ -1,4 +1,4 @@
-namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
+﻿namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
     using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-    public class CSharpDbContextGenerator : ICSharpDbContextGenerator
+    public abstract class CSharpDbContextGeneratorBase : ICSharpDbContextGenerator
     {
         private const string EntityLambdaIdentifier = "entity";
         private const string Language = "CSharp";
@@ -23,13 +23,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private readonly IScaffoldingProviderCodeGenerator _legacyProviderCodeGenerator;
         private readonly IProviderConfigurationCodeGenerator _providerConfigurationCodeGenerator;
         private readonly IAnnotationCodeGenerator _annotationCodeGenerator;
-        protected IndentedStringBuilder _sb;
+        protected IndentedStringBuilder sb;
         private bool _entityTypeBuilderInitialized;
 
-        public CSharpDbContextGenerator(
-#pragma warning disable CS0618 // Type or member is obsolete
+        public CSharpDbContextGeneratorBase(
             [NotNull] IEnumerable<IScaffoldingProviderCodeGenerator> legacyProviderCodeGenerators,
-#pragma warning restore CS0618 // Type or member is obsolete
             [NotNull] IEnumerable<IProviderConfigurationCodeGenerator> providerCodeGenerators,
             [NotNull] IAnnotationCodeGenerator annotationCodeGenerator,
             [NotNull] ICSharpHelper cSharpHelper)
@@ -58,18 +56,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             Check.NotNull(model, nameof(model));
 
-            this._sb = new IndentedStringBuilder();
+            this.sb = new IndentedStringBuilder();
 
-            this._sb.AppendLine("using System;"); // Guid default values require new Guid() which requires this using
-            this._sb.AppendLine("using Microsoft.EntityFrameworkCore;");
-            this._sb.AppendLine("using Microsoft.EntityFrameworkCore.Metadata;");
+            this.sb.AppendLine("using System;"); // Guid default values require new Guid() which requires this using
+            this.sb.AppendLine("using Microsoft.EntityFrameworkCore;");
+            this.sb.AppendLine("using Microsoft.EntityFrameworkCore.Metadata;");
             this.GenerateNameSpace();
-            this._sb.AppendLine();
+            this.sb.AppendLine();
 
-            this._sb.AppendLine($"namespace {@namespace}");
-            this._sb.AppendLine("{");
+            this.sb.AppendLine($"namespace {@namespace}");
+            this.sb.AppendLine("{");
 
-            using (this._sb.Indent())
+            using (this.sb.Indent())
             {
                 this.GenerateClass(
                     model,
@@ -79,9 +77,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     suppressConnectionStringWarning);
             }
 
-            this._sb.AppendLine("}");
+            this.sb.AppendLine("}");
 
-            return this._sb.ToString();
+            return this.sb.ToString();
         }
 
         protected virtual void GenerateClass(
@@ -95,10 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Check.NotNull(contextName, nameof(contextName));
             Check.NotNull(connectionString, nameof(connectionString));
 
-            this._sb.AppendLine($"public partial class {contextName} : DbContext");
-            this._sb.AppendLine("{");
+            this.sb.AppendLine($"public partial class {contextName} : DbContext");
+            this.sb.AppendLine("{");
 
-            using (this._sb.Indent())
+            using (this.sb.Indent())
             {
                 this.GenerateConstructors(contextName);
                 this.GenerateDbSets(model);
@@ -107,17 +105,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 this.GenerateOnModelCreating(model, useDataAnnotations);
             }
 
-            this._sb.AppendLine("}");
+            this.sb.AppendLine("}");
         }
 
         private void GenerateConstructors(string contextName)
         {
-            this._sb.AppendLine($"public {contextName}()")
+            this.sb.AppendLine($"public {contextName}()")
                 .AppendLine("{")
                 .AppendLine("}")
                 .AppendLine();
 
-            this._sb.AppendLine($"public {contextName}(DbContextOptions<{contextName}> options)")
+            this.sb.AppendLine($"public {contextName}(DbContextOptions<{contextName}> options)")
                 .IncrementIndent()
                 .AppendLine(": base(options)")
                 .DecrementIndent()
@@ -128,15 +126,19 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
         private void GenerateDbSets(IModel model)
         {
-            foreach (var entityType in model.GetEntityTypes())
+            var entityTypes = model.GetEntityTypes();
+            foreach (var entityType in entityTypes)
             {
-                this._sb.AppendLine(
-                    $"public virtual DbSet<{entityType.Name}> {entityType.Scaffolding().DbSetName} {{ get; set; }}");
+                this.sb.AppendLine($"public virtual DbSet<{entityType.Name}> {entityType.Scaffolding().DbSetName} {{ get; set; }}");
+                if (entityTypes.IndexOf(entityType) < entityTypes.Count() - 1)
+                {
+                    this.sb.AppendLine();
+                }
             }
 
             if (model.GetEntityTypes().Any())
             {
-                this._sb.AppendLine();
+                this.sb.AppendLine();
             }
         }
 
@@ -144,78 +146,49 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             foreach (var entityTypeError in model.Scaffolding().EntityTypeErrors)
             {
-                this._sb.AppendLine($"// {entityTypeError.Value} Please see the warning messages.");
+                this.sb.AppendLine($"// {entityTypeError.Value} Please see the warning messages.");
             }
 
             if (model.Scaffolding().EntityTypeErrors.Any())
             {
-                this._sb.AppendLine();
+                this.sb.AppendLine();
             }
         }
 
-        /// <summary>
-        ///     This API supports the Entity Framework Core infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         protected virtual void GenerateOnConfiguring(
             [NotNull] string connectionString,
             bool suppressConnectionStringWarning)
         {
             Check.NotNull(connectionString, nameof(connectionString));
 
-            this._sb.AppendLine("protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)");
-            this._sb.AppendLine("{");
+            this.sb.AppendLine("protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)");
+            this.sb.AppendLine("{");
 
-            using (this._sb.Indent())
+            using (this.sb.Indent())
             {
-                this._sb.AppendLine("if (!optionsBuilder.IsConfigured)");
-                this._sb.AppendLine("{");
+                this.sb.AppendLine("if (!optionsBuilder.IsConfigured)");
+                this.sb.AppendLine("{");
 
-                using (this._sb.Indent())
+                using (this.sb.Indent())
                 {
-                    if (!suppressConnectionStringWarning)
-                    {
-                        this._sb.DecrementIndent()
-                            .DecrementIndent()
-                            .DecrementIndent()
-                            .DecrementIndent()
-                            .AppendLine("#warning " + DesignStrings.SensitiveInformationWarning)
-                            .IncrementIndent()
-                            .IncrementIndent()
-                            .IncrementIndent()
-                            .IncrementIndent();
-                    }
-
-                    this._sb.Append("optionsBuilder")
-                        .Append(
-                            this._providerConfigurationCodeGenerator != null
-                                ? this._code.Fragment(
-                                    this._providerConfigurationCodeGenerator.GenerateUseProvider(connectionString))
-#pragma warning disable CS0618 // Type or member is obsolete
-                                : this._legacyProviderCodeGenerator.GenerateUseProvider(connectionString, Language))
-#pragma warning restore CS0618 // Type or member is obsolete
-                        .AppendLine(";");
+                    this.sb.AppendLine($"optionsBuilder.UseSqlServer({nameof(AppSettingManager)}.{nameof(AppSettingManager.AppSettings)}.{nameof(AppSettingManager.AppSettings.Connection)});");
                 }
 
-                this._sb.AppendLine("}");
+                this.sb.AppendLine("}");
             }
-            this._sb.AppendLine("}");
 
-            this._sb.AppendLine();
+            this.sb.AppendLine("}");
+            this.sb.AppendLine();
         }
 
-        /// <summary>
-        ///     This API supports the Entity Framework Core infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         protected virtual void GenerateOnModelCreating(
             [NotNull] IModel model,
             bool useDataAnnotations)
         {
             Check.NotNull(model, nameof(model));
 
-            this._sb.AppendLine("protected override void OnModelCreating(ModelBuilder modelBuilder)");
-            this._sb.Append("{");
+            this.sb.AppendLine("protected override void OnModelCreating(ModelBuilder modelBuilder)");
+            this.sb.Append("{");
 
             var annotations = model.GetAnnotations().ToList();
             RemoveAnnotation(ref annotations, ChangeDetector.SkipDetectChangesAnnotation);
@@ -256,25 +229,25 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             if (lines.Count > 0)
             {
-                using (this._sb.Indent())
+                using (this.sb.Indent())
                 {
-                    this._sb.AppendLine();
-                    this._sb.Append("modelBuilder" + lines[0]);
+                    this.sb.AppendLine();
+                    this.sb.Append("modelBuilder" + lines[0]);
 
-                    using (this._sb.Indent())
+                    using (this.sb.Indent())
                     {
                         foreach (var line in lines.Skip(1))
                         {
-                            this._sb.AppendLine();
-                            this._sb.Append(line);
+                            this.sb.AppendLine();
+                            this.sb.Append(line);
                         }
                     }
 
-                    this._sb.AppendLine(";");
+                    this.sb.AppendLine(";");
                 }
             }
 
-            using (this._sb.Indent())
+            using (this.sb.Indent())
             {
                 foreach (var entityType in model.GetEntityTypes())
                 {
@@ -284,7 +257,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                     if (this._entityTypeBuilderInitialized)
                     {
-                        this._sb.AppendLine("});");
+                        this.sb.AppendLine("});");
                     }
                 }
 
@@ -294,16 +267,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 }
             }
 
-            this._sb.AppendLine("}");
+            this.sb.AppendLine("}");
         }
 
         private void InitializeEntityTypeBuilder(IEntityType entityType)
         {
             if (!this._entityTypeBuilderInitialized)
             {
-                this._sb.AppendLine();
-                this._sb.AppendLine($"modelBuilder.Entity<{entityType.Name}>({EntityLambdaIdentifier} =>");
-                this._sb.Append("{");
+                this.sb.AppendLine();
+                this.sb.AppendLine($"modelBuilder.Entity<{entityType.Name}>({EntityLambdaIdentifier} =>");
+                this.sb.Append("{");
             }
 
             this._entityTypeBuilderInitialized = true;
@@ -377,22 +350,22 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             this.InitializeEntityTypeBuilder(entityType);
 
-            using (this._sb.Indent())
+            using (this.sb.Indent())
             {
-                this._sb.AppendLine();
+                this.sb.AppendLine();
 
-                this._sb.Append(EntityLambdaIdentifier + lines[0]);
+                this.sb.Append(EntityLambdaIdentifier + lines[0]);
 
-                using (this._sb.Indent())
+                using (this.sb.Indent())
                 {
                     foreach (var line in lines.Skip(1))
                     {
-                        this._sb.AppendLine();
-                        this._sb.Append(line);
+                        this.sb.AppendLine();
+                        this.sb.Append(line);
                     }
                 }
 
-                this._sb.AppendLine(";");
+                this.sb.AppendLine(";");
             }
         }
 
@@ -554,17 +527,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             this.AppendMultiLineFluentApi(index.DeclaringEntityType, lines);
         }
 
-        protected virtual List<string> lines(IProperty property)
+        protected virtual List<string> Lines(IProperty property)
         {
             return new List<string>
             {
-                $".{nameof(EntityTypeBuilder.Property)}(e => e.{property.Name})"
+                $".{nameof(EntityTypeBuilder.Property)}(e => e.{property.Name})",
             };
         }
 
         protected virtual void GenerateProperty(IProperty property, bool useDataAnnotations)
         {
-            var lines = this.lines(property);
+            var lines = this.Lines(property);
 
             var annotations = property.GetAnnotations().ToList();
 
@@ -866,19 +839,19 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 };
             }
 
-            this._sb.AppendLine();
-            this._sb.Append(lines[0]);
+            this.sb.AppendLine();
+            this.sb.Append(lines[0]);
 
-            using (this._sb.Indent())
+            using (this.sb.Indent())
             {
                 foreach (var line in lines.Skip(1))
                 {
-                    this._sb.AppendLine();
-                    this._sb.Append(line);
+                    this.sb.AppendLine();
+                    this.sb.Append(line);
                 }
             }
 
-            this._sb.AppendLine(";");
+            this.sb.AppendLine(";");
         }
 
         private static string GenerateLambdaToKey(

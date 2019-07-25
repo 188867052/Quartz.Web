@@ -5,8 +5,8 @@ namespace MaterialUI.Framework
     using System.Text;
     using System.Threading.Tasks;
     using AspNetCore.Extensions;
-    using MaterialUI.Entity;
     using MaterialUI.Controllers;
+    using MaterialUI.Entity;
     using MaterialUI.Files;
     using MaterialUI.Html;
     using MaterialUI.Html.Buttons;
@@ -110,10 +110,10 @@ namespace MaterialUI.Framework
         /// 获取所有Job（详情信息 - 初始化页面调用）.
         /// </summary>
         /// <returns></returns>
-        protected async Task<List<TaskSchedule>> GetAllJobAsync(List<TaskSchedule> list)
+        protected async Task<List<TaskScheduleModel>> GetAllJobAsync(List<TaskScheduleModel> list)
         {
             List<JobKey> jboKeyList = new List<JobKey>();
-            List<TaskSchedule> newList = new List<TaskSchedule>();
+            List<TaskScheduleModel> newList = new List<TaskScheduleModel>();
             var groupNames = await this.scheduler.GetJobGroupNames();
             foreach (var groupName in groupNames.OrderBy(t => t))
             {
@@ -144,8 +144,8 @@ namespace MaterialUI.Framework
                     item.ExceptionMessage = jobDetail.JobDataMap.GetString(Constant.Exception);
                     item.Url = jobDetail.JobDataMap.GetString(Constant.RequestUrl);
                     item.Status = await this.scheduler.GetTriggerState(triggers.Key);
-                    item.LastExcuteTime = triggers.GetPreviousFireTimeUtc()?.LocalDateTime;
-                    item.NextExcuteTime = triggers.GetNextFireTimeUtc()?.LocalDateTime;
+                    item.PrevFireTime = triggers.GetPreviousFireTimeUtc()?.LocalDateTime;
+                    item.NextFireTime = triggers.GetNextFireTimeUtc()?.LocalDateTime;
                     item.StartTime = triggers.StartTimeUtc.LocalDateTime;
                     item.CronExpression = interval;
                     item.EndTime = triggers.EndTimeUtc?.LocalDateTime;

@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Quartz;
 
-    public partial class TaskSchedule
+    public partial class TaskScheduleModel
     {
         [BindNever]
         public JobKey JobKey

@@ -3,18 +3,20 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web;
     using Host.Model;
     using MaterialUI.Controllers;
     using MaterialUI.Dapper;
+    using MaterialUI.Entity;
     using MaterialUI.Job.Model;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using Quartz;
+    using Serilog;
     using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
-    using Log = Serilog.Log;
 
     [DisallowConcurrentExecution]
     [PersistJobDataAfterExecution]
@@ -76,13 +78,23 @@
                 }
                 else
                 {
-                    DapperExtension.Insert(new MaterialUI.Entity.Log()
+                    using (var dbContext = new MaterialUIContext())
                     {
-                        CreateTime = DateTime.Now,
-                        LogLevel = LogLevel.Information,
-                        Type = 1,
-                        Message = result,
-                    });
+                        //var task = dbContext.TaskSchedule.FirstOrDefault(o => o.Name == context.JobDetail.Key.Name && o.Group == context.JobDetail.Key.Group);
+                        //task.NextExcuteTime = context.NextFireTimeUtc.Value.DateTime;
+                        //task.LastExcuteTime = context.ScheduledFireTimeUtc.Value.DateTime;
+                        QuartzLog entity = new QuartzLog()
+                        {
+                            CreateTime = DateTime.Now,
+                            LogLevel = LogLevel.Information,
+                            Type = 1,
+                            Message = result,
+                            //TaskScheduleId = task.Id,
+                        };
+                        dbContext.QuartzLog.Add(entity);
+                        //dbContext.TaskSchedule.Update(task);
+                        dbContext.SaveChanges();
+                    }
 
                     await this.InformationAsync(loginfo.JobName, this.SerializeObject(loginfo), mailMessage);
                 }

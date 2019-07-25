@@ -13,7 +13,7 @@
 
     public class SchedualGridSearch<TModel, TPostModel> : GridSearchPage<TModel, TPostModel>
          where TPostModel : SchedulePostModel
-         where TModel : TaskSchedule
+         where TModel : TaskScheduleModel
     {
         public SchedualGridSearch(IList<TModel> list)
             : base(list)

@@ -8,7 +8,7 @@
     using MaterialUI.ViewConfiguration.Schedule;
 
     public class ScheduleGridConfiguration<T> : GridConfiguration<T>
-        where T : TaskSchedule
+        where T : TaskScheduleModel
     {
         public ScheduleGridConfiguration(IList<T> model)
             : base(model)
@@ -30,8 +30,8 @@
             gridColumns.Add(new TextGridColumn<T>(o => o.CronExpression, "Cron"));
             gridColumns.Add(new DateTimeGridColumn<T>(o => o.StartTime, "开始时间"));
             gridColumns.Add(new DateTimeGridColumn<T>(o => o.EndTime, "结束时间"));
-            gridColumns.Add(new DateTimeGridColumn<T>(o => o.LastExcuteTime, "上次执行时间"));
-            gridColumns.Add(new DateTimeGridColumn<T>(o => o.NextExcuteTime, "下次执行时间"));
+            gridColumns.Add(new DateTimeGridColumn<T>(o => o.PrevFireTime, "上次执行时间"));
+            gridColumns.Add(new DateTimeGridColumn<T>(o => o.NextFireTime, "下次执行时间"));
 
             ActionGridColumn<T> actionColumns = new ActionGridColumn<T>("操作", o => o.Id);
             actionColumns.AddActionButton("btn btn-action btn-info btn-round", o => o.IconClass, o => o.IsEnable ? ScheduleRoute.StopJob : ScheduleRoute.ResumeJob);

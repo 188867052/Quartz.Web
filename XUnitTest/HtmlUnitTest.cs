@@ -159,14 +159,5 @@ namespace XUnitTest
         {
             var modal = HtmlIcons.Generate(new List<Icon> { new Icon { Name = "verified_user", Id = 1 }, new Icon { Name = "verified_user", Id = 1 } });
         }
-
-        [Fact]
-        public void Schedule()
-        {
-            MaterialUIContext dbContext = new MaterialUIContext();
-            var model = dbContext.TaskSchedule.Take(1).ToList();
-            ScheduleGridConfiguration<TaskSchedule> grid = new ScheduleGridConfiguration<TaskSchedule>(model);
-            var html = grid.Render();
-        }
     }
 }

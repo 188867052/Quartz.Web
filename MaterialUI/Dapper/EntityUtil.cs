@@ -17,13 +17,17 @@
                 var columns = new List<Column>();
                 foreach (var item in properties)
                 {
-                    columns.Add(new Column()
+                    // TODO: the dapper issus.
+                    if (MetaData.Mapping.TryGetValue($"{type.Name}.{item.Name}", out string value))
                     {
-                        ColumnKey = ColumnKey.None,
-                        ColumnName = MetaData.Mapping[$"{type.Name}.{item.Name}"],
-                        CSharpName = item.Name,
-                        Identity = key == item.Name,
-                    });
+                        columns.Add(new Column()
+                        {
+                            ColumnKey = ColumnKey.None,
+                            ColumnName = value,
+                            CSharpName = item.Name,
+                            Identity = key == item.Name,
+                        });
+                    }
                 }
 
                 if (columns.Count > 0 && !columns.Exists(e => e.ColumnKey == ColumnKey.Primary))

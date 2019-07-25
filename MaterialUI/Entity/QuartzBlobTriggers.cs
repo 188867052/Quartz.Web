@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace MaterialUI.Entity
 {
-    public partial class QrtzCronTriggers
+    public partial class QuartzBlobTriggers
     {
         public string SchedName { get; set; }
-        public string TriggerName { get; set; }
-        public string TriggerGroup { get; set; }
-        public string CronExpression { get; set; }
-        public string TimeZoneId { get; set; }
 
-        public QrtzTriggers QrtzTriggers { get; set; }
+        public string TriggerName { get; set; }
+
+        public string TriggerGroup { get; set; }
+
+        public byte[] BlobData { get; set; }
+
+        public QuartzTriggers QuartzTriggers { get; set; }
     }
 }

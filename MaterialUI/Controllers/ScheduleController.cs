@@ -26,16 +26,14 @@
     using Quartz;
     using Quartz.Impl.Matchers;
     using Quartz.Impl.Triggers;
+    using Serilog;
 
     public class ScheduleController : StandardController
     {
-        private readonly LogDialog logDialog;
-
-        public ScheduleController(MaterialUIContext dbContext, LogDialog logDialog)
+        public ScheduleController(MaterialUIContext dbContext)
             : base(dbContext)
         {
             this.scheduler = SchedulerCenter.Instance.Scheduler;
-            this.logDialog = logDialog;
         }
 
         public string GetTime()
@@ -45,10 +43,50 @@
 
         public IActionResult Index()
         {
-            var list = DapperExtension.FindAll<TaskSchedule>().ToList();
-            list = this.GetAllJobAsync(list).Result;
-            var page = new SchedualGridSearch<TaskSchedule, SchedulePostModel>(list);
+            this.DbContext.Set<QuartzJobDetails>().Load();
+            this.DbContext.Set<QuartzBlobTriggers>().Load();
+            this.DbContext.Set<QuartzCronTriggers>().Load();
+            this.DbContext.Set<QuartzSimpleTriggers>().Load();
+            this.DbContext.Set<QuartzSimpropTriggers>().Load();
+
+            var list = this.DbContext.QuartzTriggers.ToList();
+
+            List<TaskScheduleModel> models = new List<TaskScheduleModel>();
+
+            foreach (var item in list)
+            {
+                string expression = item.QuartzCronTriggers == null ?
+                    item.QuartzSimpleTriggers.RepeatInterval.ToString()
+                    : item.QuartzCronTriggers.CronExpression;
+                TaskScheduleModel model = new TaskScheduleModel()
+                {
+                    Name = item.TriggerName,
+                    Group = item.JobGroup,
+                    TriggerState = item.TriggerState,
+                    NextFireTime = item.NextFireTime,
+                    PrevFireTime = item.PrevFireTime,
+                    StartTime = item.StartTime,
+                    EndTime = item.EndTime,
+                    CronExpression = expression,
+                };
+                models.Add(model);
+            }
+
+            var page = new SchedualGridSearch<TaskScheduleModel, SchedulePostModel>(models);
             return this.SearchGrid(page);
+        }
+
+        private static DateTime ConvertLongDateTime(long ticks)
+        {
+            var date = new DateTime(ticks);
+            return date;
+        }
+
+        public IActionResult LogDialog(int id)
+        {
+            List<QuartzLog> models = this.DbContext.QuartzLog.Where(o => o.TaskScheduleId == id).OrderByDescending(o => o.CreateTime).ToList();
+            LogDialog dialog = new LogDialog(models);
+            return this.Dialog(dialog);
         }
 
         public IActionResult DeleteDialog(int id)
@@ -59,21 +97,21 @@
 
         public IActionResult Edit(int id)
         {
-            var entity = DapperExtension.Find<TaskSchedule>(id);
-            var dialog = new EditScheduleDialog<TaskSchedule, TaskSchedule>(entity);
+            var entity = DapperExtension.Find<TaskScheduleModel>(id);
+            var dialog = new EditScheduleDialog<TaskScheduleModel, TaskScheduleModel>(entity);
             return this.Dialog(dialog);
         }
 
         public async Task<IActionResult> ReplaceColumn(TriggerTypeEnum type, int? id)
         {
-            var entity = new TaskSchedule();
+            var entity = new TaskScheduleModel();
             if (id.HasValue)
             {
-                entity = DapperExtension.Find<TaskSchedule>(id.Value);
+                entity = DapperExtension.Find<TaskScheduleModel>(id.Value);
             }
 
             entity.TriggerType = type;
-            ReplaceLargeColumn<TaskSchedule, TaskSchedule> replaceColumn = new ReplaceLargeColumn<TaskSchedule, TaskSchedule>(entity);
+            ReplaceLargeColumn<TaskScheduleModel, TaskScheduleModel> replaceColumn = new ReplaceLargeColumn<TaskScheduleModel, TaskScheduleModel>(entity);
             var replace = replaceColumn.Render();
             return this.HtmlResult(replace);
         }
@@ -102,7 +140,7 @@
         /// </summary>
         public async Task StopJob(int id)
         {
-            var entity = this.DbContext.TaskSchedule.Find(id);
+            var entity = new TaskScheduleModel();
             entity.IsEnable = false;
             entity.IconClass = "pause";
             this.DbContext.SaveChanges();
@@ -115,28 +153,33 @@
         /// </summary>
         public async Task ResumeJob(int id)
         {
-            var entity = this.DbContext.TaskSchedule.Find(id);
+            var entity = new TaskScheduleModel();
             entity.IsEnable = true;
             entity.IconClass = "play_circle_filled";
             var jobKey = entity.JobKey;
             this.DbContext.SaveChanges();
 
-            if (await this.scheduler.CheckExists(jobKey))
+            bool isExists = await this.scheduler.CheckExists(jobKey);
+            if (isExists)
             {
                 await this.scheduler.ResumeJob(jobKey);
+            }
+            else
+            {
+                await this.AddScheduleJobAsync(entity);
             }
         }
 
         public IActionResult Add()
         {
-            var dialog = new EditScheduleDialog<TaskSchedule, TaskSchedule>();
+            var dialog = new EditScheduleDialog<TaskScheduleModel, TaskScheduleModel>();
             return this.Dialog(dialog);
         }
 
         [HttpPost]
         public async Task<IActionResult> Search(SchedulePostModel model)
         {
-            IQueryable<TaskSchedule> query = this.DbContext.TaskSchedule.AsNoTracking();
+            IQueryable<TaskScheduleModel> query = null;
             query = query.AddStringContainsFilter(o => o.Name, model.Name);
             query = query.AddStringContainsFilter(o => o.Group, model.Group);
             query = query.AddStringContainsFilter(o => o.Url, model.Url);
@@ -146,13 +189,13 @@
             var list = query.ToList();
 
             list = this.GetAllJobAsync(list).Result;
-            ScheduleGridConfiguration<TaskSchedule> grid = new ScheduleGridConfiguration<TaskSchedule>(list);
+            ScheduleGridConfiguration<TaskScheduleModel> grid = new ScheduleGridConfiguration<TaskScheduleModel>(list);
 
             return this.HtmlResult(grid.Render());
         }
 
         [HttpPost]
-        public async Task<BaseResult> ModifyJob(TaskSchedule model)
+        public async Task<BaseResult> ModifyJob(TaskScheduleModel model)
         {
             await this.scheduler.PauseJob(model.JobKey);
             await this.scheduler.DeleteJob(model.JobKey);
@@ -173,13 +216,7 @@
             return new BaseResult() { Msg = "修改计划任务成功！" };
         }
 
-        /// <summary>
-        /// 获取job日志.
-        /// </summary>
-        public async Task<IActionResult> LogDialog(int id)
-        {
-            return this.Dialog(this.logDialog);
-        }
+
 
         /// <summary>
         /// 启动调度.
@@ -190,7 +227,7 @@
             if (this.scheduler.InStandbyMode)
             {
                 await this.scheduler.Start();
-                Serilog.Log.Information("任务调度启动！");
+                Log.Information("任务调度启动！");
             }
 
             return this.scheduler.InStandbyMode;
@@ -207,7 +244,7 @@
             {
                 // TODO  注意：Shutdown后Start会报错，所以这里使用暂停。
                 await this.scheduler.Standby();
-                Serilog.Log.Information("任务调度暂停！");
+                Log.Information("任务调度暂停！");
             }
 
             return !this.scheduler.InStandbyMode;
@@ -238,15 +275,15 @@
         /// <param name="entity">entity.</param>
         /// <returns>BaseResult.</returns>
         [HttpPost]
-        public async Task<BaseResult> AddJob(TaskSchedule entity)
+        public async Task<BaseResult> AddJob(TaskScheduleModel entity)
         {
             return await this.AddScheduleJobAsync(entity);
         }
 
         public JsonResult Delete(int id)
         {
-            var entity = this.DbContext.TaskSchedule.Find(id);
-            this.DbContext.TaskSchedule.Remove(entity);
+            //var entity = this.DbContext.TaskSchedule.Find(id);
+            //this.DbContext.TaskSchedule.Remove(entity);
             var number = this.DbContext.SaveChanges();
             return this.Json(number);
         }
@@ -353,7 +390,7 @@
             return jobInfoList;
         }
 
-        private async Task<BaseResult> AddScheduleJobAsync(TaskSchedule entity)
+        private async Task<BaseResult> AddScheduleJobAsync(TaskScheduleModel entity)
         {
             var result = new BaseResult();
             try
@@ -394,7 +431,7 @@
             return result;
         }
 
-        private ITrigger CreateTrigger(TaskSchedule entity)
+        private ITrigger CreateTrigger(TaskScheduleModel entity)
         {
             var builder = TriggerBuilder.Create()
                    .WithIdentity(entity.TriggerKey)

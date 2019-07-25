@@ -12,8 +12,8 @@
     using Resource = Resources.EditScheduleConfigurationResource;
 
     public class ReplaceLargeColumn<TModel, TPostModel>
-        where TPostModel : TaskSchedule
-        where TModel : TaskSchedule
+        where TPostModel : TaskScheduleModel
+        where TModel : TaskScheduleModel
     {
         private readonly TModel model;
         private readonly EmptyColumn<TModel, TPostModel> emptyColumn;

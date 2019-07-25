@@ -42,7 +42,7 @@
                     var jobStore = new JobStoreTX
                     {
                         DataSource = "default",
-                        TablePrefix = "QRTZ_",
+                        TablePrefix = "Quartz_",
                         InstanceId = "AUTO",
 
                         DriverDelegateType = typeof(SqlServerDelegate).AssemblyQualifiedName,

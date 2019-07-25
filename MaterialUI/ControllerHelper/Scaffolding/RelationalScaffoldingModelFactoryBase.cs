@@ -1,4 +1,4 @@
-namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
+﻿namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
     using Microsoft.EntityFrameworkCore.Scaffolding.Metadata.Internal;
     using ScaffoldingAnnotationNames = Microsoft.EntityFrameworkCore.Scaffolding.Metadata.Internal.ScaffoldingAnnotationNames;
 
-    public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
+    public abstract class RelationalScaffoldingModelFactoryBase : IScaffoldingModelFactory
     {
         internal const string NavigationNameUniquifyingPattern = "{0}Navigation";
         internal const string SelfReferencingPrincipalEndNavigationNamePattern = "Inverse{0}";
@@ -36,7 +36,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private readonly ICSharpUtilities _cSharpUtilities;
         private readonly IScaffoldingTypeMapper _scaffoldingTypeMapper;
 
-        public RelationalScaffoldingModelFactory(
+        public RelationalScaffoldingModelFactoryBase(
             [NotNull] IOperationReporter reporter,
             [NotNull] ICandidateNamingService candidateNamingService,
             [NotNull] IPluralizer pluralizer,
@@ -663,6 +663,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                             .ToList()
                             .ForEach(tuple => tuple.property.IsNullable = false);
                     }
+
                     principalKey = principalEntityType.AddKey(principalProperties);
                 }
                 else

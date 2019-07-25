@@ -14,18 +14,15 @@ namespace MaterialUI.Controllers
     using MaterialUI.Routes;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
 
     public class GeneratorController : StandardController
     {
-        private readonly IConfiguration configuration;
         private readonly IHostingEnvironment env;
 
-        public GeneratorController(IConfiguration configuration, IHostingEnvironment hostingEnvironment, MaterialUIContext materialKitContext)
+        public GeneratorController( IHostingEnvironment hostingEnvironment, MaterialUIContext materialKitContext)
             : base(materialKitContext)
         {
-            this.configuration = configuration;
             this.env = hostingEnvironment;
         }
 
@@ -103,7 +100,7 @@ namespace MaterialUI.Controllers
         [Route(GeneratorRoute.Scaffold)]
         public IActionResult Scaffold()
         {
-            IList<string> changedFiles = ScaffoldingHelper.Scaffolding( "Entity");
+            IList<string> changedFiles = ScaffoldingHelper.Scaffolding("Entity");
             string html = this.HigntLightHtml(HttpUtility.HtmlEncode(string.Join(Environment.NewLine, changedFiles)), "cs");
             return this.HtmlResult(html);
         }

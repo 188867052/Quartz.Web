@@ -7,10 +7,10 @@
     [Serializable]
     [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
-    public class Table
+    public class Entity
     {
-        [XmlElement(ElementName = "field")]
-        public Field[] Fields { get; set; }
+        [XmlElement(ElementName = "property")]
+        public Property[] Properties { get; set; }
 
         [XmlAttribute("summary")]
         public string Description { get; set; }

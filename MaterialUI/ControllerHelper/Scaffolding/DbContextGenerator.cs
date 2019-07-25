@@ -16,14 +16,6 @@
     using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
     using Microsoft.Extensions.DependencyInjection;
 
-    internal static class Services
-    {
-        internal static T GetService<T>(this IServiceCollection services)
-        {
-            return services.BuildServiceProvider().GetRequiredService<T>();
-        }
-    }
-
     internal class DbContextGenerator
     {
         private readonly string directory;
@@ -75,6 +67,11 @@
             sb.AppendLine("        {");
             foreach (var data in dictionary)
             {
+                if (dictionary.First().Key != data.Key && data.Key.Contains("PrimaryKey"))
+                {
+                    sb.AppendLine();
+                }
+
                 sb.AppendLine($"            {{ \"{data.Key}\", \"{data.Value}\" }},");
             }
 

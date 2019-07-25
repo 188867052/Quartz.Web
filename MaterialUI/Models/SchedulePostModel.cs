@@ -3,7 +3,7 @@
     using System;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-    public class SchedulePostModel
+    public partial class SchedulePostModel
     {
         public string Name { get; set; }
 

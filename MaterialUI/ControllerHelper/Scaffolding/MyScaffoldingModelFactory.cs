@@ -9,7 +9,7 @@
     using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
     public class MyScaffoldingModelFactory
-        : RelationalScaffoldingModelFactory
+        : RelationalScaffoldingModelFactoryBase
     {
         public MyScaffoldingModelFactory([NotNull] IOperationReporter reporter, [NotNull] ICandidateNamingService candidateNamingService, [NotNull] IPluralizer pluralizer, [NotNull] ICSharpUtilities cSharpUtilities, [NotNull] IScaffoldingTypeMapper scaffoldingTypeMapper) : base(reporter, candidateNamingService, pluralizer, cSharpUtilities, scaffoldingTypeMapper)
         {

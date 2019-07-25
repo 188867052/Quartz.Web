@@ -211,8 +211,11 @@
             CodeWriter.WriteFileStart(this, sw);
             foreach (var type in types)
             {
-                if (UseNamespaces && inNamespace && rootNamespace != type.IsRoot && SecondaryNamespace != null) { CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace); inNamespace = false; }
-                if (UseNamespaces && !inNamespace) { CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot); inNamespace = true; rootNamespace = type.IsRoot; }
+                if (UseNamespaces && inNamespace && rootNamespace != type.IsRoot && SecondaryNamespace != null) { CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace);
+                    inNamespace = false; }
+                if (UseNamespaces && !inNamespace) { CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot);
+                    inNamespace = true;
+                    rootNamespace = type.IsRoot; }
                 CodeWriter.WriteClass(this, sw, type, types.Last() != type);
             }
 

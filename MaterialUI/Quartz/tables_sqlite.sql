@@ -1,161 +1,161 @@
-DROP TABLE IF EXISTS QRTZ_FIRED_TRIGGERS;
-DROP TABLE IF EXISTS QRTZ_PAUSED_TRIGGER_GRPS;
-DROP TABLE IF EXISTS QRTZ_SCHEDULER_STATE;
-DROP TABLE IF EXISTS QRTZ_LOCKS;
-DROP TABLE IF EXISTS QRTZ_SIMPROP_TRIGGERS;
-DROP TABLE IF EXISTS QRTZ_SIMPLE_TRIGGERS;
-DROP TABLE IF EXISTS QRTZ_CRON_TRIGGERS;
-DROP TABLE IF EXISTS QRTZ_BLOB_TRIGGERS;
-DROP TABLE IF EXISTS QRTZ_TRIGGERS;
-DROP TABLE IF EXISTS QRTZ_JOB_DETAILS;
-DROP TABLE IF EXISTS QRTZ_CALENDARS;
-CREATE TABLE QRTZ_JOB_DETAILS
+drop table if exists quartz_fired_triggers;
+drop table if exists quartz_paused_trigger_grps;
+drop table if exists quartz_scheduler_state;
+drop table if exists quartz_locks;
+drop table if exists quartz_simprop_triggers;
+drop table if exists quartz_simple_triggers;
+drop table if exists quartz_cron_triggers;
+drop table if exists quartz_blob_triggers;
+drop table if exists quartz_triggers;
+drop table if exists quartz_job_details;
+drop table if exists quartz_calendars;
+create table quartz_job_details
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	JOB_NAME NVARCHAR(150) NOT NULL,
-    JOB_GROUP NVARCHAR(150) NOT NULL,
-    DESCRIPTION NVARCHAR(250) NULL,
-    JOB_CLASS_NAME   NVARCHAR(250) NOT NULL,
-    IS_DURABLE BIT NOT NULL,
-    IS_NONCONCURRENT BIT NOT NULL,
-    IS_UPDATE_DATA BIT  NOT NULL,
-	REQUESTS_RECOVERY BIT NOT NULL,
-    JOB_DATA varbinary(max) null,
-    PRIMARY KEY (SCHED_NAME,JOB_NAME,JOB_GROUP)
+    sched_name nvarchar(120) not null,
+	job_name nvarchar(150) not null,
+    job_group nvarchar(150) not null,
+    description nvarchar(250) null,
+    job_class_name   nvarchar(250) not null,
+    is_durable bit not null,
+    is_nonconcurrent bit not null,
+    is_update_data bit  not null,
+	requests_recovery bit not null,
+    job_data varbinary(max) null,
+    primary key (sched_name,job_name,job_group)
 );
 
-CREATE TABLE QRTZ_TRIGGERS
+create table quartz_triggers
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	TRIGGER_NAME NVARCHAR(150) NOT NULL,
-    TRIGGER_GROUP NVARCHAR(150) NOT NULL,
-    JOB_NAME NVARCHAR(150) NOT NULL,
-    JOB_GROUP NVARCHAR(150) NOT NULL,
-    DESCRIPTION NVARCHAR(250) NULL,
-    NEXT_FIRE_TIME BIGINT NULL,
-    PREV_FIRE_TIME BIGINT NULL,
-    PRIORITY INTEGER NULL,
-    TRIGGER_STATE NVARCHAR(16) NOT NULL,
-    TRIGGER_TYPE NVARCHAR(8) NOT NULL,
-    START_TIME BIGINT NOT NULL,
-    END_TIME BIGINT NULL,
-    CALENDAR_NAME NVARCHAR(200) NULL,
-    MISFIRE_INSTR INTEGER NULL,
-    JOB_DATA varbinary(max) null,
-    PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
-    FOREIGN KEY (SCHED_NAME,JOB_NAME,JOB_GROUP)
-        REFERENCES QRTZ_JOB_DETAILS(SCHED_NAME,JOB_NAME,JOB_GROUP)
+    sched_name nvarchar(120) not null,
+	trigger_name nvarchar(150) not null,
+    trigger_group nvarchar(150) not null,
+    job_name nvarchar(150) not null,
+    job_group nvarchar(150) not null,
+    description nvarchar(250) null,
+    next_fire_time bigint null,
+    prev_fire_time bigint null,
+    priority integer null,
+    trigger_state nvarchar(16) not null,
+    trigger_type nvarchar(8) not null,
+    start_time bigint not null,
+    end_time bigint null,
+    calendar_name nvarchar(200) null,
+    misfire_instr integer null,
+    job_data varbinary(max) null,
+    primary key (sched_name,trigger_name,trigger_group),
+    foreign key (sched_name,job_name,job_group)
+        references quartz_job_details(sched_name,job_name,job_group)
 );
 
-CREATE TABLE QRTZ_SIMPLE_TRIGGERS
+create table quartz_simple_triggers
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	TRIGGER_NAME NVARCHAR(150) NOT NULL,
-    TRIGGER_GROUP NVARCHAR(150) NOT NULL,
-    REPEAT_COUNT BIGINT NOT NULL,
-    REPEAT_INTERVAL BIGINT NOT NULL,
-    TIMES_TRIGGERED BIGINT NOT NULL,
-    PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
-    FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
-        REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) ON DELETE CASCADE
-);
-
-
-
-CREATE TABLE QRTZ_SIMPROP_TRIGGERS 
-  (
-    SCHED_NAME NVARCHAR (120) NOT NULL ,
-    TRIGGER_NAME NVARCHAR (150) NOT NULL ,
-    TRIGGER_GROUP NVARCHAR (150) NOT NULL ,
-    STR_PROP_1 NVARCHAR (512) NULL,
-    STR_PROP_2 NVARCHAR (512) NULL,
-    STR_PROP_3 NVARCHAR (512) NULL,
-    INT_PROP_1 INT NULL,
-    INT_PROP_2 INT NULL,
-    LONG_PROP_1 BIGINT NULL,
-    LONG_PROP_2 BIGINT NULL,
-    DEC_PROP_1 NUMERIC NULL,
-    DEC_PROP_2 NUMERIC NULL,
-    BOOL_PROP_1 BIT NULL,
-    BOOL_PROP_2 BIT NULL,
-    TIME_ZONE_ID NVARCHAR(80) NULL,
-	PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
-	FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
-        REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) ON DELETE CASCADE
+    sched_name nvarchar(120) not null,
+	trigger_name nvarchar(150) not null,
+    trigger_group nvarchar(150) not null,
+    repeat_count bigint not null,
+    repeat_interval bigint not null,
+    times_triggered bigint not null,
+    primary key (sched_name,trigger_name,trigger_group),
+    foreign key (sched_name,trigger_name,trigger_group)
+        references quartz_triggers(sched_name,trigger_name,trigger_group) on delete cascade
 );
 
 
 
-CREATE TABLE QRTZ_CRON_TRIGGERS
+create table quartz_simprop_triggers 
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	TRIGGER_NAME NVARCHAR(150) NOT NULL,
-    TRIGGER_GROUP NVARCHAR(150) NOT NULL,
-    CRON_EXPRESSION NVARCHAR(250) NOT NULL,
-    TIME_ZONE_ID NVARCHAR(80),
-    PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
-    FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
-        REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) ON DELETE CASCADE
+    sched_name nvarchar (120) not null ,
+    trigger_name nvarchar (150) not null ,
+    trigger_group nvarchar (150) not null ,
+    str_prop_1 nvarchar (512) null,
+    str_prop_2 nvarchar (512) null,
+    str_prop_3 nvarchar (512) null,
+    int_prop_1 int null,
+    int_prop_2 int null,
+    long_prop_1 bigint null,
+    long_prop_2 bigint null,
+    dec_prop_1 numeric null,
+    dec_prop_2 numeric null,
+    bool_prop_1 bit null,
+    bool_prop_2 bit null,
+    time_zone_id nvarchar(80) null,
+	primary key (sched_name,trigger_name,trigger_group),
+	foreign key (sched_name,trigger_name,trigger_group)
+        references quartz_triggers(sched_name,trigger_name,trigger_group) on delete cascade
 );
 
 
-CREATE TABLE QRTZ_BLOB_TRIGGERS
+
+create table quartz_cron_triggers
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	TRIGGER_NAME NVARCHAR(150) NOT NULL,
-    TRIGGER_GROUP NVARCHAR(150) NOT NULL,
-    BLOB_DATA varbinary(max) null,
-    PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
-    FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
-        REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) ON DELETE CASCADE
+    sched_name nvarchar(120) not null,
+	trigger_name nvarchar(150) not null,
+    trigger_group nvarchar(150) not null,
+    cron_expression nvarchar(250) not null,
+    time_zone_id nvarchar(80),
+    primary key (sched_name,trigger_name,trigger_group),
+    foreign key (sched_name,trigger_name,trigger_group)
+        references quartz_triggers(sched_name,trigger_name,trigger_group) on delete cascade
 );
 
 
-CREATE TABLE QRTZ_CALENDARS
+create table quartz_blob_triggers
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	CALENDAR_NAME  NVARCHAR(200) NOT NULL,
-    CALENDAR varbinary(max) NOT NULL,
-    PRIMARY KEY (SCHED_NAME,CALENDAR_NAME)
+    sched_name nvarchar(120) not null,
+	trigger_name nvarchar(150) not null,
+    trigger_group nvarchar(150) not null,
+    blob_data varbinary(max) null,
+    primary key (sched_name,trigger_name,trigger_group),
+    foreign key (sched_name,trigger_name,trigger_group)
+        references quartz_triggers(sched_name,trigger_name,trigger_group) on delete cascade
 );
 
-CREATE TABLE QRTZ_PAUSED_TRIGGER_GRPS
+
+create table quartz_calendars
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	TRIGGER_GROUP NVARCHAR(150) NOT NULL, 
-    PRIMARY KEY (SCHED_NAME,TRIGGER_GROUP)
+    sched_name nvarchar(120) not null,
+	calendar_name  nvarchar(200) not null,
+    calendar varbinary(max) not null,
+    primary key (sched_name,calendar_name)
 );
 
-CREATE TABLE QRTZ_FIRED_TRIGGERS
+create table quartz_paused_trigger_grps
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	ENTRY_ID NVARCHAR(140) NOT NULL,
-    TRIGGER_NAME NVARCHAR(150) NOT NULL,
-    TRIGGER_GROUP NVARCHAR(150) NOT NULL,
-    INSTANCE_NAME NVARCHAR(200) NOT NULL,
-    FIRED_TIME BIGINT NOT NULL,
-    SCHED_TIME BIGINT NOT NULL,
-	PRIORITY INTEGER NOT NULL,
-    STATE NVARCHAR(16) NOT NULL,
-    JOB_NAME NVARCHAR(150) NULL,
-    JOB_GROUP NVARCHAR(150) NULL,
-    IS_NONCONCURRENT BIT NULL,
-    REQUESTS_RECOVERY BIT NULL,
-    PRIMARY KEY (SCHED_NAME,ENTRY_ID)
+    sched_name nvarchar(120) not null,
+	trigger_group nvarchar(150) not null, 
+    primary key (sched_name,trigger_group)
 );
 
-CREATE TABLE QRTZ_SCHEDULER_STATE
+create table quartz_fired_triggers
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	INSTANCE_NAME NVARCHAR(200) NOT NULL,
-    LAST_CHECKIN_TIME BIGINT NOT NULL,
-    CHECKIN_INTERVAL BIGINT NOT NULL,
-    PRIMARY KEY (SCHED_NAME,INSTANCE_NAME)
+    sched_name nvarchar(120) not null,
+	entry_id nvarchar(140) not null,
+    trigger_name nvarchar(150) not null,
+    trigger_group nvarchar(150) not null,
+    instance_name nvarchar(200) not null,
+    fired_time bigint not null,
+    sched_time bigint not null,
+	priority integer not null,
+    state nvarchar(16) not null,
+    job_name nvarchar(150) null,
+    job_group nvarchar(150) null,
+    is_nonconcurrent bit null,
+    requests_recovery bit null,
+    primary key (sched_name,entry_id)
 );
 
-CREATE TABLE QRTZ_LOCKS
+create table quartz_scheduler_state
   (
-    SCHED_NAME NVARCHAR(120) NOT NULL,
-	LOCK_NAME  NVARCHAR(40) NOT NULL, 
-    PRIMARY KEY (SCHED_NAME,LOCK_NAME)
+    sched_name nvarchar(120) not null,
+	instance_name nvarchar(200) not null,
+    last_checkin_time bigint not null,
+    checkin_interval bigint not null,
+    primary key (sched_name,instance_name)
+);
+
+create table quartz_locks
+  (
+    sched_name nvarchar(120) not null,
+	lock_name  nvarchar(40) not null, 
+    primary key (sched_name,lock_name)
 );

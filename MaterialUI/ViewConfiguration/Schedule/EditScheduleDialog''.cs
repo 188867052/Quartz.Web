@@ -10,8 +10,8 @@
     using Resource = Resources.EditScheduleConfigurationResource;
 
     public class EditScheduleDialog<TModel, TPostModel> : EditDialogBase<TModel, TPostModel>
-        where TPostModel : TaskSchedule
-        where TModel : TaskSchedule
+        where TPostModel : TaskScheduleModel
+        where TModel : TaskScheduleModel
     {
         public EditScheduleDialog(TModel entity = null)
             : base(entity)

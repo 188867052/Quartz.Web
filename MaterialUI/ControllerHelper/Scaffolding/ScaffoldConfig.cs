@@ -10,8 +10,8 @@
     [XmlRoot(ElementName = "config", IsNullable = false)]
     public class ScaffoldConfig
     {
-        [XmlElement("table")]
-        public Table[] Tables { get; set; }
+        [XmlElement("entity")]
+        public Entity[] Entities { get; set; }
 
         [XmlElement("namespace")]
         public Namespace[] Namespaces { get; set; }

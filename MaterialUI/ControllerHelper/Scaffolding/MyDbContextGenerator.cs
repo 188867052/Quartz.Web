@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Xml.Serialization;
     using MaterialUI.Scaffolding;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Metadata;
@@ -12,10 +10,8 @@
     using Microsoft.EntityFrameworkCore.Scaffolding;
     using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
-    internal class MyDbContextGenerator : CSharpDbContextGenerator
+    internal class MyDbContextGenerator : CSharpDbContextGeneratorBase
     {
-        private readonly ScaffoldConfig scaffoldConfig;
-
         [Obsolete]
         public MyDbContextGenerator(
             IEnumerable<IScaffoldingProviderCodeGenerator> legacyProviderCodeGenerators,
@@ -28,7 +24,6 @@
                 annotationCodeGenerator,
                 cSharpHelper)
         {
-            this.scaffoldConfig = this.GetScaffoldConfig(Environment.CurrentDirectory);
         }
 
         protected override void GenerateProperty(IProperty property, bool useDataAnnotations)
@@ -38,49 +33,62 @@
 
         protected override void GenerateNameSpace()
         {
-            foreach (var property in this.scaffoldConfig.Tables.SelectMany(table => table.Fields.Where(property => !string.IsNullOrEmpty(property.HasConversion)).Select(property => property).Select(property => property)))
+            foreach (var property in Helper.ScaffoldConfig.Entities.SelectMany(table => table.Properties.Where(property => property.HasConversion).Select(property => property).Select(property => property)))
             {
-                Namespace @namespace = this.scaffoldConfig.Namespaces.FirstOrDefault(o => o.Name == property.Type);
-                if (@namespace != null)
+                Namespace ns = Helper.ScaffoldConfig.Namespaces.FirstOrDefault(o => o.Name == property.Type);
+                if (ns != null)
                 {
-                    this._sb.AppendLine($"using {@namespace.Value};");
+                    string us = $"using {ns.Value};";
+                    if (!this.sb.ToString().Contains(us))
+                    {
+                        this.sb.AppendLine(us);
+                    }
                 }
             }
         }
 
-        protected override List<string> lines(IProperty property)
+        protected override List<string> Lines(IProperty property)
         {
-            var line = base.lines(property);
-            var propertyImp = (Property)property;
-            var fieldConfig = this.scaffoldConfig?.Tables?.FirstOrDefault(o => o.Name == propertyImp?.DeclaringType?.Name)?.Fields?.FirstOrDefault(o => o.Name == property.Name);
-            switch (fieldConfig?.HasConversion)
+            var line = base.Lines(property);
+            var propertyImp = (Microsoft.EntityFrameworkCore.Metadata.Internal.Property)property;
+            var fieldConfig = Helper.ScaffoldConfig?.Entities?.FirstOrDefault(o => o.Name == propertyImp?.DeclaringType?.Name)?.Properties?.FirstOrDefault(o => o.Name == property.Name);
+            switch (fieldConfig?.DbType)
             {
-                case "int2enum":
-                    line.Add($@".HasConversion(v => (int)v, v => ({fieldConfig.Type})v)");
+                case "int":
+                    switch (fieldConfig?.CSharpType)
+                    {
+                        default:
+                            line.Add($@".HasConversion(v => (int)v, v => ({fieldConfig.Type})v)");
+                            break;
+                    }
+
                     break;
-                case "string2enum":
-                    line.Add($@".HasConversion(v => v.ToString(), v => ({fieldConfig.Type})Enum.Parse(typeof({fieldConfig.Type}), v))");
+                case "string":
+                    switch (fieldConfig?.CSharpType)
+                    {
+                        default:
+                            line.Add($@".HasConversion(v => v.ToString(), v => ({fieldConfig.Type})Enum.Parse(typeof({fieldConfig.Type}), v))");
+                            break;
+                    }
+
+                    break;
+
+                case "long":
+                case "long?":
+                    switch (fieldConfig?.CSharpType)
+                    {
+                        case "DateTime":
+                            line.Add($@".HasConversion(v => v.Ticks, v => new DateTime(v))");
+                            break;
+                        case "DateTime?":
+                            line.Add($@".HasConversion(v => v.Value.Ticks, v => new DateTime(v))");
+                            break;
+                    }
+
                     break;
             }
 
             return line;
-        }
-
-        private ScaffoldConfig GetScaffoldConfig(string webRootPath)
-        {
-            DirectoryInfo di = new DirectoryInfo(webRootPath);
-            var file = di.GetFiles("Scaffolding.xml", SearchOption.AllDirectories).FirstOrDefault();
-            var xml = File.ReadAllText(file.FullName);
-            return this.Deserialize(xml);
-        }
-
-        private ScaffoldConfig Deserialize(string xml)
-        {
-            using (StringReader sr = new StringReader(xml))
-            {
-                XmlSerializer xmldes = new XmlSerializer(typeof(ScaffoldConfig));
-                return (ScaffoldConfig)xmldes.Deserialize(sr);
-            }
         }
     }
 }

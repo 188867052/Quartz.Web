@@ -1,5 +1,6 @@
 ﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
+    using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
     using Javascript;
@@ -12,6 +13,13 @@
 
     public class LogDialog : DialogBase
     {
+        private readonly List<QuartzLog> models;
+
+        public LogDialog(List<QuartzLog> models)
+        {
+            this.models = models;
+        }
+
         protected override Identifier Identifier => ScheduleIdentifiers.LogDialogIdentifier;
 
         protected override string Title => "日志";
@@ -22,9 +30,8 @@
         {
             get
             {
-                var grid = new LogDialogGridConfiguration<Log>();
-                var list = DapperExtension.Page<Log>(1, 10, out int count).OrderByDescending(o => o.CreateTime).Select().ToList();
-                var responsiveTable = grid.Render(1, 10, list, count);
+                var grid = new LogDialogGridConfiguration<QuartzLog>();
+                var responsiveTable = grid.Render(1, 10, this.models.Take(10).ToList(), this.models.Count);
                 return responsiveTable;
             }
         }

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 using MaterialUI.Enums;
 using Quartz;
-using Quartz;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace MaterialUI.Entity
@@ -21,27 +20,38 @@ namespace MaterialUI.Entity
         }
 
         public virtual DbSet<Icon> Icon { get; set; }
-        public virtual DbSet<Log> Log { get; set; }
-        public virtual DbSet<QrtzBlobTriggers> QrtzBlobTriggers { get; set; }
-        public virtual DbSet<QrtzCalendars> QrtzCalendars { get; set; }
-        public virtual DbSet<QrtzCronTriggers> QrtzCronTriggers { get; set; }
-        public virtual DbSet<QrtzFiredTriggers> QrtzFiredTriggers { get; set; }
-        public virtual DbSet<QrtzJobDetails> QrtzJobDetails { get; set; }
-        public virtual DbSet<QrtzLocks> QrtzLocks { get; set; }
-        public virtual DbSet<QrtzPausedTriggerGrps> QrtzPausedTriggerGrps { get; set; }
-        public virtual DbSet<QrtzSchedulerState> QrtzSchedulerState { get; set; }
-        public virtual DbSet<QrtzSimpleTriggers> QrtzSimpleTriggers { get; set; }
-        public virtual DbSet<QrtzSimpropTriggers> QrtzSimpropTriggers { get; set; }
-        public virtual DbSet<QrtzTriggers> QrtzTriggers { get; set; }
-        public virtual DbSet<TaskSchedule> TaskSchedule { get; set; }
+
+        public virtual DbSet<QuartzBlobTriggers> QuartzBlobTriggers { get; set; }
+
+        public virtual DbSet<QuartzCalendars> QuartzCalendars { get; set; }
+
+        public virtual DbSet<QuartzCronTriggers> QuartzCronTriggers { get; set; }
+
+        public virtual DbSet<QuartzFiredTriggers> QuartzFiredTriggers { get; set; }
+
+        public virtual DbSet<QuartzJobDetails> QuartzJobDetails { get; set; }
+
+        public virtual DbSet<QuartzLocks> QuartzLocks { get; set; }
+
+        public virtual DbSet<QuartzLog> QuartzLog { get; set; }
+
+        public virtual DbSet<QuartzPausedTriggerGrps> QuartzPausedTriggerGrps { get; set; }
+
+        public virtual DbSet<QuartzSchedulerState> QuartzSchedulerState { get; set; }
+
+        public virtual DbSet<QuartzSimpleTriggers> QuartzSimpleTriggers { get; set; }
+
+        public virtual DbSet<QuartzSimpropTriggers> QuartzSimpropTriggers { get; set; }
+
+        public virtual DbSet<QuartzTriggers> QuartzTriggers { get; set; }
+
         public virtual DbSet<TriggerType> TriggerType { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.;App=EntityFrameworkCore;Initial Catalog=MaterialUI;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer(AppSettingManager.AppSettings.Connection);
             }
         }
 
@@ -61,9 +71,193 @@ namespace MaterialUI.Entity
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Log>(entity =>
+            modelBuilder.Entity<QuartzBlobTriggers>(entity =>
             {
-                entity.ToTable("log");
+                entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
+
+                entity.ToTable("quartz_blob_triggers");
+
+                entity.Property(e => e.SchedName)
+                    .HasColumnName("sched_name")
+                    .HasMaxLength(120);
+
+                entity.Property(e => e.TriggerName)
+                    .HasColumnName("trigger_name")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.TriggerGroup)
+                    .HasColumnName("trigger_group")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.BlobData).HasColumnName("blob_data");
+
+                entity.HasOne(d => d.QuartzTriggers)
+                    .WithOne(p => p.QuartzBlobTriggers)
+                    .HasForeignKey<QuartzBlobTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
+                    .HasConstraintName("FK__quartz_blob_trig__093F5D4E");
+            });
+
+            modelBuilder.Entity<QuartzCalendars>(entity =>
+            {
+                entity.HasKey(e => new { e.SchedName, e.CalendarName });
+
+                entity.ToTable("quartz_calendars");
+
+                entity.Property(e => e.SchedName)
+                    .HasColumnName("sched_name")
+                    .HasMaxLength(120);
+
+                entity.Property(e => e.CalendarName)
+                    .HasColumnName("calendar_name")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.Calendar)
+                    .IsRequired()
+                    .HasColumnName("calendar");
+            });
+
+            modelBuilder.Entity<QuartzCronTriggers>(entity =>
+            {
+                entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
+
+                entity.ToTable("quartz_cron_triggers");
+
+                entity.Property(e => e.SchedName)
+                    .HasColumnName("sched_name")
+                    .HasMaxLength(120);
+
+                entity.Property(e => e.TriggerName)
+                    .HasColumnName("trigger_name")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.TriggerGroup)
+                    .HasColumnName("trigger_group")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.CronExpression)
+                    .IsRequired()
+                    .HasColumnName("cron_expression")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.TimeZoneId)
+                    .HasColumnName("time_zone_id")
+                    .HasMaxLength(80);
+
+                entity.HasOne(d => d.QuartzTriggers)
+                    .WithOne(p => p.QuartzCronTriggers)
+                    .HasForeignKey<QuartzCronTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
+                    .HasConstraintName("FK__quartz_cron_trig__0662F0A3");
+            });
+
+            modelBuilder.Entity<QuartzFiredTriggers>(entity =>
+            {
+                entity.HasKey(e => new { e.SchedName, e.EntryId });
+
+                entity.ToTable("quartz_fired_triggers");
+
+                entity.Property(e => e.SchedName)
+                    .HasColumnName("sched_name")
+                    .HasMaxLength(120);
+
+                entity.Property(e => e.EntryId)
+                    .HasColumnName("entry_id")
+                    .HasMaxLength(140);
+
+                entity.Property(e => e.FiredTime).HasColumnName("fired_time");
+
+                entity.Property(e => e.InstanceName)
+                    .IsRequired()
+                    .HasColumnName("instance_name")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.IsNonconcurrent).HasColumnName("is_nonconcurrent");
+
+                entity.Property(e => e.JobGroup)
+                    .HasColumnName("job_group")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.JobName)
+                    .HasColumnName("job_name")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Priority).HasColumnName("priority");
+
+                entity.Property(e => e.RequestsRecovery).HasColumnName("requests_recovery");
+
+                entity.Property(e => e.SchedTime).HasColumnName("sched_time");
+
+                entity.Property(e => e.State)
+                    .IsRequired()
+                    .HasColumnName("state")
+                    .HasMaxLength(16);
+
+                entity.Property(e => e.TriggerGroup)
+                    .IsRequired()
+                    .HasColumnName("trigger_group")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.TriggerName)
+                    .IsRequired()
+                    .HasColumnName("trigger_name")
+                    .HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<QuartzJobDetails>(entity =>
+            {
+                entity.HasKey(e => new { e.SchedName, e.JobName, e.JobGroup });
+
+                entity.ToTable("quartz_job_details");
+
+                entity.Property(e => e.SchedName)
+                    .HasColumnName("sched_name")
+                    .HasMaxLength(120);
+
+                entity.Property(e => e.JobName)
+                    .HasColumnName("job_name")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.JobGroup)
+                    .HasColumnName("job_group")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.IsDurable).HasColumnName("is_durable");
+
+                entity.Property(e => e.IsNonconcurrent).HasColumnName("is_nonconcurrent");
+
+                entity.Property(e => e.IsUpdateData).HasColumnName("is_update_data");
+
+                entity.Property(e => e.JobClassName)
+                    .IsRequired()
+                    .HasColumnName("job_class_name")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.JobData).HasColumnName("job_data");
+
+                entity.Property(e => e.RequestsRecovery).HasColumnName("requests_recovery");
+            });
+
+            modelBuilder.Entity<QuartzLocks>(entity =>
+            {
+                entity.HasKey(e => new { e.SchedName, e.LockName });
+
+                entity.ToTable("quartz_locks");
+
+                entity.Property(e => e.SchedName)
+                    .HasColumnName("sched_name")
+                    .HasMaxLength(120);
+
+                entity.Property(e => e.LockName)
+                    .HasColumnName("lock_name")
+                    .HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<QuartzLog>(entity =>
+            {
+                entity.ToTable("quartz_log");
 
                 entity.HasIndex(e => e.CreateTime)
                     .HasName("ix_create_time");
@@ -90,462 +284,208 @@ namespace MaterialUI.Entity
                     .HasColumnName("message")
                     .HasColumnType("text");
 
+                entity.Property(e => e.TaskScheduleId).HasColumnName("task_schedule_id");
+
                 entity.Property(e => e.Type).HasColumnName("type");
             });
 
-            modelBuilder.Entity<QrtzBlobTriggers>(entity =>
-            {
-                entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
-
-                entity.ToTable("QRTZ_BLOB_TRIGGERS");
-
-                entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
-                    .HasMaxLength(120);
-
-                entity.Property(e => e.TriggerName)
-                    .HasColumnName("TRIGGER_NAME")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.TriggerGroup)
-                    .HasColumnName("TRIGGER_GROUP")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.BlobData).HasColumnName("BLOB_DATA");
-
-                entity.HasOne(d => d.QrtzTriggers)
-                    .WithOne(p => p.QrtzBlobTriggers)
-                    .HasForeignKey<QrtzBlobTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
-                    .HasConstraintName("FK__QRTZ_BLOB_TRIGGE__15DA3E5D");
-            });
-
-            modelBuilder.Entity<QrtzCalendars>(entity =>
-            {
-                entity.HasKey(e => new { e.SchedName, e.CalendarName });
-
-                entity.ToTable("QRTZ_CALENDARS");
-
-                entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
-                    .HasMaxLength(120);
-
-                entity.Property(e => e.CalendarName)
-                    .HasColumnName("CALENDAR_NAME")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Calendar)
-                    .IsRequired()
-                    .HasColumnName("CALENDAR");
-            });
-
-            modelBuilder.Entity<QrtzCronTriggers>(entity =>
-            {
-                entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
-
-                entity.ToTable("QRTZ_CRON_TRIGGERS");
-
-                entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
-                    .HasMaxLength(120);
-
-                entity.Property(e => e.TriggerName)
-                    .HasColumnName("TRIGGER_NAME")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.TriggerGroup)
-                    .HasColumnName("TRIGGER_GROUP")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.CronExpression)
-                    .IsRequired()
-                    .HasColumnName("CRON_EXPRESSION")
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.TimeZoneId)
-                    .HasColumnName("TIME_ZONE_ID")
-                    .HasMaxLength(80);
-
-                entity.HasOne(d => d.QrtzTriggers)
-                    .WithOne(p => p.QrtzCronTriggers)
-                    .HasForeignKey<QrtzCronTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
-                    .HasConstraintName("FK__QRTZ_CRON_TRIGGE__12FDD1B2");
-            });
-
-            modelBuilder.Entity<QrtzFiredTriggers>(entity =>
-            {
-                entity.HasKey(e => new { e.SchedName, e.EntryId });
-
-                entity.ToTable("QRTZ_FIRED_TRIGGERS");
-
-                entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
-                    .HasMaxLength(120);
-
-                entity.Property(e => e.EntryId)
-                    .HasColumnName("ENTRY_ID")
-                    .HasMaxLength(140);
-
-                entity.Property(e => e.FiredTime).HasColumnName("FIRED_TIME");
-
-                entity.Property(e => e.InstanceName)
-                    .IsRequired()
-                    .HasColumnName("INSTANCE_NAME")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.IsNonconcurrent).HasColumnName("IS_NONCONCURRENT");
-
-                entity.Property(e => e.JobGroup)
-                    .HasColumnName("JOB_GROUP")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.JobName)
-                    .HasColumnName("JOB_NAME")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.Priority).HasColumnName("PRIORITY");
-
-                entity.Property(e => e.RequestsRecovery).HasColumnName("REQUESTS_RECOVERY");
-
-                entity.Property(e => e.SchedTime).HasColumnName("SCHED_TIME");
-
-                entity.Property(e => e.State)
-                    .IsRequired()
-                    .HasColumnName("STATE")
-                    .HasMaxLength(16);
-
-                entity.Property(e => e.TriggerGroup)
-                    .IsRequired()
-                    .HasColumnName("TRIGGER_GROUP")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.TriggerName)
-                    .IsRequired()
-                    .HasColumnName("TRIGGER_NAME")
-                    .HasMaxLength(150);
-            });
-
-            modelBuilder.Entity<QrtzJobDetails>(entity =>
-            {
-                entity.HasKey(e => new { e.SchedName, e.JobName, e.JobGroup });
-
-                entity.ToTable("QRTZ_JOB_DETAILS");
-
-                entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
-                    .HasMaxLength(120);
-
-                entity.Property(e => e.JobName)
-                    .HasColumnName("JOB_NAME")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.JobGroup)
-                    .HasColumnName("JOB_GROUP")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.Description)
-                    .HasColumnName("DESCRIPTION")
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.IsDurable).HasColumnName("IS_DURABLE");
-
-                entity.Property(e => e.IsNonconcurrent).HasColumnName("IS_NONCONCURRENT");
-
-                entity.Property(e => e.IsUpdateData).HasColumnName("IS_UPDATE_DATA");
-
-                entity.Property(e => e.JobClassName)
-                    .IsRequired()
-                    .HasColumnName("JOB_CLASS_NAME")
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.JobData).HasColumnName("JOB_DATA");
-
-                entity.Property(e => e.RequestsRecovery).HasColumnName("REQUESTS_RECOVERY");
-            });
-
-            modelBuilder.Entity<QrtzLocks>(entity =>
-            {
-                entity.HasKey(e => new { e.SchedName, e.LockName });
-
-                entity.ToTable("QRTZ_LOCKS");
-
-                entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
-                    .HasMaxLength(120);
-
-                entity.Property(e => e.LockName)
-                    .HasColumnName("LOCK_NAME")
-                    .HasMaxLength(40);
-            });
-
-            modelBuilder.Entity<QrtzPausedTriggerGrps>(entity =>
+            modelBuilder.Entity<QuartzPausedTriggerGrps>(entity =>
             {
                 entity.HasKey(e => new { e.SchedName, e.TriggerGroup });
 
-                entity.ToTable("QRTZ_PAUSED_TRIGGER_GRPS");
+                entity.ToTable("quartz_paused_trigger_grps");
 
                 entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
+                    .HasColumnName("sched_name")
                     .HasMaxLength(120);
 
                 entity.Property(e => e.TriggerGroup)
-                    .HasColumnName("TRIGGER_GROUP")
+                    .HasColumnName("trigger_group")
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<QrtzSchedulerState>(entity =>
+            modelBuilder.Entity<QuartzSchedulerState>(entity =>
             {
                 entity.HasKey(e => new { e.SchedName, e.InstanceName });
 
-                entity.ToTable("QRTZ_SCHEDULER_STATE");
+                entity.ToTable("quartz_scheduler_state");
 
                 entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
+                    .HasColumnName("sched_name")
                     .HasMaxLength(120);
 
                 entity.Property(e => e.InstanceName)
-                    .HasColumnName("INSTANCE_NAME")
+                    .HasColumnName("instance_name")
                     .HasMaxLength(200);
 
-                entity.Property(e => e.CheckinInterval).HasColumnName("CHECKIN_INTERVAL");
+                entity.Property(e => e.CheckinInterval).HasColumnName("checkin_interval");
 
-                entity.Property(e => e.LastCheckinTime).HasColumnName("LAST_CHECKIN_TIME");
+                entity.Property(e => e.LastCheckinTime).HasColumnName("last_checkin_time");
             });
 
-            modelBuilder.Entity<QrtzSimpleTriggers>(entity =>
+            modelBuilder.Entity<QuartzSimpleTriggers>(entity =>
             {
                 entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
 
-                entity.ToTable("QRTZ_SIMPLE_TRIGGERS");
+                entity.ToTable("quartz_simple_triggers");
 
                 entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
+                    .HasColumnName("sched_name")
                     .HasMaxLength(120);
 
                 entity.Property(e => e.TriggerName)
-                    .HasColumnName("TRIGGER_NAME")
+                    .HasColumnName("trigger_name")
                     .HasMaxLength(150);
 
                 entity.Property(e => e.TriggerGroup)
-                    .HasColumnName("TRIGGER_GROUP")
+                    .HasColumnName("trigger_group")
                     .HasMaxLength(150);
 
-                entity.Property(e => e.RepeatCount).HasColumnName("REPEAT_COUNT");
+                entity.Property(e => e.RepeatCount).HasColumnName("repeat_count");
 
-                entity.Property(e => e.RepeatInterval).HasColumnName("REPEAT_INTERVAL");
+                entity.Property(e => e.RepeatInterval).HasColumnName("repeat_interval");
 
-                entity.Property(e => e.TimesTriggered).HasColumnName("TIMES_TRIGGERED");
+                entity.Property(e => e.TimesTriggered).HasColumnName("times_triggered");
 
-                entity.HasOne(d => d.QrtzTriggers)
-                    .WithOne(p => p.QrtzSimpleTriggers)
-                    .HasForeignKey<QrtzSimpleTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
-                    .HasConstraintName("FK__QRTZ_SIMPLE_TRIG__0D44F85C");
+                entity.HasOne(d => d.QuartzTriggers)
+                    .WithOne(p => p.QuartzSimpleTriggers)
+                    .HasForeignKey<QuartzSimpleTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
+                    .HasConstraintName("FK__quartz_simple_tr__00AA174D");
             });
 
-            modelBuilder.Entity<QrtzSimpropTriggers>(entity =>
+            modelBuilder.Entity<QuartzSimpropTriggers>(entity =>
             {
                 entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
 
-                entity.ToTable("QRTZ_SIMPROP_TRIGGERS");
+                entity.ToTable("quartz_simprop_triggers");
 
                 entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
+                    .HasColumnName("sched_name")
                     .HasMaxLength(120);
 
                 entity.Property(e => e.TriggerName)
-                    .HasColumnName("TRIGGER_NAME")
+                    .HasColumnName("trigger_name")
                     .HasMaxLength(150);
 
                 entity.Property(e => e.TriggerGroup)
-                    .HasColumnName("TRIGGER_GROUP")
+                    .HasColumnName("trigger_group")
                     .HasMaxLength(150);
 
-                entity.Property(e => e.BoolProp1).HasColumnName("BOOL_PROP_1");
+                entity.Property(e => e.BoolProp1).HasColumnName("bool_prop_1");
 
-                entity.Property(e => e.BoolProp2).HasColumnName("BOOL_PROP_2");
+                entity.Property(e => e.BoolProp2).HasColumnName("bool_prop_2");
 
                 entity.Property(e => e.DecProp1)
-                    .HasColumnName("DEC_PROP_1")
+                    .HasColumnName("dec_prop_1")
                     .HasColumnType("numeric(18, 0)");
 
                 entity.Property(e => e.DecProp2)
-                    .HasColumnName("DEC_PROP_2")
+                    .HasColumnName("dec_prop_2")
                     .HasColumnType("numeric(18, 0)");
 
-                entity.Property(e => e.IntProp1).HasColumnName("INT_PROP_1");
+                entity.Property(e => e.IntProp1).HasColumnName("int_prop_1");
 
-                entity.Property(e => e.IntProp2).HasColumnName("INT_PROP_2");
+                entity.Property(e => e.IntProp2).HasColumnName("int_prop_2");
 
-                entity.Property(e => e.LongProp1).HasColumnName("LONG_PROP_1");
+                entity.Property(e => e.LongProp1).HasColumnName("long_prop_1");
 
-                entity.Property(e => e.LongProp2).HasColumnName("LONG_PROP_2");
+                entity.Property(e => e.LongProp2).HasColumnName("long_prop_2");
 
                 entity.Property(e => e.StrProp1)
-                    .HasColumnName("STR_PROP_1")
+                    .HasColumnName("str_prop_1")
                     .HasMaxLength(512);
 
                 entity.Property(e => e.StrProp2)
-                    .HasColumnName("STR_PROP_2")
+                    .HasColumnName("str_prop_2")
                     .HasMaxLength(512);
 
                 entity.Property(e => e.StrProp3)
-                    .HasColumnName("STR_PROP_3")
+                    .HasColumnName("str_prop_3")
                     .HasMaxLength(512);
 
                 entity.Property(e => e.TimeZoneId)
-                    .HasColumnName("TIME_ZONE_ID")
+                    .HasColumnName("time_zone_id")
                     .HasMaxLength(80);
 
-                entity.HasOne(d => d.QrtzTriggers)
-                    .WithOne(p => p.QrtzSimpropTriggers)
-                    .HasForeignKey<QrtzSimpropTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
-                    .HasConstraintName("FK__QRTZ_SIMPROP_TRI__10216507");
+                entity.HasOne(d => d.QuartzTriggers)
+                    .WithOne(p => p.QuartzSimpropTriggers)
+                    .HasForeignKey<QuartzSimpropTriggers>(d => new { d.SchedName, d.TriggerName, d.TriggerGroup })
+                    .HasConstraintName("FK__quartz_simprop_t__038683F8");
             });
 
-            modelBuilder.Entity<QrtzTriggers>(entity =>
+            modelBuilder.Entity<QuartzTriggers>(entity =>
             {
                 entity.HasKey(e => new { e.SchedName, e.TriggerName, e.TriggerGroup });
 
-                entity.ToTable("QRTZ_TRIGGERS");
+                entity.ToTable("quartz_triggers");
 
                 entity.Property(e => e.SchedName)
-                    .HasColumnName("SCHED_NAME")
+                    .HasColumnName("sched_name")
                     .HasMaxLength(120);
 
                 entity.Property(e => e.TriggerName)
-                    .HasColumnName("TRIGGER_NAME")
+                    .HasColumnName("trigger_name")
                     .HasMaxLength(150);
 
                 entity.Property(e => e.TriggerGroup)
-                    .HasColumnName("TRIGGER_GROUP")
+                    .HasColumnName("trigger_group")
                     .HasMaxLength(150);
 
                 entity.Property(e => e.CalendarName)
-                    .HasColumnName("CALENDAR_NAME")
+                    .HasColumnName("calendar_name")
                     .HasMaxLength(200);
 
                 entity.Property(e => e.Description)
-                    .HasColumnName("DESCRIPTION")
+                    .HasColumnName("description")
                     .HasMaxLength(250);
 
-                entity.Property(e => e.EndTime).HasColumnName("END_TIME");
+                entity.Property(e => e.EndTime)
+                    .HasConversion(v => v.Value.Ticks, v => new DateTime(v))
+                    .HasColumnName("end_time");
 
-                entity.Property(e => e.JobData).HasColumnName("JOB_DATA");
+                entity.Property(e => e.JobData).HasColumnName("job_data");
 
                 entity.Property(e => e.JobGroup)
                     .IsRequired()
-                    .HasColumnName("JOB_GROUP")
+                    .HasColumnName("job_group")
                     .HasMaxLength(150);
 
                 entity.Property(e => e.JobName)
                     .IsRequired()
-                    .HasColumnName("JOB_NAME")
+                    .HasColumnName("job_name")
                     .HasMaxLength(150);
 
-                entity.Property(e => e.MisfireInstr).HasColumnName("MISFIRE_INSTR");
+                entity.Property(e => e.MisfireInstr).HasColumnName("misfire_instr");
 
-                entity.Property(e => e.NextFireTime).HasColumnName("NEXT_FIRE_TIME");
+                entity.Property(e => e.NextFireTime)
+                    .HasConversion(v => v.Value.Ticks, v => new DateTime(v))
+                    .HasColumnName("next_fire_time");
 
-                entity.Property(e => e.PrevFireTime).HasColumnName("PREV_FIRE_TIME");
+                entity.Property(e => e.PrevFireTime)
+                    .HasConversion(v => v.Value.Ticks, v => new DateTime(v))
+                    .HasColumnName("prev_fire_time");
 
-                entity.Property(e => e.Priority).HasColumnName("PRIORITY");
+                entity.Property(e => e.Priority).HasColumnName("priority");
 
-                entity.Property(e => e.StartTime).HasColumnName("START_TIME");
+                entity.Property(e => e.StartTime)
+                    .HasConversion(v => v.Ticks, v => new DateTime(v))
+                    .HasColumnName("start_time");
 
                 entity.Property(e => e.TriggerState)
                     .IsRequired()
-                    .HasColumnName("TRIGGER_STATE")
+                    .HasColumnName("trigger_state")
                     .HasMaxLength(16);
 
                 entity.Property(e => e.TriggerType)
                     .IsRequired()
-                    .HasColumnName("TRIGGER_TYPE")
+                    .HasColumnName("trigger_type")
                     .HasMaxLength(8);
 
-                entity.HasOne(d => d.QrtzJobDetails)
-                    .WithMany(p => p.QrtzTriggers)
+                entity.HasOne(d => d.QuartzJobDetails)
+                    .WithMany(p => p.QuartzTriggers)
                     .HasForeignKey(d => new { d.SchedName, d.JobName, d.JobGroup })
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__QRTZ_TRIGGERS__0A688BB1");
-            });
-
-            modelBuilder.Entity<TaskSchedule>(entity =>
-            {
-                entity.ToTable("task_schedule");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.CronExpression)
-                    .HasColumnName("cron_expression")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Description).HasMaxLength(500);
-
-                entity.Property(e => e.EndTime)
-                    .HasColumnName("end_time")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.ExceptionMessage)
-                    .HasColumnName("exception_message")
-                    .HasColumnType("text");
-
-                entity.Property(e => e.ExcutePlan)
-                    .HasColumnName("excute_plan")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Group)
-                    .HasColumnName("group")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.HttpMethod)
-                    .HasConversion(v => v.ToString(), v => (HttpMethod)Enum.Parse(typeof(HttpMethod), v))
-                    .HasColumnName("http_method")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.IconClass)
-                    .HasColumnName("icon_class")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.IntervalTime).HasColumnName("interval_time");
-
-                entity.Property(e => e.IntervalType)
-                    .HasConversion(v => v.ToString(), v => (TimeSpanParseRule)Enum.Parse(typeof(TimeSpanParseRule), v))
-                    .HasColumnName("interval_type")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.IsEnable).HasColumnName("is_enable");
-
-                entity.Property(e => e.LastExcuteTime)
-                    .HasColumnName("last_excute_time")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.NextExcuteTime)
-                    .HasColumnName("next_excute_time")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Parameters).HasMaxLength(500);
-
-                entity.Property(e => e.StartTime)
-                    .HasColumnName("start_time")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Status)
-                    .HasConversion(v => v.ToString(), v => (TriggerState)Enum.Parse(typeof(TriggerState), v))
-                    .HasColumnName("status")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.TriggerType)
-                    .HasConversion(v => v.ToString(), v => (TriggerTypeEnum)Enum.Parse(typeof(TriggerTypeEnum), v))
-                    .HasColumnName("trigger_type")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Url)
-                    .HasColumnName("url")
-                    .HasMaxLength(100);
+                    .HasConstraintName("FK__quartz_triggers__7DCDAAA2");
             });
 
             modelBuilder.Entity<TriggerType>(entity =>

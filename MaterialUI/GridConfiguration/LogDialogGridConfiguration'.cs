@@ -7,7 +7,7 @@
 
     public class LogDialogGridConfiguration<TModel>
       : GridConfigurationBase<TModel>
-      where TModel : Log
+      where TModel : QuartzLog
     {
         protected override void CreateGridColumn(IList<BaseGridColumn<TModel>> gridColumns)
         {

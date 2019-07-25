@@ -7,7 +7,7 @@
     [Serializable]
     [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
-    public class Field
+    public class Property
     {
         [XmlAttribute("summary")]
         public string Summary { get; set; }
@@ -22,7 +22,14 @@
         [DefaultValue(false)]
         public bool IsKey { get; set; }
 
-        [XmlAttribute("conversion")]
-        public string HasConversion { get; set; }
+        [XmlAttribute("hasConversion")]
+        [DefaultValue(false)]
+        public bool HasConversion { get; set; }
+
+        [XmlAttribute("dbType")]
+        public string DbType { get; set; }
+
+        [XmlAttribute("csharpType")]
+        public string CSharpType { get; set; }
     }
 }

@@ -21,7 +21,7 @@
             Check.NotNull(entity, nameof(entity));
 
             var value = this.expression.Compile()(entity);
-            if (this.MaxLength != 0 && value.Length > this.MaxLength)
+            if (this.MaxLength != 0 && value?.Length > this.MaxLength)
             {
                 value = value.Substring(0, this.MaxLength);
             }
