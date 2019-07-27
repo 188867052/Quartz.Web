@@ -1,11 +1,11 @@
-﻿namespace MaterialUI.Html.Inputs
+﻿namespace Quartz.Html.Inputs
 {
     using System.Collections.Generic;
     using System.Text;
     using AspNetCore.Extensions;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
+    using Quartz.Entity;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
 
     public class HtmlIcons
     {

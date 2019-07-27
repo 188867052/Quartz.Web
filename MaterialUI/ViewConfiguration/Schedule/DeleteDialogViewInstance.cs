@@ -1,6 +1,6 @@
-﻿namespace MaterialUI.ViewConfiguration.Schedule
+﻿namespace Quartz.ViewConfiguration.Schedule
 {
-    using MaterialUI.Javascript;
+    using Quartz.Javascript;
 
     public class DeleteDialogViewInstance : ViewInstanceConstruction
     {

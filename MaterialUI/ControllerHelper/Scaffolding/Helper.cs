@@ -1,11 +1,11 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System;
     using System.IO;
     using System.Linq;
     using System.Xml.Serialization;
-    using MaterialUI.Scaffolding;
     using Microsoft.Extensions.DependencyInjection;
+    using Quartz.Scaffolding;
 
     internal static class Helper
     {

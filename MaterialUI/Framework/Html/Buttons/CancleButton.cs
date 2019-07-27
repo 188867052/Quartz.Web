@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.Html.Buttons
+﻿namespace Quartz.Html.Buttons
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public class CancleButton : SimpleButton
     {

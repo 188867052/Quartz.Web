@@ -1,10 +1,10 @@
-namespace MaterialUI.Html.Buttons
+namespace Quartz.Html.Buttons
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Shared;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.Shared;
 
     public class Button
     {

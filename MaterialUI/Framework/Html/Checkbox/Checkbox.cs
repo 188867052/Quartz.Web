@@ -1,7 +1,7 @@
-namespace MaterialUI.Html.Checkbox
+namespace Quartz.Html.Checkbox
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     public class Checkbox
     {

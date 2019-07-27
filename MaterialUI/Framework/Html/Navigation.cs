@@ -1,10 +1,10 @@
-namespace MaterialUI.Html
+namespace Quartz.Html
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.DropDowns;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Routes;
+    using Quartz.Html.DropDowns;
+    using Quartz.Html.Tags;
+    using Quartz.Routes;
     using Route.Generator;
     using TagHelper = AspNetCore.Extensions.TagHelper;
 

@@ -1,8 +1,8 @@
-namespace MaterialUI.Html.Inputs
+namespace Quartz.Html.Inputs
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Html.Tags;
 
     public class Input
     {

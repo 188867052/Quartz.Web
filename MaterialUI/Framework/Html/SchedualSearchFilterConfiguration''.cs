@@ -1,13 +1,13 @@
-﻿namespace MaterialUI.SearchFilterConfigurations
+﻿namespace Quartz.SearchFilterConfigurations
 {
     using System.Collections.Generic;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.TextBoxs;
-    using MaterialUI.Javascript;
-    using MaterialUI.Models;
-    using MaterialUI.ViewConfiguration;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-    using Resource = Resources.EditScheduleConfigurationResource;
+    using Quartz.Entity;
+    using Quartz.Html.TextBoxs;
+    using Quartz.Javascript;
+    using Quartz.Models;
+    using Quartz.ViewConfiguration;
+    using Resource = Web.Resources.EditScheduleConfigurationResource;
 
     public class SchedualSearchFilterConfiguration<TModel, TPostModel>
         : SearchFilterConfigurationBase<TModel, TPostModel>

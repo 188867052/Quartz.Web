@@ -1,17 +1,17 @@
-﻿namespace MaterialUI.ViewConfiguration.Schedule
+﻿namespace Quartz.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using Enums;
     using Html.TextBoxs;
     using Javascript;
-    using MaterialUI.Entity;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+    using Quartz.Entity;
     using Routes;
-    using Resource = Resources.EditScheduleConfigurationResource;
+    using Resource = Web.Resources.EditScheduleConfigurationResource;
 
     public class EditScheduleDialog<TModel, TPostModel> : EditDialogBase<TModel, TPostModel>
-        where TPostModel : TaskScheduleModel
-        where TModel : TaskScheduleModel
+        where TPostModel : EdieTaskScheduleModel
+        where TModel : EdieTaskScheduleModel
     {
         public EditScheduleDialog(TModel entity = null)
             : base(entity)

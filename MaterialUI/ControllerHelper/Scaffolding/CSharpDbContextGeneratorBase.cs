@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using JetBrains.Annotations;
-    using MaterialUI.Shared;
     using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -13,6 +12,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
+    using Quartz.Shared;
 
     public abstract class CSharpDbContextGeneratorBase : ICSharpDbContextGenerator
     {

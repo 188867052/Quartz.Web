@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.Javascript
+﻿namespace Quartz.Javascript
 {
     using System;
     using System.Globalization;
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     /// <summary>
     /// Generates an identifier string.

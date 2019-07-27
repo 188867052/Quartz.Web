@@ -1,13 +1,9 @@
-namespace MaterialUI
+namespace Quartz
 {
     using System;
-    using Core.Extension.DependencyInjection;
     using DependencyInjection.Analyzer;
     using EntityFrameworkCore.SqlProfile;
-    using MaterialUI.Entity;
-    using MaterialUI.Framework;
-    using MaterialUI.Html;
-    using MaterialUI.Html.TextBoxs;
+    using global::Core.Extension.DependencyInjection;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -17,6 +13,10 @@ namespace MaterialUI
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Quartz.Entity;
+    using Quartz.Framework;
+    using Quartz.Html;
+    using Quartz.Html.TextBoxs;
     using Route.Generator;
 
     public class Startup
@@ -41,7 +41,7 @@ namespace MaterialUI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<MaterialUIContext>(options =>
+            services.AddDbContext<QuartzContext>(options =>
             {
                 options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlProfile(); // Add when use SqlServer

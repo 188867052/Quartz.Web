@@ -1,4 +1,4 @@
-namespace MaterialUI.Html
+namespace Quartz.Html
 {
     public interface IGetHtml
     {

@@ -1,8 +1,8 @@
-namespace MaterialUI.Html.Inputs
+namespace Quartz.Html.Inputs
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
 
     public class MaterialIconInput
     {

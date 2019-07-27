@@ -1,14 +1,14 @@
-﻿namespace MaterialUI.ViewConfiguration.Schedule
+﻿namespace Quartz.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Dialog;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Shared;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Html.Dialog;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.Shared;
 
     public abstract class EditDialogBase<TModel, TPostModel> : DialogBase
     {

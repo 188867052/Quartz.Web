@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.SearchFilterConfigurations
+﻿namespace Quartz.SearchFilterConfigurations
 {
     using System.Collections.Generic;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.GridColumn;
-    using MaterialUI.Routes;
-    using MaterialUI.ViewConfiguration.Schedule;
+    using Quartz.Entity;
+    using Quartz.Html.GridColumn;
+    using Quartz.Routes;
+    using Quartz.ViewConfiguration.Schedule;
 
     public class SchedualGridConfiguration<TModel>
         : GridConfigurationBase<TModel>

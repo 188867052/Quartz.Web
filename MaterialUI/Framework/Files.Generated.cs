@@ -1,4 +1,4 @@
-namespace MaterialUI.Files
+namespace Quartz.Files
 {
     public class AssetsForDemoFile
     {
@@ -81,7 +81,7 @@ namespace MaterialUI.Files
     }
 }
 
-namespace MaterialUI.Files.Js
+namespace Quartz.Files.Js
 {
     public class JsScheduleFile
     {
@@ -89,7 +89,7 @@ namespace MaterialUI.Files.Js
     }
 }
 
-namespace MaterialUI.Files.Css.Font.Awesome
+namespace Quartz.Files.Css.Font.Awesome
 {
     public class CssFontAwesomeCssFile
     {

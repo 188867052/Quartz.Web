@@ -1,6 +1,6 @@
-﻿namespace MaterialUI.Html.Buttons
+﻿namespace Quartz.Html.Buttons
 {
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     public class ScriptButton : SimpleButton
     {

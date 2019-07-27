@@ -1,4 +1,4 @@
-namespace MaterialUI.Routes
+namespace Quartz.Routes
 {
     /// <summary>
     /// <see cref="Controllers.GeneratorController"/>

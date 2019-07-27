@@ -1,15 +1,15 @@
-namespace MaterialUI.Controllers
+namespace Quartz.Controllers
 {
-    using MaterialUI.Entity;
-    using MaterialUI.Files;
-    using MaterialUI.Framework;
-    using MaterialUI.Html;
     using Microsoft.AspNetCore.Mvc;
+    using Quartz.Entity;
+    using Quartz.Files;
+    using Quartz.Framework;
+    using Quartz.Html;
 
     [ResponseCache(Duration = 3600)]
     public class HomeController : StandardController
     {
-        public HomeController(IGetHtml getHtml, MaterialUIContext dbContext)
+        public HomeController(IGetHtml getHtml, QuartzContext dbContext)
             : base( dbContext)
         {
             this.getHtml = getHtml;

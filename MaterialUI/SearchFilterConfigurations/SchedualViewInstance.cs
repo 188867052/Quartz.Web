@@ -1,6 +1,6 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
-    using MaterialUI.Javascript;
+    using Quartz.Javascript;
 
     public class SchedualViewInstance : ViewInstanceConstruction
     {

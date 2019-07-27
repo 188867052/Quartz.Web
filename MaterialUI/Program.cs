@@ -1,4 +1,4 @@
-namespace MaterialUI
+namespace Quartz
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;

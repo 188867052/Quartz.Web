@@ -1,13 +1,13 @@
-﻿namespace MaterialUI.Html
+﻿namespace Quartz.Html
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialUI.Files;
-    using MaterialUI.Files.Css.Font.Awesome;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Files;
+    using Quartz.Files.Css.Font.Awesome;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public abstract class PageBase
     {

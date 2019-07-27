@@ -1,14 +1,14 @@
-﻿namespace MaterialUI.Html
+﻿namespace Quartz.Html
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.SearchFilterConfigurations;
-    using MaterialUI.ViewConfiguration;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.SearchFilterConfigurations;
+    using Quartz.ViewConfiguration;
 
     public abstract class GridSearchPage<TModel, TPostModel> : PageBase
     {

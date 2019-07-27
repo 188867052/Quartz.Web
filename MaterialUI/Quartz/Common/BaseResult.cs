@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Job.Common
+﻿namespace Quartz.Job.Common
 {
     public class BaseResult
     {

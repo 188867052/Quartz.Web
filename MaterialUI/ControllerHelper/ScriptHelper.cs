@@ -5,7 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     internal static class ScriptHelper
     {
@@ -54,7 +54,7 @@
         private static string GetConvertedFileNamespace(string name)
         {
             string relativeName = GetRelativeName(name);
-            IEnumerable<string> list0 = new List<string>() { nameof(MaterialUI), "Files" };
+            IEnumerable<string> list0 = new List<string>() { nameof(Quartz), "Files" };
             IList<string> list = relativeName.Split('.', '-', '/').Where(o => !string.IsNullOrEmpty(o)).ToList();
             list0 = list0.Concat(list);
             return string.Join(".", list0.Select(o => char.ToUpper(o[0]) + o.Substring(1)));

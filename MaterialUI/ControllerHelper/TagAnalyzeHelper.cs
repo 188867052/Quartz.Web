@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     internal static class TagAnalyzeHelper
     {

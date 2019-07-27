@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Entity
+﻿namespace Quartz.Entity
 {
     using System.Collections.Generic;
 

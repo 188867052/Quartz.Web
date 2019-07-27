@@ -1,12 +1,12 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Text;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Javascript;
-    using MaterialUI.Shared;
+    using Quartz.Html.Buttons;
+    using Quartz.Javascript;
+    using Quartz.Shared;
 
     public class ActionGridColumn<T> : BaseGridColumn<T>
     {

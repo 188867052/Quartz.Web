@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System;
     using System.Collections.Generic;

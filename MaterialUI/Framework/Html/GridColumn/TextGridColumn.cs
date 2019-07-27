@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
     using System;
     using System.Linq.Expressions;
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     public class TextGridColumn<T> : BaseGridColumn<T>
     {

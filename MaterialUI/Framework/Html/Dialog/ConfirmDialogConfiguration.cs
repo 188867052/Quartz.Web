@@ -1,14 +1,14 @@
-﻿namespace MaterialUI.Html.Dialog
+﻿namespace Quartz.Html.Dialog
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
-    using MaterialUI.Shared;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
+    using Quartz.Shared;
 
     public abstract class ConfirmDialogConfiguration : IDialogConfiguration
     {

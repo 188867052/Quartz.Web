@@ -1,14 +1,14 @@
-namespace XUnitTest
+namespace Quartz.Web.Test
 {
     using System;
     using System.Collections.Generic;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Checkbox;
-    using MaterialUI.Html.Dialog.Demo;
-    using MaterialUI.Html.Inputs;
-    using MaterialUI.Html.RadioButtons;
-    using MaterialUI.Html.Tables;
+    using Quartz.Entity;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Checkbox;
+    using Quartz.Html.Dialog.Demo;
+    using Quartz.Html.Inputs;
+    using Quartz.Html.RadioButtons;
+    using Quartz.Html.Tables;
     using Xunit;
 
     public class HtmlUnitTest
@@ -16,15 +16,6 @@ namespace XUnitTest
         [Fact]
         public void ManualRotatingCards()
         {
-            string str = $@"                entity.Property(e => e.Name)
-                    .HasName(Icon_name_unique)
-                    .IsUnique(); ";
-            string begin = "entity.Property(e => e.";
-            string end = "Icon_name_unique";
-            int beginIndex = str.IndexOf(begin) + begin.Length;
-            int endIndex = str.IndexOf(end);
-            string resultstr = str.Substring(beginIndex, endIndex - beginIndex);
-
             var modal = new ManualRotatingCard();
             var a = modal.ToHtml();
         }

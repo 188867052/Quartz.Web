@@ -1,11 +1,11 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System.Threading.Tasks;
     using Host.Model;
-    using MaterialUI.Job.Entity;
     using Microsoft.AspNetCore.Mvc;
     using MimeKit;
     using Newtonsoft.Json;
+    using Quartz.Job.Entity;
 
     public class SetingController : Controller
     {

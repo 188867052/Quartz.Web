@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29021.104
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Extensions", "AspNetCore.Extensions\AspNetCore.Extensions.csproj", "{BF4C6DD3-D4AD-4E1B-BEA6-0121423CAA44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialUI.Test", "XUnitTest\MaterialUI.Test.csproj", "{A7F36BB2-E926-45ED-BF97-04B398510AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Web.Test", "XUnitTest\Quartz.Web.Test.csproj", "{A7F36BB2-E926-45ED-BF97-04B398510AEB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialUI", "MaterialUI\MaterialUI.csproj", "{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Web", "MaterialUI\Quartz.Web.csproj", "{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

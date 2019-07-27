@@ -1,7 +1,7 @@
-namespace MaterialUI.Html.Inputs
+namespace Quartz.Html.Inputs
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     public class LabeledErrorInput
     {

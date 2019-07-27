@@ -1,4 +1,4 @@
-namespace MaterialUI.Enums
+namespace Quartz.Enums
 {
     public enum TriggerTypeEnum
     {

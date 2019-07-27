@@ -1,6 +1,6 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     public abstract class BaseGridColumn<T>
     {

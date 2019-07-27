@@ -1,14 +1,14 @@
-﻿namespace MaterialUI.ViewConfiguration.Schedule
+﻿namespace Quartz.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Dialog;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
-    using MaterialUI.Routes;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Entity;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Dialog;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
+    using Quartz.Routes;
 
     public class DeleteConfiguration : DialogBase
     {

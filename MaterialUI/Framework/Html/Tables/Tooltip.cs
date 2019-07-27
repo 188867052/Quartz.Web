@@ -1,7 +1,7 @@
-namespace MaterialUI.Html.Tables
+namespace Quartz.Html.Tables
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     public class Tooltip
     {

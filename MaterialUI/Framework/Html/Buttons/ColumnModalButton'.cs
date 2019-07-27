@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
     using System;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public class ColumnModalButton<T> : ColumnButtonBase<T>
     {

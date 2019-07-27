@@ -1,17 +1,17 @@
-﻿namespace MaterialUI.ViewConfiguration
+﻿namespace Quartz.ViewConfiguration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.GridColumn;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
-    using MaterialUI.Shared;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Newtonsoft.Json;
+    using Quartz.Html.GridColumn;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
+    using Quartz.Shared;
 
     public class SingleSelect<TModel, TPostModel> : IColumn<TModel, TPostModel>
     {

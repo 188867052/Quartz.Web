@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace MaterialUI.Entity
+namespace Quartz.Entity
 {
     public partial class QuartzLog
     {

@@ -8,28 +8,48 @@
     using Quartz.Job;
     using Quartz.Job.Common;
 
-    public class TaskScheduleModel
+    public class EdieTaskScheduleModel
     {
-        public TaskScheduleModel()
+        public EdieTaskScheduleModel()
         {
         }
 
-        public TaskScheduleModel(QuartzTriggers item)
+        public EdieTaskScheduleModel(QuartzTriggers item)
         {
-            string expression = string.Empty;
             if (item.QuartzCronTriggers != null)
             {
-                expression = item.QuartzCronTriggers.CronExpression;
+                this.CronExpression = item.QuartzCronTriggers.CronExpression;
+                this.TriggerType = TriggerTypeEnum.Cron;
             }
 
             if (item.QuartzSimpleTriggers != null)
             {
-                expression = (item.QuartzSimpleTriggers.RepeatInterval / 1000) + "秒";
+                if (item.QuartzSimpleTriggers.RepeatInterval % 1000000 != 0)
+                {
+                    this.IntervalTime = (int)item.QuartzSimpleTriggers.RepeatInterval;
+                    this.IntervalType = TimeSpanParseRule.Milliseconds;
+                }
+                else
+                {
+                    this.IntervalTime = (int)(item.QuartzSimpleTriggers.RepeatInterval / 1000000);
+                    this.IntervalType = TimeSpanParseRule.Seconds;
+                    if (this.IntervalTime % 60 == 0)
+                    {
+                        this.IntervalType = TimeSpanParseRule.Minutes;
+                        this.IntervalTime /= 60;
+                        if (this.IntervalTime % 60 == 0)
+                        {
+                            this.IntervalType = TimeSpanParseRule.Hours;
+                            this.IntervalTime /= 60;
+                        }
+                    }
+                }
+
+                this.TriggerType = TriggerTypeEnum.Simple;
             }
 
-            var jobDetail = SchedulerCenter.Instance.Scheduler.GetJobDetail(new JobKey(item.JobName, item.JobGroup)).Result;
+            var jobDetail = SchedulerCenter.Instance.Scheduler.GetJobDetail(new JobKey(item.TriggerName, item.JobGroup)).Result;
             this.Url = jobDetail.JobDataMap.GetString(Constant.RequestUrl);
-
             bool isNotPaused = item.TriggerState.ToLower() != "paused";
             this.Name = item.TriggerName;
             this.Group = item.JobGroup;
@@ -38,22 +58,16 @@
             this.PrevFireTime = item.PrevFireTime;
             this.StartTime = item.StartTime;
             this.EndTime = item.EndTime;
-            this.CronExpression = expression;
             this.IsPaused = !isNotPaused;
-            this.IconClass = !isNotPaused ? "pause" : "play_circle_filled";
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public TriggerState Status { get; set; }
-
         public string TriggerState { get; set; }
 
         public string Url { get; set; }
-
-        public string ExceptionMessage { get; set; }
 
         public DateTime? StartTime { get; set; }
 
@@ -62,8 +76,6 @@
         public DateTime? NextFireTime { get; set; }
 
         public DateTime? PrevFireTime { get; set; }
-
-        public string ExcutePlan { get; set; }
 
         public HttpMethod HttpMethod { get; set; }
 

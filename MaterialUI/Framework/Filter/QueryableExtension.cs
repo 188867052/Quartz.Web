@@ -1,14 +1,14 @@
-﻿namespace Core.Extension
+﻿namespace MaterialUI.Framework.Filter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using MaterialUI.Html.GridColumn;
     using Microsoft.EntityFrameworkCore.Query;
     using Microsoft.EntityFrameworkCore.Query.Internal;
     using Microsoft.EntityFrameworkCore.Storage;
+    using Quartz.Html.GridColumn;
 
     /// <summary>
     /// QueryableExtension.

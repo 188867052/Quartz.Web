@@ -1,12 +1,12 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Inputs;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Inputs;
 
     public abstract class GridConfiguration<T>
     {
@@ -69,7 +69,7 @@
             }
 
             var tableHtml = $"<div class=\"table-responsive\"><table class=\"table table-striped\"><thead><tr>{thead}</tr></thead><tbody>{tbody}</tbody></table></div>";
-            var pagination = new Pagination().ToHtml(1, 10, 100);
+            var pagination = new Pagination().Render(1, 10, 100);
             return tableHtml + pagination;
         }
 

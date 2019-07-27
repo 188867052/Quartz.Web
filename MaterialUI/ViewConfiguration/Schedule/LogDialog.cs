@@ -1,13 +1,13 @@
-﻿namespace MaterialUI.ViewConfiguration.Schedule
+﻿namespace Quartz.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialUI.Entity;
-    using MaterialUI.GridConfiguration;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Dialog;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Entity;
+    using Quartz.GridConfiguration;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Dialog;
 
     public class LogDialog : DialogBase
     {
@@ -30,7 +30,7 @@
 
         protected override Identifier Identifier => ScheduleIdentifiers.LogDialogIdentifier;
 
-        protected override string Title => $"Name: {this.name},Group:{this.group} -- 任务日志";
+        protected override string Title => $"{this.name},{this.group} -- 任务日志";
 
         protected override int Width { get; } = 80;
 

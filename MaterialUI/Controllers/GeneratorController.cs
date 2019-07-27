@@ -1,4 +1,4 @@
-namespace MaterialUI.Controllers
+namespace Quartz.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -7,20 +7,20 @@ namespace MaterialUI.Controllers
     using System.Web;
     using AspNetCore.Extensions;
     using AspNetCore.Extensions.JsonClassGenerate;
-    using MaterialUI.Entity;
-    using MaterialUI.Files;
-    using MaterialUI.Framework;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Routes;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
+    using Quartz.Entity;
+    using Quartz.Files;
+    using Quartz.Framework;
+    using Quartz.Html.Tags;
+    using Quartz.Routes;
 
     public class GeneratorController : StandardController
     {
         private readonly IHostingEnvironment env;
 
-        public GeneratorController( IHostingEnvironment hostingEnvironment, MaterialUIContext materialKitContext)
+        public GeneratorController( IHostingEnvironment hostingEnvironment, QuartzContext materialKitContext)
             : base(materialKitContext)
         {
             this.env = hostingEnvironment;

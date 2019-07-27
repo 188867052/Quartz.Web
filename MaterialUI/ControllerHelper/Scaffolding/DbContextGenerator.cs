@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -44,14 +44,14 @@
             var scaffoldingModelFactory = (MyScaffoldingModelFactory)services.GetService<IScaffoldingModelFactory>();
             var databaseModel = databaseModelFactory.Create(AppSettings.Connection, new List<string>(), new List<string>());
             Model model = (Model)scaffoldingModelFactory.Create(databaseModel, false);
-            this.DbContextCode = dbContextGenerator.WriteCode(model, $"{nameof(MaterialUI)}.{folder}", $"{nameof(MaterialUI)}Context", AppSettings.Connection, false, false);
+            this.DbContextCode = dbContextGenerator.WriteCode(model, $"{nameof(Quartz)}.{folder}", $"{nameof(Quartz)}Context", AppSettings.Connection, false, false);
             foreach (var entityType in model.GetEntityTypes())
             {
-                var entityCode = entityTypeGenerator.WriteCode(entityType, $"{nameof(MaterialUI)}.{folder}", false);
+                var entityCode = entityTypeGenerator.WriteCode(entityType, $"{nameof(Quartz)}.{folder}", false);
                 this.EntityCodeList.Add(entityCode);
             }
 
-            this.WriteCode(scaffoldingModelFactory.Data, $"{nameof(MaterialUI)}.{folder}");
+            this.WriteCode(scaffoldingModelFactory.Data, $"{nameof(Quartz)}.{folder}");
         }
 
         internal void WriteCode(Dictionary<string, string> dictionary, string @namespace)

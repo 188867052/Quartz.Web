@@ -1,6 +1,6 @@
 ﻿namespace Host.Model
 {
-    using MaterialUI.Job.Entity;
+    using Quartz.Job.Entity;
 
     public class SendMailModel
     {

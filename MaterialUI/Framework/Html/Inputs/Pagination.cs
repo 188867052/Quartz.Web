@@ -1,153 +1,55 @@
-﻿namespace MaterialUI.Html.Inputs
+﻿namespace Quartz.Html.Inputs
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.Tags;
 
     public class Pagination
     {
-        public int Total { get; set; }
-        public string ToHtml(int index, int size, int total)
+        public int Total { get; private set; }
+
+        public int Size { get; private set; }
+
+        public IHtmlContent Render(int index, int size, int total)
         {
-            Total = total;
-            List<int> list;
+            this.Total = total;
+            this.Size = size;
             int last = (int)Math.Ceiling(total / (float)size);
-            switch (index)
+            List<int> list;
+            if (index < 6)
             {
-                case 1:
-                    switch (last)
-                    {
-                        case 1:
-                        case 2:
-                            list = new List<int> { };
-                            break;
-                        case 3:
-                            list = new List<int> { 2 };
-                            break;
-                        case 4:
-                            list = new List<int> { 2, 3 };
-                            break;
-                        case 5:
-                            list = new List<int> { 2, 3, 4, };
-                            break;
-                        default:
-                            list = new List<int> { 2, 3, 4, 5, };
-                            break;
-                    }
-
-                    break;
-                case 2:
-                    switch (last)
-                    {
-                        case 2:
-                            list = new List<int> { };
-                            break;
-                        case 3:
-                            list = new List<int> { 2, };
-                            break;
-                        case 4:
-                            list = new List<int> { 2, 3, };
-                            break;
-                        case 5:
-                            list = new List<int> { 2, 3, 4, };
-                            break;
-                        default:
-                            list = new List<int> { 2, 3, 4, 5, };
-                            break;
-                    }
-
-                    break;
-                case 3:
-                    switch (last)
-                    {
-                        case 3:
-                            list = new List<int> { 2, };
-                            break;
-                        case 4:
-                            list = new List<int> { 2, 3, };
-                            break;
-                        case 5:
-                            list = new List<int> { 2, 3, 4, };
-                            break;
-                        default:
-                            list = new List<int> { 2, 3, 4, 5, };
-                            break;
-                    }
-
-                    break;
-                case 4:
-                    switch (last)
-                    {
-                        case 4:
-                            list = new List<int> { 2, 3, };
-                            break;
-                        case 5:
-                            list = new List<int> { 2, 3, 4, };
-                            break;
-                        case 6:
-                            list = new List<int> { 2, 3, 4, 5, };
-                            break;
-                        default:
-                            list = new List<int> { 2, 3, 4, 5, 6, };
-                            break;
-                    }
-
-                    break;
-                case 5:
-                    switch (last)
-                    {
-                        case 5:
-                            list = new List<int> { 2, 3, 4, };
-                            break;
-                        case 6:
-                            list = new List<int> { 2, 3, 4, 5, };
-                            break;
-                        case 7:
-                            list = new List<int> { 2, 3, 4, 5, 6, };
-                            break;
-                        default:
-                            list = new List<int> { 2, 3, 4, 5, 6, 7, };
-                            break;
-                    }
-
-                    break;
-                default:
-                    int min = Math.Min(index, last - 2);
-                    list = new List<int> { min - 1, min, min + 1 };
-                    break;
+                list = this.Range(2, last - 1);
+            }
+            else
+            {
+                int min = Math.Min(index, last - 2);
+                list = this.Range(min - 1, min + 1);
             }
 
             return this.Generate(list, index, last);
         }
 
-        private string Generate(List<int> list, int current, int last)
+        private List<int> Range(int left, int right)
         {
-            if (list.Any())
+            var list = new List<int>();
+            for (int i = left, j = 0; i <= right && j <= 4; i++, j++)
             {
-                if (!list.Contains(current) && current != 1 && last != current)
-                {
-                    throw new Exception("current 必须在list中 1,last除外");
-                }
-
-                if (list.Contains(1))
-                {
-                    throw new Exception("1 不能在list中");
-                }
-
-                if (list.Contains(last))
-                {
-                    throw new Exception("last 不能在list中");
-                }
+                list.Add(i);
             }
 
+            return list;
+        }
+
+        private IHtmlContent Generate(List<int> list, int current, int last)
+        {
             var ul = TagHelper.Create(Tag.ul, new TagAttribute(Attr.Class, "pagination pagination-info"));
             ul.Content.AppendHtml(this.GetTag(1, current));
             if (list.Any() && list.First() - 1 > 1)
             {
-                ul.Content.AppendHtml(TagHelper.Create(Tag.li, new AnchorHref("...").Html));
+                ul.Content.AppendHtml(this.GetTag("...", current));
             }
 
             foreach (var item in list)
@@ -163,7 +65,7 @@
 
             if (list.Any() && list.Last() + 1 < last)
             {
-                ul.Content.AppendHtml(TagHelper.Create(Tag.li, new AnchorHref("...").Html));
+                ul.Content.AppendHtml(this.GetTag("...", current));
             }
 
             if (last != 1)
@@ -171,14 +73,15 @@
                 ul.Content.AppendHtml(this.GetTag(last, current));
             }
 
-            ul.Content.AppendHtml(TagHelper.Create(Tag.li, new AnchorHref($"共 {Total} 条").Html));
-            return TagHelper.ToHtml(ul);
+            ul.Content.AppendHtml(this.GetTag($"共 {this.Total} 条", current));
+            ul.Content.AppendHtml(this.GetTag($"{this.Size} 条/页", current));
+            return ul;
         }
 
-        private IHtmlContent GetTag(int number, int index)
+        private IHtmlContent GetTag(object number, int index)
         {
-            var tag = TagHelper.Create(Tag.li, new AnchorHref(number).Html);
-            if (number == index)
+            var tag = TagHelper.Create(Tag.li, new AnchorHref(number.ToString()).Html);
+            if (number.ToString() == index.ToString())
             {
                 tag.Attributes.Add(Attr.Class, "active");
             }

@@ -1,39 +1,39 @@
-namespace MaterialUI.Framework
+namespace Quartz.Framework
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using AspNetCore.Extensions;
-    using MaterialUI.Controllers;
-    using MaterialUI.Entity;
-    using MaterialUI.Files;
-    using MaterialUI.Html;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.Checkbox;
-    using MaterialUI.Html.Dialog;
-    using MaterialUI.Html.Dialog.Demo;
-    using MaterialUI.Html.Inputs;
-    using MaterialUI.Html.RadioButtons;
-    using MaterialUI.Html.Tables;
-    using MaterialUI.Job.Common;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc;
     using Quartz;
+    using Quartz.Controllers;
+    using Quartz.Entity;
+    using Quartz.Files;
+    using Quartz.Html;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.Checkbox;
+    using Quartz.Html.Dialog;
+    using Quartz.Html.Dialog.Demo;
+    using Quartz.Html.Inputs;
+    using Quartz.Html.RadioButtons;
+    using Quartz.Html.Tables;
     using Quartz.Impl.Matchers;
     using Quartz.Impl.Triggers;
+    using Quartz.Job.Common;
 
     public class StandardController : Controller
     {
         protected IGetHtml getHtml;
         protected IScheduler scheduler;
 
-        protected StandardController(MaterialUIContext dbContext)
+        protected StandardController(QuartzContext dbContext)
         {
             this.DbContext = dbContext;
         }
 
-        public MaterialUIContext DbContext { get; }
+        public QuartzContext DbContext { get; }
 
         protected IActionResult HtmlResult(string html)
         {
@@ -90,7 +90,6 @@ namespace MaterialUI.Framework
                 html = html.Replace("{{Checkbox}}", Checkbox.Generate());
                 html = html.Replace("{{RadioButton}}", RadioButton.Generate());
                 html = html.Replace("{{ToggleButton}}", ToggleButton.Generate());
-                html = html.Replace("{{Pagination}}", new Pagination().ToHtml(1, 10, 100));
                 html = html.Replace("{{Dropdown}}", new Dropdown().ToHtml());
                 html = html.Replace("{{Textarea}}", new Textarea().ToHtml());
                 html = html.Replace("{{SelectPicker}}", new SingleSelect().ToHtml());

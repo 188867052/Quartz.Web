@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.Html.TextBoxs
+﻿namespace Quartz.Html.TextBoxs
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Javascript;
 
     public class EmptyColumn<TModel, TPostModel> : IColumn<TModel, TPostModel>
     {

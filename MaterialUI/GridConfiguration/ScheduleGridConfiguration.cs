@@ -1,11 +1,11 @@
-﻿namespace MaterialUI.GridConfigurations.Schedule
+﻿namespace Quartz.GridConfigurations.Schedule
 {
     using System.Collections.Generic;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Html.GridColumn;
-    using MaterialUI.Routes;
-    using MaterialUI.ViewConfiguration.Schedule;
+    using Quartz.Entity;
+    using Quartz.Html.Buttons;
+    using Quartz.Html.GridColumn;
+    using Quartz.Routes;
+    using Quartz.ViewConfiguration.Schedule;
 
     public class ScheduleGridConfiguration<T> : GridConfiguration<T>
         where T : TaskScheduleModel

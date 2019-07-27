@@ -1,9 +1,9 @@
-﻿namespace MaterialUI.Html.Dialog
+﻿namespace Quartz.Html.Dialog
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Routes;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.Routes;
 
     public class ConfirmDeleteDialog
     {

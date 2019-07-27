@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MaterialUI.Entity
+namespace Quartz.Entity
 {
     public partial class QuartzSchedulerState
     {

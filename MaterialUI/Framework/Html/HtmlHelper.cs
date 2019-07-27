@@ -1,12 +1,12 @@
-namespace MaterialUI.Html
+namespace Quartz.Html
 {
     using System;
     using AspNetCore.Extensions;
-    using MaterialUI.Files;
-    using MaterialUI.Files.Css.Font.Awesome;
-    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Files;
+    using Quartz.Files.Css.Font.Awesome;
+    using Quartz.Html.Tags;
 
     public static class HtmlHelper
     {

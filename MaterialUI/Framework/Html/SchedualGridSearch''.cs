@@ -1,15 +1,15 @@
-﻿namespace MaterialUI.SearchFilterConfigurations
+﻿namespace Quartz.SearchFilterConfigurations
 {
     using System.Collections.Generic;
-    using MaterialUI.Controllers;
-    using MaterialUI.Entity;
-    using MaterialUI.Files.Js;
-    using MaterialUI.Html;
-    using MaterialUI.Html.Buttons;
-    using MaterialUI.Javascript;
-    using MaterialUI.Models;
-    using MaterialUI.Routes;
-    using MaterialUI.ViewConfiguration.Schedule;
+    using Quartz.Controllers;
+    using Quartz.Entity;
+    using Quartz.Files.Js;
+    using Quartz.Html;
+    using Quartz.Html.Buttons;
+    using Quartz.Javascript;
+    using Quartz.Models;
+    using Quartz.Routes;
+    using Quartz.ViewConfiguration.Schedule;
 
     public class SchedualGridSearch<TModel, TPostModel> : GridSearchPage<TModel, TPostModel>
          where TPostModel : SchedulePostModel

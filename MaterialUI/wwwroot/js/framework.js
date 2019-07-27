@@ -2,51 +2,62 @@
     'use strict';
 
     window.Framework = function () {
-        this._currentPage = 1;
     };
 
     window.Framework.prototype = {
 
         // Private Fields
-        _currentPage: null,
-        _pageSize: null,
-        _successPointer: null,
-        _leftText: null,
-        _rightText: null,
 
         initialize: function () {
-            // TODO
-            $('button[data-toggle="modal"]').on("click", function (e) {
-                var url = e.currentTarget.getAttribute("action");
-                var data = e.currentTarget.getAttribute("data");
-                $.ajaxSettings.async = false;
-                var point = this.displayDialog;
-                $.get(url, JSON.parse(data), $.proxy(function (response) {
-                    $(".modal").remove();
-                    $("body").append(response);
-                }, this));
-            });
-
-            $('.btn-action').on("click", function (e) {
-                var url = e.currentTarget.getAttribute("action");
-                var data = e.currentTarget.getAttribute("data");
-                $.ajaxSettings.async = false;
-                var point = this.refresh;
-                $.get(url, JSON.parse(data), $.proxy(location.reload(), this));
-            });
-
+            this.btnModalInit();
+            this.btnActionInit();
             this.pageInit();
         },
 
         pageInit: function () {
-            $('.pagination li').on("click", function (e) {
-                if (e.currentTarget.className == "active" || isNaN(e.currentTarget.textContent)) { return;}
-                var data = JSON.parse(this.parentElement.previousElementSibling.getAttribute('data'));
-                data.index = e.currentTarget.textContent;
-                data.size = 10;
-                var url = this.parentElement.previousElementSibling.getAttribute('url');
-                $.get(url, data, $.proxy(function (response) { this.parentElement.previousElementSibling.innerHTML = response; this.parentElement.remove(); framework.pageInit(); }, this));
-            });
+            $('.pagination li').on("click", $.proxy(this._onPageInitEvent, this));
+        },
+
+        btnActionInit: function () {
+            $('.btn-action').on("click", $.proxy(this._onBtnActionEvent, this));
+        },
+
+        btnModalInit: function () {
+            $('button[data-toggle="modal"]').on("click", $.proxy(this._onBtnModalEvent, this));
+        },
+
+        _onBtnModalEvent: function (e) {
+            this._onBtnEvent(e, $.proxy(this.displayDialog, this));
+        },
+
+        _onBtnActionEvent: function (e) {
+            this._onBtnEvent(e, $.proxy(this.refresh, this));
+        },
+
+        _onBtnEvent: function (e, pointer) {
+            var url = e.currentTarget.getAttribute("action");
+            var data = e.currentTarget.getAttribute("data");
+            $.ajaxSettings.async = false;
+            $.get(url, JSON.parse(data), pointer);
+        },
+
+        _onPageInitEvent: function (e) {
+            var currentNode = e.currentTarget;
+            var tableNode = currentNode.parentElement.previousElementSibling;
+            if (currentNode.className == "active" || isNaN(currentNode.textContent)) { return; }
+            var data = JSON.parse(tableNode.getAttribute('data'));
+            data.index = e.currentTarget.textContent;
+            data.size = 10;
+            var url = tableNode.getAttribute('url');
+            $.get(url, data, $.proxy(this._onPageInit, this, e));
+        },
+
+        _onPageInit: function (e, response) {
+            var html = $.parseHTML(response);
+            var pageNode = e.currentTarget.parentElement;
+            pageNode.previousElementSibling.replaceWith(html[0])
+            pageNode.replaceWith(html[1])
+            this.pageInit();
         },
 
         refresh: function () {
@@ -59,7 +70,6 @@
         },
 
         getData: function (form) {
-
             this.checkNotNull(form);
 
             var data = new Object;

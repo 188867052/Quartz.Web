@@ -1,9 +1,9 @@
-﻿namespace MaterialUI.Job.Entity
+﻿namespace Quartz.Job.Entity
 {
     using System;
-    using MaterialUI.Enums;
-    using MaterialUI.Job.Common;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+    using Quartz.Enums;
+    using Quartz.Job.Common;
 
     public class ScheduleEntity
     {

@@ -1,9 +1,9 @@
-namespace MaterialUI.Html.Dialog.Demo
+namespace Quartz.Html.Dialog.Demo
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
     using TagHelper = AspNetCore.Extensions.TagHelper;
 
     public class ScheduleCard

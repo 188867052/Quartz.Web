@@ -1,19 +1,19 @@
-﻿namespace MaterialUI.ViewConfiguration.Schedule
+﻿namespace Quartz.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialUI.Entity;
-    using MaterialUI.Enums;
-    using MaterialUI.Html.TextBoxs;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
     using Microsoft.Extensions.DependencyInjection;
     using Quartz;
-    using Resource = Resources.EditScheduleConfigurationResource;
+    using Quartz.Entity;
+    using Quartz.Enums;
+    using Quartz.Html.TextBoxs;
+    using Quartz.Javascript;
+    using Resource = Web.Resources.EditScheduleConfigurationResource;
 
     public class ReplaceLargeColumn<TModel, TPostModel>
-        where TPostModel : TaskScheduleModel
-        where TModel : TaskScheduleModel
+        where TPostModel : EdieTaskScheduleModel
+        where TModel : EdieTaskScheduleModel
     {
         private readonly TModel model;
         private readonly EmptyColumn<TModel, TPostModel> emptyColumn;

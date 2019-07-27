@@ -1,12 +1,12 @@
-namespace MaterialUI.ViewConfiguration
+namespace Quartz.ViewConfiguration
 {
     using System;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.GridColumn;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.GridColumn;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public class FooterButton<TModel, TPostModel> : IColumn<TModel, TPostModel>
     {

@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.Javascript
+﻿namespace Quartz.Javascript
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.Tags;
 
     /// <summary>
     /// JavaScript used to initialize a view instance.

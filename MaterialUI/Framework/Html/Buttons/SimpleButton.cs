@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.Html.Buttons
+﻿namespace Quartz.Html.Buttons
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public class SimpleButton
     {

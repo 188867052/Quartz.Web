@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.ViewConfiguration
+﻿namespace Quartz.ViewConfiguration
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Javascript;
 
     public class ButtonColumn<TModel, TPostModel>
     {

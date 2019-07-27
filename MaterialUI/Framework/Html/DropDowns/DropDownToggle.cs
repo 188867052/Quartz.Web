@@ -1,7 +1,7 @@
-﻿namespace MaterialUI.Html.DropDowns
+﻿namespace Quartz.Html.DropDowns
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     public class DropDownToggle
     {

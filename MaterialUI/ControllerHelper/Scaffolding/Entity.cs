@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Scaffolding
+﻿namespace Quartz.Scaffolding
 {
     using System;
     using System.ComponentModel;

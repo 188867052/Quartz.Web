@@ -1,4 +1,4 @@
-namespace MaterialUI.Html
+namespace Quartz.Html
 {
     using System.IO;
     using Microsoft.AspNetCore.Hosting;

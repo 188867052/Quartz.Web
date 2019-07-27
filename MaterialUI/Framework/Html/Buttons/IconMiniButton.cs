@@ -1,4 +1,4 @@
-namespace MaterialUI.Html.Buttons
+namespace Quartz.Html.Buttons
 {
     public class IconMiniButton : Button
     {

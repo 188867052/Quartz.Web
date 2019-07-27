@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Job.Model
+﻿namespace Quartz.Job.Model
 {
     using System;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;

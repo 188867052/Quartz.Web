@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.Html.Filters
+﻿namespace Quartz.Html.Filters
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialUI.ViewConfiguration;
     using Microsoft.AspNetCore.Html;
+    using Quartz.ViewConfiguration;
 
     public abstract class FilterBase<TModel, TPostModel> : IDialogConfiguration
     {

@@ -1,9 +1,9 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using MaterialUI.Entity;
+    using Quartz.Entity;
 
     internal static class EnumHelper
     {
@@ -13,7 +13,7 @@
         {
             StringBuilder sb = new StringBuilder();
             var group = info.GroupBy(o => o.EnumName);
-            sb.AppendLine($"namespace {nameof(MaterialUI)}.Enums");
+            sb.AppendLine($"namespace {nameof(Quartz)}.Enums");
             sb.AppendLine("{");
             for (int i = 0; i < group.Count(); i++)
             {

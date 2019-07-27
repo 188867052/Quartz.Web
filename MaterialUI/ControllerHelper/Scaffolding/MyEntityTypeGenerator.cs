@@ -1,11 +1,11 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System.Linq;
     using JetBrains.Annotations;
-    using MaterialUI.Scaffolding;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
+    using Quartz.Scaffolding;
 
     internal class MyEntityTypeGenerator
         : CSharpEntityTypeGeneratorBase

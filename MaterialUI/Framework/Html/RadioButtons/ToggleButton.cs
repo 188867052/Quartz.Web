@@ -1,7 +1,7 @@
-﻿namespace MaterialUI.Html.RadioButtons
+﻿namespace Quartz.Html.RadioButtons
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     public class ToggleButton
     {

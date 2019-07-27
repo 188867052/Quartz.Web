@@ -1,11 +1,11 @@
-﻿namespace MaterialUI.Dapper
+﻿namespace Quartz.Dapper
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using AppSettingManager;
     using global::Dapper;
-    using MaterialUI.Entity;
+    using Quartz.Entity;
 
     public partial class DapperExtension
     {

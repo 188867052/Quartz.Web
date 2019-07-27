@@ -1,14 +1,14 @@
-﻿namespace MaterialUI.Html.Dialog
+﻿namespace Quartz.Html.Dialog
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Shared;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.Shared;
     using TagHelper = AspNetCore.Extensions.TagHelper;
 
     public abstract class DialogBase

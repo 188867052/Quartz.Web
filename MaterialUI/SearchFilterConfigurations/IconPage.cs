@@ -1,15 +1,15 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
     using AspNetCore.Extensions;
-    using MaterialUI.Dapper;
-    using MaterialUI.Entity;
-    using MaterialUI.Html;
-    using MaterialUI.Html.Inputs;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Dapper;
+    using Quartz.Entity;
+    using Quartz.Html;
+    using Quartz.Html.Inputs;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public class IconPage : PageBase
     {

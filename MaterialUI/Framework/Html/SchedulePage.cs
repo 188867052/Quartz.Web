@@ -1,8 +1,8 @@
-namespace MaterialUI.Controllers
+namespace Quartz.Controllers
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Dialog.Demo;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Dialog.Demo;
+    using Quartz.Html.Tags;
 
     public class SchedulePage
     {

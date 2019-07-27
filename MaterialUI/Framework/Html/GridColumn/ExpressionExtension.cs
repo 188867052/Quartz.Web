@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
     using System;
     using System.Linq.Expressions;

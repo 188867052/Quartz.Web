@@ -6,13 +6,13 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using JetBrains.Annotations;
-    using MaterialUI.Shared;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Design.Internal;
     using Microsoft.EntityFrameworkCore.Internal;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
+    using Quartz.Shared;
 
     public abstract class CSharpEntityTypeGeneratorBase : ICSharpEntityTypeGenerator
     {

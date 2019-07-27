@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Models
+﻿namespace Quartz.Models
 {
     using System;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
@@ -11,16 +11,16 @@
 
         public string Url { get; set; }
 
-        public DateTime? StartTime { get; internal set; }
+        public DateTime? StartTime { get; set; }
 
-        public DateTime? EndTime { get; internal set; }
+        public DateTime? EndTime { get; set; }
 
-        public DateTime? LastExcuteTime { get; internal set; }
+        public DateTime? LastExcuteTime { get; set; }
 
-        public DateTime? NextExcuteTime { get; internal set; }
+        public DateTime? NextExcuteTime { get; set; }
 
-        public string Cron { get; internal set; }
+        public string Cron { get; set; }
 
-        public HttpMethod HttpMethod { get; internal set; }
+        public HttpMethod HttpMethod { get; set; }
     }
 }

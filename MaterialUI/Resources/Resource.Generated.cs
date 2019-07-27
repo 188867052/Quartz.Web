@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Resources;
 
-namespace MaterialUI.Resources
+namespace Quartz.Web.Resources
 {
 	/// <summary>
 	/// A static class used to access a specific set of resources.
@@ -19,7 +19,7 @@ namespace MaterialUI.Resources
 			{
                 if (object.ReferenceEquals(resourceManager, null)) 
 				{
-                    resourceManager = new ResourceManager("MaterialUI.Resources.EditScheduleConfigurationResource", typeof(EditScheduleConfigurationResource).Assembly);
+                    resourceManager = new ResourceManager("Quartz.Web.Resources.EditScheduleConfigurationResource", typeof(EditScheduleConfigurationResource).Assembly);
                 }
                 return resourceManager;
             }

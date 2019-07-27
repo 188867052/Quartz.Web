@@ -1,8 +1,8 @@
-﻿namespace MaterialUI.Html.Buttons
+﻿namespace Quartz.Html.Buttons
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
     using Newtonsoft.Json;
+    using Quartz.Html.Tags;
 
     public class SubmitButton : SimpleButton
     {

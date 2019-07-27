@@ -19,6 +19,7 @@
     <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="DependencyInjection.Analyzer" Version="1.0.0" />
     <PackageReference Include="EntityFrameworkCore.SqlProfile" Version="2.1.0.1" />
+    <PackageReference Include="LanguageExt.Core" Version="3.3.3" />
     <PackageReference Include="MailKit" Version="2.1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />

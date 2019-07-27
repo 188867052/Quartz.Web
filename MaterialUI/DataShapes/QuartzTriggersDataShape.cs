@@ -1,7 +1,7 @@
-﻿namespace MaterialUI.DataShapes
+﻿namespace Quartz.DataShapes
 {
-    using MaterialUI.Entity;
     using Microsoft.EntityFrameworkCore;
+    using Quartz.Entity;
 
     public static class QuartzTriggersDataShape
     {

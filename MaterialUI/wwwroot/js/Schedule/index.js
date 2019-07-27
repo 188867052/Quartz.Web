@@ -37,7 +37,7 @@
         changeTriggerType: function () {
             var url = event.currentTarget.getAttribute("url");
             $.ajaxSettings.async = true;
-            $.get(url, { type: event.currentTarget.value}, $.proxy(this._onChangeTriggerType, this));
+            $.get(url, { type: event.currentTarget.value }, $.proxy(this._onChangeTriggerType, this));
         },
 
         _onDelete: function (response) {

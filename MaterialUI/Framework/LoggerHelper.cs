@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Framework
+﻿namespace Quartz.Framework
 {
     using System;
     using Serilog;

@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Job.Entity
+﻿namespace Quartz.Job.Entity
 {
     using System.Collections.Generic;
 

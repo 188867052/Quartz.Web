@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Job
+﻿namespace Quartz.Job
 {
     using AppSettingManager;
     using Quartz;

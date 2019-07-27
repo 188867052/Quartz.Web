@@ -1,8 +1,8 @@
-namespace MaterialUI.Html.Icons
+namespace Quartz.Html.Icons
 {
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Razor.TagHelpers;
+    using Quartz.Html.Tags;
     using TagHelper = AspNetCore.Extensions.TagHelper;
 
     public class MaterialIcon

@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.ViewConfiguration
+﻿namespace Quartz.ViewConfiguration
 {
     using System;
     using System.Linq;

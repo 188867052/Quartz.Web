@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -6,33 +6,33 @@
     using System.Text;
     using System.Threading.Tasks;
     using AspNetCore.Extensions;
-    using Core.Extension;
     using global::Dapper;
-    using MaterialUI.DataShapes;
-    using MaterialUI.Entity;
-    using MaterialUI.Enums;
-    using MaterialUI.Framework;
-    using MaterialUI.GridConfiguration;
-    using MaterialUI.GridConfigurations.Schedule;
-    using MaterialUI.Job;
-    using MaterialUI.Job.Common;
-    using MaterialUI.Job.Entity;
-    using MaterialUI.Models;
-    using MaterialUI.SearchFilterConfigurations;
-    using MaterialUI.ViewConfiguration.Schedule;
+    using MaterialUI.Framework.Filter;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
     using Newtonsoft.Json.Linq;
     using Quartz;
+    using Quartz.DataShapes;
+    using Quartz.Entity;
+    using Quartz.Enums;
+    using Quartz.Framework;
+    using Quartz.GridConfiguration;
+    using Quartz.GridConfigurations.Schedule;
     using Quartz.Impl.Matchers;
     using Quartz.Impl.Triggers;
+    using Quartz.Job;
+    using Quartz.Job.Common;
+    using Quartz.Job.Entity;
+    using Quartz.Models;
+    using Quartz.SearchFilterConfigurations;
+    using Quartz.ViewConfiguration.Schedule;
     using Serilog;
 
     public class ScheduleController : StandardController
     {
-        public ScheduleController(MaterialUIContext dbContext)
+        public ScheduleController(QuartzContext dbContext)
             : base(dbContext)
         {
             this.scheduler = SchedulerCenter.Instance.Scheduler;
@@ -81,10 +81,7 @@
 
         public IActionResult LogDialog(string name, string group, int index, int size)
         {
-            IQueryable<QuartzLog> query = this.DbContext.QuartzLog;
-            query = query.AddStringEqualFilter(name, o => o.Name);
-            query = query.AddStringEqualFilter(group, o => o.Group);
-            query = query.OrderByDescending(o => o.CreateTime);
+            IQueryable<QuartzLog> query = this.DbContext.QuartzLog.Where(o => o.Name == name && o.Group == group).OrderByDescending(o => o.CreateTime);
             IList<QuartzLog> models = query.PageToList(index, size, out int total);
             LogDialog dialog = new LogDialog(models, index, size, total, name, group);
             return this.Dialog(dialog);
@@ -102,17 +99,18 @@
         {
             QuartzTriggersDataShape.Index(this.DbContext);
             var trigger = this.DbContext.QuartzTriggers.FirstOrDefault(o => o.TriggerName == name && o.TriggerGroup == group);
-            var dialog = new EditScheduleDialog<TaskScheduleModel, TaskScheduleModel>(new TaskScheduleModel(trigger));
+
+            var dialog = new EditScheduleDialog<EdieTaskScheduleModel, EdieTaskScheduleModel>(new EdieTaskScheduleModel(trigger));
             return this.Dialog(dialog);
         }
 
-        public async Task<IActionResult> ReplaceColumn(TriggerTypeEnum type)
+        public IActionResult ReplaceColumn(TriggerTypeEnum type)
         {
-            var entity = new TaskScheduleModel
+            var entity = new EdieTaskScheduleModel
             {
                 TriggerType = type,
             };
-            var replaceColumn = new ReplaceLargeColumn<TaskScheduleModel, TaskScheduleModel>(entity);
+            var replaceColumn = new ReplaceLargeColumn<EdieTaskScheduleModel, EdieTaskScheduleModel>(entity);
             var replace = replaceColumn.Render();
             return this.HtmlResult(replace);
         }
@@ -163,12 +161,12 @@
 
         public IActionResult Add()
         {
-            var dialog = new EditScheduleDialog<TaskScheduleModel, TaskScheduleModel>();
+            var dialog = new EditScheduleDialog<EdieTaskScheduleModel, EdieTaskScheduleModel>();
             return this.Dialog(dialog);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(SchedulePostModel model)
+        public IActionResult Search(SchedulePostModel model)
         {
             IQueryable<TaskScheduleModel> query = null;
             query = query.AddStringContainsFilter(o => o.Name, model.Name);

@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.Html.GridColumn
+﻿namespace Quartz.Html.GridColumn
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     public class BooleanGridColumn<T> : BaseGridColumn<T>
     {

@@ -1,7 +1,7 @@
-﻿namespace MaterialUI.SearchFilterConfigurations
+﻿namespace Quartz.SearchFilterConfigurations
 {
     using System.Collections.Generic;
-    using MaterialUI.ViewConfiguration;
+    using Quartz.ViewConfiguration;
 
     public abstract class SearchFilterConfigurationBase<TModel, TPostModel>
     {

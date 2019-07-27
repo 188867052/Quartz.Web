@@ -1,7 +1,7 @@
-﻿namespace MaterialUI.ViewConfiguration
+﻿namespace Quartz.ViewConfiguration
 {
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Javascript;
 
     public class LargeReplaceColumn<TModel, TPostModel> : LargeColumn<TModel, TPostModel>
     {

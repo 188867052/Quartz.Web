@@ -2,19 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
-using MaterialUI.Enums;
+using Quartz.Enums;
 using Quartz;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-namespace MaterialUI.Entity
+namespace Quartz.Entity
 {
-    public partial class MaterialUIContext : DbContext
+    public partial class QuartzContext : DbContext
     {
-        public MaterialUIContext()
+        public QuartzContext()
         {
         }
 
-        public MaterialUIContext(DbContextOptions<MaterialUIContext> options)
+        public QuartzContext(DbContextOptions<QuartzContext> options)
             : base(options)
         {
         }

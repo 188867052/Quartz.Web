@@ -1,6 +1,6 @@
-﻿namespace MaterialUI.Html
+﻿namespace Quartz.Html
 {
-    using MaterialUI.Javascript;
+    using Quartz.Javascript;
 
     public class FrameworkViewInstance : ViewInstanceConstruction
     {

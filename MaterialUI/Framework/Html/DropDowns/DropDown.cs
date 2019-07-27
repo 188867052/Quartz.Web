@@ -1,8 +1,8 @@
-namespace MaterialUI.Html.DropDowns
+namespace Quartz.Html.DropDowns
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.Tags;
+    using Quartz.Html.Tags;
 
     public class DropDown
     {

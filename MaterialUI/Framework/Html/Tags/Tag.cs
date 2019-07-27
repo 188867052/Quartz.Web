@@ -1,4 +1,4 @@
-namespace MaterialUI.Html.Tags
+namespace Quartz.Html.Tags
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1303: Const field names should begin with upper -case letter", Justification = "<挂起>")]
     public class Tag

@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Javascript
+﻿namespace Quartz.Javascript
 {
     using System.Collections.Generic;
     using System.Text;

@@ -1,4 +1,4 @@
-﻿namespace MaterialUI.Job.Common
+﻿namespace Quartz.Job.Common
 {
     using System;
     using System.Collections.Generic;
@@ -7,12 +7,12 @@
     using System.Threading.Tasks;
     using System.Web;
     using Host.Model;
-    using MaterialUI.Controllers;
-    using MaterialUI.Entity;
-    using MaterialUI.Job.Model;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using Quartz;
+    using Quartz.Controllers;
+    using Quartz.Entity;
+    using Quartz.Job.Model;
     using Serilog;
     using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 
@@ -76,7 +76,7 @@
                 }
                 else
                 {
-                    using (var dbContext = new MaterialUIContext())
+                    using (var dbContext = new QuartzContext())
                     {
                         dbContext.QuartzLog.Add(new QuartzLog()
                         {

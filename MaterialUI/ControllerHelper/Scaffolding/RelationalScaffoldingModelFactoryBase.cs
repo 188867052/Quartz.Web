@@ -5,7 +5,6 @@
     using System.Globalization;
     using System.Linq;
     using JetBrains.Annotations;
-    using MaterialUI.Shared;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Design.Internal;
     using Microsoft.EntityFrameworkCore.Internal;
@@ -17,6 +16,7 @@
     using Microsoft.EntityFrameworkCore.Migrations;
     using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
     using Microsoft.EntityFrameworkCore.Scaffolding.Metadata.Internal;
+    using Quartz.Shared;
     using ScaffoldingAnnotationNames = Microsoft.EntityFrameworkCore.Scaffolding.Metadata.Internal.ScaffoldingAnnotationNames;
 
     public abstract class RelationalScaffoldingModelFactoryBase : IScaffoldingModelFactory

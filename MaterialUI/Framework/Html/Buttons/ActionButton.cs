@@ -1,9 +1,9 @@
-﻿namespace MaterialUI.Html.Buttons
+﻿namespace Quartz.Html.Buttons
 {
     using System;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.GridColumn;
+    using Quartz.Html.GridColumn;
 
     public class ActionButton<T> : ColumnButtonBase<T>
     {

@@ -1,10 +1,10 @@
-﻿namespace MaterialUI.GridConfiguration
+﻿namespace Quartz.GridConfiguration
 {
     using System.Collections.Generic;
-    using MaterialUI.Entity;
-    using MaterialUI.Html.GridColumn;
-    using MaterialUI.Routes;
-    using MaterialUI.SearchFilterConfigurations;
+    using Quartz.Entity;
+    using Quartz.Html.GridColumn;
+    using Quartz.Routes;
+    using Quartz.SearchFilterConfigurations;
 
     public class LogDialogGridConfiguration<TModel>
       : GridConfigurationBase<TModel>
@@ -18,6 +18,7 @@
             this.name = name;
             this.group = group;
         }
+
         protected override void CreateGridColumn(IList<BaseGridColumn<TModel>> gridColumns)
         {
             gridColumns.Add(new TextGridColumn<TModel>(o => o.Message, "Message") { MaxLength = 20 });
@@ -33,6 +34,6 @@
             }
         }
 
-        public override object Data => new { name, group };
+        public override object Data => new { this.name, this.group };
     }
 }

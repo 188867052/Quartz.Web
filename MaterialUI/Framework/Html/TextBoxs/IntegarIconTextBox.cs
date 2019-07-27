@@ -1,13 +1,13 @@
-namespace MaterialUI.Html.TextBoxs
+namespace Quartz.Html.TextBoxs
 {
     using System;
     using System.Linq.Expressions;
     using AspNetCore.Extensions;
-    using MaterialUI.Html.GridColumn;
-    using MaterialUI.Html.Icons;
-    using MaterialUI.Html.Tags;
-    using MaterialUI.Javascript;
     using Microsoft.AspNetCore.Html;
+    using Quartz.Html.GridColumn;
+    using Quartz.Html.Icons;
+    using Quartz.Html.Tags;
+    using Quartz.Javascript;
 
     public class IntegarIconTextBox<TModel, TPostModel> : IColumn<TModel, TPostModel>
     {

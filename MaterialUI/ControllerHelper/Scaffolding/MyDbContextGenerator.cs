@@ -1,13 +1,13 @@
-﻿namespace MaterialUI.Controllers
+﻿namespace Quartz.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using MaterialUI.Scaffolding;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Scaffolding;
     using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
+    using Quartz.Scaffolding;
 
     internal class MyDbContextGenerator : CSharpDbContextGeneratorBase
     {

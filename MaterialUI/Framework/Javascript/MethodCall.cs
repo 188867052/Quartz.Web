@@ -1,6 +1,6 @@
-﻿namespace MaterialUI.Javascript
+﻿namespace Quartz.Javascript
 {
-    using MaterialUI.Shared;
+    using Quartz.Shared;
 
     public class MethodCall
     {

@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspNetCore.Extensions\AspNetCore.Extensions.csproj" />
-    <ProjectReference Include="..\MaterialUI\MaterialUI.csproj" />
+    <ProjectReference Include="..\MaterialUI\Quartz.Web.csproj" />
   </ItemGroup>
 
 </Project>

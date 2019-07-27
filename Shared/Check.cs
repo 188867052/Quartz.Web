@@ -1,4 +1,4 @@
-namespace MaterialUI.Shared
+namespace Quartz.Shared
 {
     using System;
     using System.Collections.Generic;
