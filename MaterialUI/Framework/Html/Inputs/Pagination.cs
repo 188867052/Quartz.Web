@@ -9,8 +9,10 @@
 
     public class Pagination
     {
+        public int Total { get; set; }
         public string ToHtml(int index, int size, int total)
         {
+            Total = total;
             List<int> list;
             int last = (int)Math.Ceiling(total / (float)size);
             switch (index)
@@ -29,10 +31,10 @@
                             list = new List<int> { 2, 3 };
                             break;
                         case 5:
-                            list = new List<int> { 2, 3, 4, 5 };
+                            list = new List<int> { 2, 3, 4, };
                             break;
                         default:
-                            list = new List<int> { 2, 3, 4, 5, 6 };
+                            list = new List<int> { 2, 3, 4, 5, };
                             break;
                     }
 
@@ -44,16 +46,16 @@
                             list = new List<int> { };
                             break;
                         case 3:
-                            list = new List<int> { 2, 3 };
+                            list = new List<int> { 2, };
                             break;
                         case 4:
-                            list = new List<int> { 2, 3, 4 };
+                            list = new List<int> { 2, 3, };
                             break;
                         case 5:
-                            list = new List<int> { 2, 3, 4, 5 };
+                            list = new List<int> { 2, 3, 4, };
                             break;
                         default:
-                            list = new List<int> { 2, 3, 4, 5, 6 };
+                            list = new List<int> { 2, 3, 4, 5, };
                             break;
                     }
 
@@ -62,16 +64,16 @@
                     switch (last)
                     {
                         case 3:
-                            list = new List<int> { 2, 3 };
+                            list = new List<int> { 2, };
                             break;
                         case 4:
-                            list = new List<int> { 2, 3, 4 };
+                            list = new List<int> { 2, 3, };
                             break;
                         case 5:
-                            list = new List<int> { 2, 3, 4, 5 };
+                            list = new List<int> { 2, 3, 4, };
                             break;
                         default:
-                            list = new List<int> { 2, 3, 4, 5, 6 };
+                            list = new List<int> { 2, 3, 4, 5, };
                             break;
                     }
 
@@ -80,16 +82,16 @@
                     switch (last)
                     {
                         case 4:
-                            list = new List<int> { 2, 3, 4 };
+                            list = new List<int> { 2, 3, };
                             break;
                         case 5:
-                            list = new List<int> { 2, 3, 4, 5 };
+                            list = new List<int> { 2, 3, 4, };
                             break;
                         case 6:
-                            list = new List<int> { 2, 3, 4, 5, 6 };
+                            list = new List<int> { 2, 3, 4, 5, };
                             break;
                         default:
-                            list = new List<int> { 4, 5, 6, 7 };
+                            list = new List<int> { 2, 3, 4, 5, 6, };
                             break;
                     }
 
@@ -98,22 +100,23 @@
                     switch (last)
                     {
                         case 5:
-                            list = new List<int> { 2, 3, 4, 5 };
+                            list = new List<int> { 2, 3, 4, };
                             break;
                         case 6:
-                            list = new List<int> { 2, 3, 4, 5, 6 };
+                            list = new List<int> { 2, 3, 4, 5, };
                             break;
                         case 7:
-                            list = new List<int> { 4, 5, 6, 7 };
+                            list = new List<int> { 2, 3, 4, 5, 6, };
                             break;
                         default:
-                            list = new List<int> { 5, 6, 7, 8 };
+                            list = new List<int> { 2, 3, 4, 5, 6, 7, };
                             break;
                     }
 
                     break;
                 default:
-                    list = new List<int> { index - 1, index, index + 1 };
+                    int min = Math.Min(index, last - 2);
+                    list = new List<int> { min - 1, min, min + 1 };
                     break;
             }
 
@@ -124,9 +127,9 @@
         {
             if (list.Any())
             {
-                if (!list.Contains(current) && current != 1)
+                if (!list.Contains(current) && current != 1 && last != current)
                 {
-                    throw new Exception("current 必须在list中 1除外");
+                    throw new Exception("current 必须在list中 1,last除外");
                 }
 
                 if (list.Contains(1))
@@ -168,6 +171,7 @@
                 ul.Content.AppendHtml(this.GetTag(last, current));
             }
 
+            ul.Content.AppendHtml(TagHelper.Create(Tag.li, new AnchorHref($"共 {Total} 条").Html));
             return TagHelper.ToHtml(ul);
         }
 

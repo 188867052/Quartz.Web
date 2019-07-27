@@ -15,12 +15,12 @@
         public JsonType(IJsonClassGeneratorConfig generator, JToken token)
             : this(generator)
         {
-            Type = GetFirstTypeEnum(token);
+            this.Type = GetFirstTypeEnum(token);
 
-            if (Type == JsonTypeEnum.Array)
+            if (this.Type == JsonTypeEnum.Array)
             {
                 var array = (JArray)token;
-                InternalType = GetCommonType(generator, array.ToArray());
+                this.InternalType = GetCommonType(generator, array.ToArray());
             }
         }
 
@@ -34,7 +34,7 @@
         internal JsonType(IJsonClassGeneratorConfig generator, JsonTypeEnum type)
             : this(generator)
         {
-            Type = type;
+            this.Type = type;
         }
 
         public static JsonType GetCommonType(IJsonClassGeneratorConfig generator, JToken[] tokens)
@@ -55,7 +55,7 @@
         internal JsonType MaybeMakeNullable(IJsonClassGeneratorConfig generator)
         {
             if (!generator.AlwaysUseNullableValues) return this;
-            return GetCommonType(GetNull(generator));
+            return this.GetCommonType(GetNull(generator));
         }
 
         public JsonTypeEnum Type { get; private set; }
@@ -65,15 +65,15 @@
 
         public void AssignName(string name, string originalName)
         {
-            AssignedName = name;
-            OriginalName = originalName;
+            this.AssignedName = name;
+            this.OriginalName = originalName;
         }
 
         public bool MustCache
         {
             get
             {
-                switch (Type)
+                switch (this.Type)
                 {
                     case JsonTypeEnum.Array: return true;
                     case JsonTypeEnum.Object: return true;
@@ -87,40 +87,40 @@
 
         public string GetReaderName()
         {
-            if (Type == JsonTypeEnum.Anything || Type == JsonTypeEnum.NullableSomething || Type == JsonTypeEnum.NonConstrained)
+            if (this.Type == JsonTypeEnum.Anything || this.Type == JsonTypeEnum.NullableSomething || this.Type == JsonTypeEnum.NonConstrained)
             {
                 return "ReadObject";
             }
 
-            if (Type == JsonTypeEnum.Object)
+            if (this.Type == JsonTypeEnum.Object)
             {
-                return string.Format("ReadStronglyTypedObject<{0}>", AssignedName);
+                return string.Format("ReadStronglyTypedObject<{0}>", this.AssignedName);
             }
-            else if (Type == JsonTypeEnum.Array)
+            else if (this.Type == JsonTypeEnum.Array)
             {
-                return string.Format("ReadArray<{0}>", InternalType.GetTypeName());
+                return string.Format("ReadArray<{0}>", this.InternalType.GetTypeName());
             }
             else
             {
-                return string.Format("Read{0}", Enum.GetName(typeof(JsonTypeEnum), Type));
+                return string.Format("Read{0}", Enum.GetName(typeof(JsonTypeEnum), this.Type));
             }
         }
 
         public JsonType GetInnermostType()
         {
-            if (Type != JsonTypeEnum.Array) throw new InvalidOperationException();
-            if (InternalType.Type != JsonTypeEnum.Array) return InternalType;
-            return InternalType.GetInnermostType();
+            if (this.Type != JsonTypeEnum.Array) throw new InvalidOperationException();
+            if (this.InternalType.Type != JsonTypeEnum.Array) return this.InternalType;
+            return this.InternalType.GetInnermostType();
         }
 
         public string GetTypeName()
         {
-            return generator.CodeWriter.GetTypeName(this, generator);
+            return this.generator.CodeWriter.GetTypeName(this, this.generator);
         }
 
         public string GetJTokenType()
         {
-            switch (Type)
+            switch (this.Type)
             {
                 case JsonTypeEnum.Boolean:
                 case JsonTypeEnum.Integer:
@@ -147,14 +147,14 @@
 
         public JsonType GetCommonType(JsonType type2)
         {
-            var commonType = GetCommonTypeEnum(Type, type2.Type);
+            var commonType = this.GetCommonTypeEnum(this.Type, type2.Type);
 
             if (commonType == JsonTypeEnum.Array)
             {
                 if (type2.Type == JsonTypeEnum.NullableSomething) return this;
-                if (Type == JsonTypeEnum.NullableSomething) return type2;
-                var commonInternalType = InternalType.GetCommonType(type2.InternalType).MaybeMakeNullable(generator);
-                if (commonInternalType != InternalType) return new JsonType(generator, JsonTypeEnum.Array) { InternalType = commonInternalType };
+                if (this.Type == JsonTypeEnum.NullableSomething) return type2;
+                var commonInternalType = this.InternalType.GetCommonType(type2.InternalType).MaybeMakeNullable(this.generator);
+                if (commonInternalType != this.InternalType) return new JsonType(this.generator, JsonTypeEnum.Array) { InternalType = commonInternalType };
             }
 
             //if (commonType == JsonTypeEnum.Dictionary)
@@ -163,8 +163,8 @@
             //    if (commonInternalType != InternalType) return new JsonType(JsonTypeEnum.Dictionary) { InternalType = commonInternalType };
             //}
 
-            if (Type == commonType) return this;
-            return new JsonType(generator, commonType).MaybeMakeNullable(generator);
+            if (this.Type == commonType) return this;
+            return new JsonType(this.generator, commonType).MaybeMakeNullable(this.generator);
         }
 
         private static bool IsNull(JsonTypeEnum type)

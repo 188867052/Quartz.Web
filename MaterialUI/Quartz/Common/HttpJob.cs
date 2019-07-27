@@ -3,13 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web;
     using Host.Model;
     using MaterialUI.Controllers;
-    using MaterialUI.Dapper;
     using MaterialUI.Entity;
     using MaterialUI.Job.Model;
     using Microsoft.Extensions.Logging;
@@ -80,19 +78,15 @@
                 {
                     using (var dbContext = new MaterialUIContext())
                     {
-                        //var task = dbContext.TaskSchedule.FirstOrDefault(o => o.Name == context.JobDetail.Key.Name && o.Group == context.JobDetail.Key.Group);
-                        //task.NextExcuteTime = context.NextFireTimeUtc.Value.DateTime;
-                        //task.LastExcuteTime = context.ScheduledFireTimeUtc.Value.DateTime;
-                        QuartzLog entity = new QuartzLog()
+                        dbContext.QuartzLog.Add(new QuartzLog()
                         {
                             CreateTime = DateTime.Now,
                             LogLevel = LogLevel.Information,
                             Type = 1,
                             Message = result,
-                            //TaskScheduleId = task.Id,
-                        };
-                        dbContext.QuartzLog.Add(entity);
-                        //dbContext.TaskSchedule.Update(task);
+                            Name = context.JobDetail.Key.Name,
+                            Group = context.JobDetail.Key.Group,
+                        });
                         dbContext.SaveChanges();
                     }
 

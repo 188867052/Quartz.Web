@@ -182,6 +182,18 @@
             return query.CreateQuery(null, expression.GetPropertyName(), Predicate);
         }
 
+        public static IList<T> PageToList<T>(this IQueryable<T> query, int index, int size, out int total)
+        {
+            total = query.Count();
+            return query.Skip(size * (index - 1)).Take(size).ToList();
+        }
+
+        private static IQueryable<T> CreateQuery<T>(this IQueryable<T> query, object value, string name, Func<MemberExpression, ConstantExpression, BinaryExpression> predicate)
+        {
+            Expression<Func<T, bool>> Lambda(MemberExpression a, ConstantExpression b, ParameterExpression c) => Expression.Lambda<Func<T, bool>>(predicate(a, b), c);
+            return query.CreateQuery(value, name, Lambda);
+        }
+
         private static IQueryable<T> AddStringFilter<T>(this IQueryable<T> query, string value, Expression<Func<T, string>> expression, MethodInfo method)
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -191,12 +203,6 @@
             }
 
             return query;
-        }
-
-        private static IQueryable<T> CreateQuery<T>(this IQueryable<T> query, object value, string name, Func<MemberExpression, ConstantExpression, BinaryExpression> predicate)
-        {
-            Expression<Func<T, bool>> Lambda(MemberExpression a, ConstantExpression b, ParameterExpression c) => Expression.Lambda<Func<T, bool>>(predicate(a, b), c);
-            return query.CreateQuery(value, name, Lambda);
         }
 
         private static IQueryable<T> CreateQuery<T>(this IQueryable<T> query, object value, string propertyName, Func<MemberExpression, ConstantExpression, MethodCallExpression> predicate)

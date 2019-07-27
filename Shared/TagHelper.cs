@@ -60,6 +60,13 @@
                                        getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
         }
 
+        public static TagHelperOutput Script(string script)
+        {
+            Check.NotEmpty(script, nameof(script));
+
+            return Create("script", script);
+        }
+
         public static TagHelperOutput StartOnlyTag(string tagName)
         {
             var tag = Create(tagName);

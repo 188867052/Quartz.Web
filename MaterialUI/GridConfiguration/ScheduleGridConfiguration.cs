@@ -34,10 +34,10 @@
             gridColumns.Add(new DateTimeGridColumn<T>(o => o.NextFireTime, "下次执行时间"));
 
             ActionGridColumn<T> actionColumns = new ActionGridColumn<T>("操作", o => o.Id);
-            actionColumns.AddActionButton("btn btn-action btn-info btn-round", o => o.IconClass, o => o.IsEnable ? ScheduleRoute.StopJob : ScheduleRoute.ResumeJob);
+            actionColumns.AddActionButton("btn btn-action btn-info btn-round", o => o.IconClass, o => o.IsPaused ? ScheduleRoute.StopJob : ScheduleRoute.ResumeJob);
             actionColumns.AddModalButton("btn btn-success btn-simple", o => "edit", o => ScheduleRoute.Edit, ScheduleIdentifiers.EditDialogIdentifier);
             actionColumns.AddModalButton("btn btn-danger", o => "close", o => ScheduleRoute.DeleteDialog, ScheduleIdentifiers.DeleteDialogIdentifier);
-            actionColumns.AddModalButton("btn btn-info btn-round", o => "book", o => ScheduleRoute.GetJobLogs, ScheduleIdentifiers.LogDialogIdentifier);
+            actionColumns.AddModalButton("btn btn-info btn-round", o => "book", o => ScheduleRoute.LogDialog, ScheduleIdentifiers.LogDialogIdentifier);
             gridColumns.Add(actionColumns);
         }
     }

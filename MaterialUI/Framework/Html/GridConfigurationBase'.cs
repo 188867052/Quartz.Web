@@ -6,10 +6,14 @@
     using MaterialUI.Html.Inputs;
     using MaterialUI.Html.Tags;
     using Microsoft.AspNetCore.Html;
+    using Newtonsoft.Json;
 
     public abstract class GridConfigurationBase<TModel>
     {
         public bool EnablePagination { get; set; } = true;
+
+        public abstract string GridStateChange { get; }
+        public abstract object Data { get; }
 
         public IHtmlContent Render(int index, int size, IList<TModel> list, int total)
         {
@@ -38,15 +42,18 @@
             var theadTag = TagHelper.Create(Tag.thead, TagHelper.Create(Tag.tr, thead));
             var table = TagHelper.Create(Tag.table, new TagAttribute(Attr.Class, "table table-striped"), theadTag, tbody);
             var responsiveTable = TagHelper.Div("table-responsive", table);
-
+            responsiveTable.Attributes.Add("url", this.GridStateChange);
+            responsiveTable.Attributes.Add("data", JsonConvert.SerializeObject(this.Data));
             if (this.EnablePagination)
             {
                 responsiveTable.PostElement.AppendHtml(new Pagination().ToHtml(index, size, total));
             }
 
+            //responsiveTable.PostContent.AppendHtml(TagHelper.Script(this.Script));
             return responsiveTable;
         }
 
+        private string Script = "framework.pageInit();";
         protected abstract void CreateGridColumn(IList<BaseGridColumn<TModel>> gridColumns);
     }
 }

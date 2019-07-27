@@ -27,8 +27,8 @@
             switch (type.Type)
             {
                 case JsonTypeEnum.Anything: return "object";
-                case JsonTypeEnum.Array: return arraysAsLists ? "IList<" + GetTypeName(type.InternalType, config) + ">" : GetTypeName(type.InternalType, config) + "[]";
-                case JsonTypeEnum.Dictionary: return "Dictionary<string, " + GetTypeName(type.InternalType, config) + ">";
+                case JsonTypeEnum.Array: return arraysAsLists ? "IList<" + this.GetTypeName(type.InternalType, config) + ">" : this.GetTypeName(type.InternalType, config) + "[]";
+                case JsonTypeEnum.Dictionary: return "Dictionary<string, " + this.GetTypeName(type.InternalType, config) + ">";
                 case JsonTypeEnum.Boolean: return "bool";
                 case JsonTypeEnum.Float: return "double";
                 case JsonTypeEnum.Integer: return "int";
@@ -92,16 +92,16 @@
             {
                 if (!type.IsRoot)
                 {
-                    if (ShouldApplyNoRenamingAttribute(config)) sw.WriteLine("        " + NoRenameAttribute);
-                    if (ShouldApplyNoPruneAttribute(config)) sw.WriteLine("        " + NoPruneAttribute);
+                    if (this.ShouldApplyNoRenamingAttribute(config)) sw.WriteLine("        " + NoRenameAttribute);
+                    if (this.ShouldApplyNoPruneAttribute(config)) sw.WriteLine("        " + NoPruneAttribute);
                     sw.WriteLine("        {0} partial class {1}", visibility, type.AssignedName);
                     sw.WriteLine("        {");
                 }
             }
             else
             {
-                if (ShouldApplyNoRenamingAttribute(config)) sw.WriteLine("    " + NoRenameAttribute);
-                if (ShouldApplyNoPruneAttribute(config)) sw.WriteLine("    " + NoPruneAttribute);
+                if (this.ShouldApplyNoRenamingAttribute(config)) sw.WriteLine("    " + NoRenameAttribute);
+                if (this.ShouldApplyNoPruneAttribute(config)) sw.WriteLine("    " + NoPruneAttribute);
                 sw.WriteLine("    {0} partial class {1}", visibility, type.AssignedName);
                 sw.WriteLine("    {");
             }
@@ -115,16 +115,16 @@
                 if (!config.UsePascalCase) sw.WriteLine();
             }
 
-            if (type.IsRoot && config.ExplicitDeserialization) WriteStringConstructorExplicitDeserialization(config, sw, type, prefix);
+            if (type.IsRoot && config.ExplicitDeserialization) this.WriteStringConstructorExplicitDeserialization(config, sw, type, prefix);
 
             if (config.ExplicitDeserialization)
             {
-                if (config.UseProperties) WriteClassWithPropertiesExplicitDeserialization(sw, type, prefix);
-                else WriteClassWithFieldsExplicitDeserialization(sw, type, prefix);
+                if (config.UseProperties) this.WriteClassWithPropertiesExplicitDeserialization(sw, type, prefix);
+                else this.WriteClassWithFieldsExplicitDeserialization(sw, type, prefix);
             }
             else
             {
-                WriteClassMembers(config, sw, type, prefix);
+                this.WriteClassMembers(config, sw, type, prefix);
             }
 
             if (shouldSuppressWarning)

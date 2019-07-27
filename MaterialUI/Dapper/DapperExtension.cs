@@ -5,25 +5,15 @@
     using System.Data.SqlClient;
     using AppSettingManager;
     using global::Dapper;
-    using global::Dapper.Common;
     using MaterialUI.Entity;
 
     public partial class DapperExtension
     {
-        private static IDbConnection Connection => new SqlConnection(AppSettings.Connection);
-
-        private static IDbContext DbContext => DbContextFactory.GetDbContext(nameof(DataSourceType.SqlServer));
+        public static IDbConnection Connection => new SqlConnection(AppSettings.Connection);
 
         static DapperExtension()
         {
             DefaultTypeMap.MatchNamesWithUnderscores = true;
-            DbContextFactory.AddDataSource(new DataSource()
-            {
-                SourceType = DataSourceType.SqlServer,
-                Source = () => Connection,
-                UseProxy = true,
-                Name = DataSourceType.SqlServer.ToString(),
-            });
         }
 
         // TODO: Table name may not be id.
@@ -47,30 +37,6 @@
             }
         }
 
-        public static int Count<T>()
-            where T : class
-        {
-            return Query<T>().Count();
-        }
-
-        public static IQueryable<T> Page<T>(int index, int count, out int total)
-            where T : class
-        {
-            return Query<T>().Page(index, count, out total);
-        }
-
-        public static IQueryable<T> Query<T>()
-            where T : class
-        {
-            return DbContext.From<T>();
-        }
-
-        public static int Insert<T>(T entity)
-            where T : class
-        {
-            return DbContext.From<T>().Insert(entity);
-        }
-
         public static IEnumerable<T> Page<T>(int size)
         {
             using (Connection)
@@ -79,6 +45,13 @@
                 string sql = $"SELECT TOP {size} * FROM {tableName}";
                 return Connection.Query<T>(sql);
             }
+        }
+
+        internal static T Query<T>(string sql, object param = null)
+        {
+            string tableName = MetaData.Mapping[typeof(T).Name];
+            sql = $"SELECT * FROM {tableName} WHERE " + sql;
+            return Connection.QueryFirst<T>(sql, param);
         }
     }
 }

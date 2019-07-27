@@ -36,11 +36,8 @@
 
         changeTriggerType: function () {
             var url = event.currentTarget.getAttribute("url");
-            var data = event.currentTarget.getAttribute("data");
-            data = JSON.parse(data);
-            data.type = event.currentTarget.value;
             $.ajaxSettings.async = true;
-            $.get(url, data, $.proxy(this._onChangeTriggerType, this));
+            $.get(url, { type: event.currentTarget.value}, $.proxy(this._onChangeTriggerType, this));
         },
 
         _onDelete: function (response) {

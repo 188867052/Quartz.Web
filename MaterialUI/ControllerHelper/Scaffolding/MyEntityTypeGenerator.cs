@@ -1,12 +1,10 @@
 ﻿namespace MaterialUI.Controllers
 {
-    using System;
     using System.Linq;
     using JetBrains.Annotations;
     using MaterialUI.Scaffolding;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
     internal class MyEntityTypeGenerator

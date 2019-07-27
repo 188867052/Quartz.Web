@@ -8,7 +8,6 @@ namespace MaterialUI
     using MaterialUI.Framework;
     using MaterialUI.Html;
     using MaterialUI.Html.TextBoxs;
-    using MaterialUI.ViewConfiguration.Schedule;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

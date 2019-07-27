@@ -7,18 +7,7 @@
 
     internal static class EnumHelper
     {
-        private static readonly MaterialUIContext Context = null;
         private static IList<EnumInfo> info = new List<EnumInfo>();
-
-        static EnumHelper()
-        {
-            Context = new MaterialUIContext();
-            List<TriggerType> list = Context.TriggerType.ToList();
-            foreach (var item in list)
-            {
-                info.Add(new EnumInfo() { EnumName = nameof(TriggerType), PropertyName = item.Name, Id = item.Id });
-            }
-        }
 
         internal static string Generate()
         {

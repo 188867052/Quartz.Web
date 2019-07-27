@@ -2,9 +2,7 @@ namespace XUnitTest
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using MaterialUI.Entity;
-    using MaterialUI.GridConfigurations.Schedule;
     using MaterialUI.Html.Buttons;
     using MaterialUI.Html.Checkbox;
     using MaterialUI.Html.Dialog.Demo;

@@ -34,26 +34,26 @@
         public Action<string> FeedBack { get; set; }
 
         private bool used = false;
-        public bool UseNamespaces { get { return Namespace != null; } }
+        public bool UseNamespaces { get { return this.Namespace != null; } }
 
         public string GenerateClasses()
         {
-            if (CodeWriter == null)
+            if (this.CodeWriter == null)
             {
-                CodeWriter = new CSharpCodeWriter();
+                this.CodeWriter = new CSharpCodeWriter();
             }
 
-            if (ExplicitDeserialization && !(CodeWriter is CSharpCodeWriter)) throw new ArgumentException("Explicit deserialization is obsolete and is only supported by the C# provider.");
+            if (this.ExplicitDeserialization && !(this.CodeWriter is CSharpCodeWriter)) throw new ArgumentException("Explicit deserialization is obsolete and is only supported by the C# provider.");
 
-            if (used)
+            if (this.used)
             {
                 throw new InvalidOperationException("This instance of JsonClassGenerator has already been used. Please create a new instance.");
             }
 
-            used = true;
+            this.used = true;
 
             JObject[] examples;
-            var example = Example.StartsWith("HTTP/") ? Example.Substring(Example.IndexOf("\r\n\r\n")) : Example;
+            var example = this.Example.StartsWith("HTTP/") ? this.Example.Substring(this.Example.IndexOf("\r\n\r\n")) : this.Example;
             using (var sr = new StringReader(example))
             using (var reader = new JsonTextReader(sr))
             {
@@ -72,31 +72,31 @@
                 }
             }
 
-            Types = new List<JsonType>();
-            Names.Add(MainClass);
+            this.Types = new List<JsonType>();
+            this.Names.Add(this.MainClass);
             var rootType = new JsonType(this, examples[0])
             {
                 IsRoot = true,
             };
-            rootType.AssignName(MainClass, MainClass);
-            GenerateClass(examples, rootType);
+            rootType.AssignName(this.MainClass, this.MainClass);
+            this.GenerateClass(examples, rootType);
 
-            if (DeduplicateClasses)
+            if (this.DeduplicateClasses)
             {
-                FeedBack?.Invoke("De-duplicating classes");
-                DeDuplicateClasses();
+                this.FeedBack?.Invoke("De-duplicating classes");
+                this.DeDuplicateClasses();
             }
 
-            FeedBack?.Invoke("Writing classes to disk.");
+            this.FeedBack?.Invoke("Writing classes to disk.");
 
-            WriteClassesToFile(OutputStream, Types);
-            return OutputStream.ToString();
+            this.WriteClassesToFile(this.OutputStream, this.Types);
+            return this.OutputStream.ToString();
         }
 
         private void DeDuplicateClasses()
         {
             // Get the first occurrence classes (original name = assigned name) as we always want these
-            var newTypes = (from tt in Types
+            var newTypes = (from tt in this.Types
                             where string.Compare(tt.OriginalName, tt.AssignedName, StringComparison.InvariantCultureIgnoreCase) == 0
                             select tt).ToList();
 
@@ -106,7 +106,7 @@
 
             // Get the potential duplicate classes. These are classes where the class name does not match
             // the original name (i.e. we added a count to it).
-            var possibleDuplicates = from tt in Types
+            var possibleDuplicates = from tt in this.Types
                                      where string.Compare(tt.OriginalName, tt.AssignedName, StringComparison.InvariantCultureIgnoreCase) != 0
                                      select tt;
 
@@ -116,14 +116,14 @@
                 {
                     var original = newTypes.FirstOrDefault(tt => tt.OriginalName == duplicate.OriginalName);
 
-                    if (FirstOccurrenceClassNotFound(original))
+                    if (this.FirstOccurrenceClassNotFound(original))
                     {
                         newTypes.Add(duplicate);
                         continue;
                     }
 
                     // Classes are the same - Merge the fields
-                    MergeFieldFromDuplicateToOriginal(original, duplicate);
+                    this.MergeFieldFromDuplicateToOriginal(original, duplicate);
 
                     // Two objects are the 'same', so we want to replace the duplicate with the original. We will
                     // need to fix-up the field types when we are done.
@@ -136,13 +136,13 @@
                 {
                     foreach (var field in jsonType.Fields)
                     {
-                        var internalTypeName = GetInternalTypeName(field);
+                        var internalTypeName = this.GetInternalTypeName(field);
                         if (internalTypeName != null && typeNameReplacements.ContainsKey(internalTypeName))
                         {
                             field.Type.InternalType.AssignName(typeNameReplacements[internalTypeName], typeNameReplacements[internalTypeName]);
                         }
 
-                        var typeName = GetTypeName(field);
+                        var typeName = this.GetTypeName(field);
                         if (typeName != null && typeNameReplacements.ContainsKey(typeName))
                         {
                             field.Type.AssignName(typeNameReplacements[typeName], typeNameReplacements[typeName]);
@@ -151,8 +151,8 @@
                 }
 
                 // Replace the previous type list with the new type list
-                Types.Clear();
-                newTypes.ForEach(tt => Types.Add(tt));
+                this.Types.Clear();
+                newTypes.ForEach(tt => this.Types.Add(tt));
             }
             catch (Exception ex)
             {
@@ -163,7 +163,7 @@
 
         private void MergeFieldFromDuplicateToOriginal(JsonType original, JsonType duplicate)
         {
-            var fieldDifferences = GetFieldDifferences(original.Fields, duplicate.Fields, x => x.MemberName);
+            var fieldDifferences = this.GetFieldDifferences(original.Fields, duplicate.Fields, x => x.MemberName);
             foreach (var fieldDifference in fieldDifferences)
             {
                 original.Fields.Add(duplicate.Fields.First(fld => fld.MemberName == fieldDifference));
@@ -196,10 +196,10 @@
 
         private void WriteClassesToFile(string path, IEnumerable<JsonType> types)
         {
-            FeedBack?.Invoke($"Writing {path}");
+            this.FeedBack?.Invoke($"Writing {path}");
             using (var sw = new StreamWriter(path, false, Encoding.UTF8))
             {
-                WriteClassesToFile(sw, types);
+                this.WriteClassesToFile(sw, types);
             }
         }
 
@@ -208,19 +208,19 @@
             var inNamespace = false;
             var rootNamespace = false;
 
-            CodeWriter.WriteFileStart(this, sw);
+            this.CodeWriter.WriteFileStart(this, sw);
             foreach (var type in types)
             {
-                if (UseNamespaces && inNamespace && rootNamespace != type.IsRoot && SecondaryNamespace != null) { CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace);
+                if (this.UseNamespaces && inNamespace && rootNamespace != type.IsRoot && this.SecondaryNamespace != null) { this.CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace);
                     inNamespace = false; }
-                if (UseNamespaces && !inNamespace) { CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot);
+                if (this.UseNamespaces && !inNamespace) { this.CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot);
                     inNamespace = true;
                     rootNamespace = type.IsRoot; }
-                CodeWriter.WriteClass(this, sw, type, types.Last() != type);
+                this.CodeWriter.WriteClass(this, sw, type, types.Last() != type);
             }
 
-            if (UseNamespaces && inNamespace) CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace);
-            CodeWriter.WriteFileEnd(this, sw);
+            if (this.UseNamespaces && inNamespace) this.CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace);
+            this.CodeWriter.WriteFileEnd(this, sw);
         }
 
         private void GenerateClass(JObject[] examples, JsonType type)
@@ -272,11 +272,11 @@
                 first = false;
             }
 
-            if (UseNestedClasses)
+            if (this.UseNestedClasses)
             {
                 foreach (var field in jsonFields)
                 {
-                    Names.Add(field.Key.ToLower());
+                    this.Names.Add(field.Key.ToLower());
                 }
             }
 
@@ -298,8 +298,8 @@
                         }
                     }
 
-                    fieldType.AssignName(CreateUniqueClassName(field.Key), field.Key);
-                    GenerateClass(subexamples.ToArray(), fieldType);
+                    fieldType.AssignName(this.CreateUniqueClassName(field.Key), field.Key);
+                    this.GenerateClass(subexamples.ToArray(), fieldType);
                 }
 
                 if (fieldType.InternalType != null && fieldType.InternalType.Type == JsonTypeEnum.Object)
@@ -330,16 +330,16 @@
                         }
                     }
 
-                    field.Value.InternalType.AssignName(CreateUniqueClassNameFromPlural(field.Key),
-                            ConvertPluralToSingle(field.Key));
-                    GenerateClass(subexamples.ToArray(), field.Value.InternalType);
+                    field.Value.InternalType.AssignName(this.CreateUniqueClassNameFromPlural(field.Key),
+                            this.ConvertPluralToSingle(field.Key));
+                    this.GenerateClass(subexamples.ToArray(), field.Value.InternalType);
                 }
             }
 
-            type.Fields = jsonFields.Select(x => new FieldInfo(this, x.Key, x.Value, UsePascalCase, fieldExamples[x.Key])).ToList();
+            type.Fields = jsonFields.Select(x => new FieldInfo(this, x.Key, x.Value, this.UsePascalCase, fieldExamples[x.Key])).ToList();
 
-            FeedBack?.Invoke($"Generating class {type.AssignedName}");
-            Types.Add(type);
+            this.FeedBack?.Invoke($"Generating class {type.AssignedName}");
+            this.Types.Add(type);
         }
 
         public IList<JsonType> Types { get; private set; }
@@ -351,13 +351,13 @@
 
             var finalName = name;
             var i = 2;
-            while (Names.Any(x => x.Equals(finalName, StringComparison.OrdinalIgnoreCase)))
+            while (this.Names.Any(x => x.Equals(finalName, StringComparison.OrdinalIgnoreCase)))
             {
                 finalName = name + i.ToString();
                 i++;
             }
 
-            Names.Add(finalName);
+            this.Names.Add(finalName);
             return finalName;
         }
 
@@ -399,7 +399,7 @@
 
         public bool HasSecondaryClasses
         {
-            get { return Types.Count > 1; }
+            get { return this.Types.Count > 1; }
         }
     }
 }

@@ -40,10 +40,9 @@
                 Url = ScheduleRoute.ReplaceColumn,
                 Function = "index.changeTriggerType",
                 Id = Identifier.NewId,
-                Data = new { this.Model?.Id },
                 Init = true,
             };
-            var isEnable = new CheckBox<TModel, TPostModel>(Resource.IsEnableLable, o => o.IsEnable, o => o.IsEnable);
+            var isEnable = new CheckBox<TModel, TPostModel>(Resource.IsEnableLable, o => o.IsPaused, o => o.IsPaused);
 
             columns.Add(new LargeColumn<TModel, TPostModel>(name, group));
             columns.Add(new LargeColumn<TModel, TPostModel>(url));

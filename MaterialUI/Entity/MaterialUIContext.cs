@@ -45,8 +45,6 @@ namespace MaterialUI.Entity
 
         public virtual DbSet<QuartzTriggers> QuartzTriggers { get; set; }
 
-        public virtual DbSet<TriggerType> TriggerType { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -262,8 +260,14 @@ namespace MaterialUI.Entity
                 entity.HasIndex(e => e.CreateTime)
                     .HasName("ix_create_time");
 
+                entity.HasIndex(e => e.Group)
+                    .HasName("ix_group");
+
                 entity.HasIndex(e => e.LogLevel)
                     .HasName("ix_level");
+
+                entity.HasIndex(e => e.Name)
+                    .HasName("ix_name");
 
                 entity.HasIndex(e => e.Type)
                     .HasName("ix_type");
@@ -273,6 +277,10 @@ namespace MaterialUI.Entity
                 entity.Property(e => e.CreateTime)
                     .HasColumnName("create_time")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.Group)
+                    .HasColumnName("group")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.LogLevel)
                     .HasConversion(v => v.ToString(), v => (LogLevel)Enum.Parse(typeof(LogLevel), v))
@@ -284,7 +292,9 @@ namespace MaterialUI.Entity
                     .HasColumnName("message")
                     .HasColumnType("text");
 
-                entity.Property(e => e.TaskScheduleId).HasColumnName("task_schedule_id");
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Type).HasColumnName("type");
             });
@@ -486,17 +496,6 @@ namespace MaterialUI.Entity
                     .HasForeignKey(d => new { d.SchedName, d.JobName, d.JobGroup })
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__quartz_triggers__7DCDAAA2");
-            });
-
-            modelBuilder.Entity<TriggerType>(entity =>
-            {
-                entity.ToTable("trigger_type");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name)
-                    .HasColumnName("name")
-                    .HasMaxLength(50);
             });
         }
     }

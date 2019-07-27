@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using AspNetCore.Extensions;
+    using MaterialUI.Entity;
     using MaterialUI.Html.Buttons;
     using MaterialUI.Html.Dialog;
     using MaterialUI.Html.Tags;
@@ -11,11 +12,11 @@
 
     public class DeleteConfiguration : DialogBase
     {
-        private readonly int id;
+        private QuartzTriggers trigger;
 
-        public DeleteConfiguration(int id)
+        public DeleteConfiguration(QuartzTriggers trigger)
         {
-            this.id = id;
+            this.trigger = trigger;
         }
 
         protected override string Title => "删除";
@@ -40,7 +41,7 @@
             {
                 IList<SimpleButton> buttons = new List<SimpleButton>();
                 buttons.Add(new CancleButton("取消"));
-                buttons.Add(new SubmitButton("确定", "index.delete", ScheduleRoute.Delete, new { this.id }));
+                buttons.Add(new SubmitButton("确定", "index.delete", ScheduleRoute.Delete, new { this.trigger.TriggerName, this.trigger.TriggerGroup }));
 
                 IList<IHtmlContent> list = new List<IHtmlContent>();
                 foreach (var item in buttons)

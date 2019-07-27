@@ -13,10 +13,16 @@
     public abstract class GridSearchPage<TModel, TPostModel> : PageBase
     {
         private readonly IList<TModel> list;
+        private readonly int index;
+        private readonly int size;
+        private readonly int total;
 
-        protected GridSearchPage(IList<TModel> list)
+        protected GridSearchPage(IList<TModel> list,int index,int size,int total)
         {
             this.list = list;
+            this.index = index;
+            this.size = size;
+            this.total = total;
         }
 
         protected override IHtmlContent InitJs()
@@ -93,7 +99,7 @@
             var button = TagHelper.Create(Tag.a, attributes, h4);
             var heading = TagHelper.Create(Tag.div, new TagAttributeList { { "class", "panel-heading" }, { "role", "tab" }, { "id", "headingOne" }, }, button);
             var panel = TagHelper.Div("panel panel-default", heading, tabpanel);
-            var grid = TagHelper.Div("col-md-12 col-lg-offset-0 text-left", this.GenerateButtons(), this.GridConfiguration.Render(1, 10, this.list, 100));
+            var grid = TagHelper.Div("col-md-12 col-lg-offset-0 text-left", this.GenerateButtons(), this.GridConfiguration.Render(index, size, this.list, total));
             var div2 = TagHelper.Div("col-md-12 col-lg-offset-0", grid);
             var div1 = TagHelper.Div("col-md-12 col-lg-offset-0", panel);
             var row = TagHelper.Div("row", div1, div2);

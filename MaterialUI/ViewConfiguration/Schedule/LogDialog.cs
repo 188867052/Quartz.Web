@@ -1,10 +1,8 @@
 ﻿namespace MaterialUI.ViewConfiguration.Schedule
 {
     using System.Collections.Generic;
-    using System.Linq;
     using AspNetCore.Extensions;
     using Javascript;
-    using MaterialUI.Dapper;
     using MaterialUI.Entity;
     using MaterialUI.GridConfiguration;
     using MaterialUI.Html.Buttons;
@@ -13,16 +11,26 @@
 
     public class LogDialog : DialogBase
     {
-        private readonly List<QuartzLog> models;
+        private readonly IList<QuartzLog> models;
+        private readonly int index;
+        private readonly int size;
+        private readonly int total;
+        private readonly string name;
+        private readonly string group;
 
-        public LogDialog(List<QuartzLog> models)
+        public LogDialog(IList<QuartzLog> models, int index, int size, int total, string name, string group)
         {
             this.models = models;
+            this.index = index;
+            this.size = size;
+            this.total = total;
+            this.name = name;
+            this.group = group;
         }
 
         protected override Identifier Identifier => ScheduleIdentifiers.LogDialogIdentifier;
 
-        protected override string Title => "日志";
+        protected override string Title => $"Name: {this.name},Group:{this.group} -- 任务日志";
 
         protected override int Width { get; } = 80;
 
@@ -30,8 +38,8 @@
         {
             get
             {
-                var grid = new LogDialogGridConfiguration<QuartzLog>();
-                var responsiveTable = grid.Render(1, 10, this.models.Take(10).ToList(), this.models.Count);
+                var grid = new LogDialogGridConfiguration<QuartzLog>(name, group);
+                var responsiveTable = grid.Render(this.index, this.size, this.models, this.total);
                 return responsiveTable;
             }
         }

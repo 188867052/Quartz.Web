@@ -1,8 +1,8 @@
 ﻿namespace MaterialUI.SearchFilterConfigurations
 {
     using System.Collections.Generic;
-    using MaterialUI.Entity;
     using MaterialUI.Controllers;
+    using MaterialUI.Entity;
     using MaterialUI.Files.Js;
     using MaterialUI.Html;
     using MaterialUI.Html.Buttons;
@@ -15,8 +15,8 @@
          where TPostModel : SchedulePostModel
          where TModel : TaskScheduleModel
     {
-        public SchedualGridSearch(IList<TModel> list)
-            : base(list)
+        public SchedualGridSearch(IList<TModel> list, int index, int size, int total)
+            : base(list, index, size, total)
         {
         }
 
@@ -41,6 +41,7 @@
         {
             buttons.Add(new ModalButton("添加", ScheduleRoute.Add, ScheduleIdentifiers.EditDialogIdentifier));
             buttons.Add(new ScriptButton("搜索", "index.search", ScheduleRoute.Search));
+            buttons.Add(new ScriptButton("刷新", "index.search", ScheduleRoute.Search));
         }
 
         protected override IList<string> JavaScriptFiles()

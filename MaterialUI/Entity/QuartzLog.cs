@@ -16,6 +16,8 @@ namespace MaterialUI.Entity
 
         public int Type { get; set; }
 
-        public int? TaskScheduleId { get; set; }
+        public string Name { get; set; }
+
+        public string Group { get; set; }
     }
 }

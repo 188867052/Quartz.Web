@@ -83,11 +83,6 @@
             { "Icon.Id", "id" },
             { "Icon.Name", "name" },
 
-            { "TriggerType.PrimaryKey", "id" },
-            { "TriggerType", "trigger_type" },
-            { "TriggerType.Id", "id" },
-            { "TriggerType.Name", "name" },
-
             { "QuartzJobDetails.PrimaryKey", "sched_name" },
             { "QuartzJobDetails", "quartz_job_details" },
             { "QuartzJobDetails.SchedName", "sched_name" },
@@ -108,7 +103,8 @@
             { "QuartzLog.CreateTime", "create_time" },
             { "QuartzLog.LogLevel", "log_level" },
             { "QuartzLog.Type", "type" },
-            { "QuartzLog.TaskScheduleId", "task_schedule_id" },
+            { "QuartzLog.Name", "name" },
+            { "QuartzLog.Group", "group" },
 
             { "QuartzTriggers.PrimaryKey", "sched_name" },
             { "QuartzTriggers", "quartz_triggers" },

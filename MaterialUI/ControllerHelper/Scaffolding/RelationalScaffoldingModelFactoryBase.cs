@@ -253,7 +253,7 @@
             Check.NotNull(table, nameof(table));
 
             var entityTypeName = this.GetEntityTypeName(table);
-            SetTableDictionary(entityTypeName, table);
+            this.SetTableDictionary(entityTypeName, table);
             var builder = modelBuilder.Entity(entityTypeName);
 
             var dbSetName = this.GetDbSetName(table);
@@ -265,7 +265,7 @@
 
             var keyBuilder = this.VisitPrimaryKey(builder, table);
 
-            SetKeyDictionary(keyBuilder, table);
+            this.SetKeyDictionary(keyBuilder, table);
 
             if (keyBuilder == null)
             {

@@ -18,10 +18,10 @@
             // TODO
             $('button[data-toggle="modal"]').on("click", function (e) {
                 var url = e.currentTarget.getAttribute("action");
-                var id = e.currentTarget.getAttribute("id");
+                var data = e.currentTarget.getAttribute("data");
                 $.ajaxSettings.async = false;
                 var point = this.displayDialog;
-                $.get(url, { id }, $.proxy(function (response) {
+                $.get(url, JSON.parse(data), $.proxy(function (response) {
                     $(".modal").remove();
                     $("body").append(response);
                 }, this));
@@ -29,10 +29,23 @@
 
             $('.btn-action').on("click", function (e) {
                 var url = e.currentTarget.getAttribute("action");
-                var id = e.currentTarget.getAttribute("id");
+                var data = e.currentTarget.getAttribute("data");
                 $.ajaxSettings.async = false;
                 var point = this.refresh;
-                $.get(url, { id }, $.proxy(location.reload(), this));
+                $.get(url, JSON.parse(data), $.proxy(location.reload(), this));
+            });
+
+            this.pageInit();
+        },
+
+        pageInit: function () {
+            $('.pagination li').on("click", function (e) {
+                if (e.currentTarget.className == "active" || isNaN(e.currentTarget.textContent)) { return;}
+                var data = JSON.parse(this.parentElement.previousElementSibling.getAttribute('data'));
+                data.index = e.currentTarget.textContent;
+                data.size = 10;
+                var url = this.parentElement.previousElementSibling.getAttribute('url');
+                $.get(url, data, $.proxy(function (response) { this.parentElement.previousElementSibling.innerHTML = response; this.parentElement.remove(); framework.pageInit(); }, this));
             });
         },
 
@@ -69,7 +82,5 @@
                 alert("value is null or undefined!");
             }
         },
-
-
     };
 })();

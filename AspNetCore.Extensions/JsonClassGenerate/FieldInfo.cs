@@ -11,10 +11,10 @@
         public FieldInfo(IJsonClassGeneratorConfig generator, string jsonMemberName, JsonType type, bool usePascalCase, IList<object> Examples)
         {
             this.generator = generator;
-            JsonMemberName = jsonMemberName;
-            MemberName = jsonMemberName;
-            if (usePascalCase) MemberName = JsonClassGenerator.ToTitleCase(MemberName);
-            Type = type;
+            this.JsonMemberName = jsonMemberName;
+            this.MemberName = jsonMemberName;
+            if (usePascalCase) this.MemberName = JsonClassGenerator.ToTitleCase(this.MemberName);
+            this.Type = type;
             this.Examples = Examples;
         }
 
@@ -26,8 +26,8 @@
 
         public void UpdateMemberName(string newMemberName)
         {
-            MemberName = newMemberName;
-            JsonMemberName = newMemberName;
+            this.MemberName = newMemberName;
+            this.JsonMemberName = newMemberName;
         }
 
         public string GetGenerationCode(string jobject)
@@ -66,7 +66,7 @@
 
         public string GetExamplesText()
         {
-            return string.Join(", ", Examples.Take(5).Select(x => JsonConvert.SerializeObject(x)).ToArray());
+            return string.Join(", ", this.Examples.Take(5).Select(x => JsonConvert.SerializeObject(x)).ToArray());
         }
     }
 }

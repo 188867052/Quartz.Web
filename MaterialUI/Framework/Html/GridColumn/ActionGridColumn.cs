@@ -11,13 +11,13 @@
     public class ActionGridColumn<T> : BaseGridColumn<T>
     {
         private readonly IList<ColumnButtonBase<T>> actionButtons;
-        private readonly Expression<Func<T, int>> expression;
+        private readonly Expression<Func<T, object>> dataExpression;
 
-        public ActionGridColumn(string thead, Expression<Func<T, int>> expression)
+        public ActionGridColumn(string thead, Expression<Func<T, object>> dataExpression)
             : base(thead)
         {
             this.actionButtons = new List<ColumnButtonBase<T>>();
-            this.expression = expression;
+            this.dataExpression = dataExpression;
         }
 
         public void AddModalButton(string buttonClass, Expression<Func<T, string>> iconClass, Expression<Func<T, string>> action, Identifier id)
@@ -32,8 +32,7 @@
 
         public override string RenderTh()
         {
-            var name = this.expression.GetPropertyName();
-            return $"<th  class=\"text-right\" name=\"{name}\">{this.Thead}</th>";
+            return $"<th  class=\"text-right\">{this.Thead}</th>";
         }
 
         public override string RenderTd(T entity)
@@ -43,7 +42,7 @@
             StringBuilder sb = new StringBuilder();
             foreach (var item in this.actionButtons)
             {
-                var value = this.expression.Compile()(entity);
+                var value = this.dataExpression.Compile()(entity);
                 sb.AppendLine(item.ToHtml(entity, value));
             }
 

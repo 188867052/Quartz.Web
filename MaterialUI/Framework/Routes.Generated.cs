@@ -178,6 +178,21 @@ namespace MaterialUI.Routes
         public const string Index = "/Schedule/Index";
 
         /// <summary>
+        /// <see cref="Controllers.ScheduleController.GridStateChange"/>
+        /// </summary>
+        public const string GridStateChange = "/Schedule/GridStateChange";
+
+        /// <summary>
+        /// <see cref="Controllers.ScheduleController.LogGridStateChange"/>
+        /// </summary>
+        public const string LogGridStateChange = "/Schedule/LogGridStateChange";
+
+        /// <summary>
+        /// <see cref="Controllers.ScheduleController.LogDialog"/>
+        /// </summary>
+        public const string LogDialog = "/Schedule/LogDialog";
+
+        /// <summary>
         /// <see cref="Controllers.ScheduleController.DeleteDialog"/>
         /// </summary>
         public const string DeleteDialog = "/Schedule/DeleteDialog";
@@ -228,11 +243,6 @@ namespace MaterialUI.Routes
         public const string ModifyJob = "/Schedule/ModifyJob";
 
         /// <summary>
-        /// <see cref="Controllers.ScheduleController.LogDialog"/>
-        /// </summary>
-        public const string GetJobLogs = "/Schedule/LogDialog";
-
-        /// <summary>
         /// <see cref="Controllers.ScheduleController.StartSchedule"/>
         /// </summary>
         public const string StartSchedule = "/Schedule/StartSchedule";
@@ -258,7 +268,7 @@ namespace MaterialUI.Routes
         public const string AddJob = "/Schedule/AddJob";
 
         /// <summary>
-        /// <see cref="Controllers.ScheduleController.Delete"/>
+        /// <see cref="Controllers.ScheduleController.DeleteAsync"/>
         /// </summary>
         public const string Delete = "/Schedule/Delete";
 

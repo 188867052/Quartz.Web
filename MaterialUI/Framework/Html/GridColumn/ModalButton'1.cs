@@ -5,6 +5,7 @@
     using AspNetCore.Extensions;
     using MaterialUI.Html.Icons;
     using MaterialUI.Html.Tags;
+    using Newtonsoft.Json;
 
     public abstract class ColumnButtonBase<T>
     {
@@ -30,7 +31,7 @@
             }
         }
 
-        public virtual string ToHtml(T entity, int id)
+        public virtual string ToHtml(T entity, object data)
         {
             var icon = this.iconClass.Compile()(entity);
             var button = TagHelper.Create(Tag.button, this.Attributes, new MaterialIcon(icon).Html);
@@ -39,7 +40,7 @@
             button.Attributes.Add(Attr.Type, "button");
             button.Attributes.Add(Attr.Class, this.buttonClass);
             button.Attributes.Add(Attr.Action, url);
-            button.Attributes.Add(Attr.Id, id);
+            button.Attributes.Add(Attr.Data, JsonConvert.SerializeObject(data));
             button.PostElement.Append(" ");
             return TagHelper.ToHtml(button);
         }
