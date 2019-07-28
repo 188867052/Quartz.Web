@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-16"?>
+<config>
+  <entity Name="QuartzLog">
+    <property Name="LogLevel" Converter="EnumToString" CSharpType="LogLevel" />
+    <property Name="TestData" Converter="EnumToString" CSharpType="HttpMethod" />
+  </entity>
+  <entity Name="QuartzTriggers">
+    <property Name="PrevFireTime" Converter="DateTimeToTicks" CSharpType="DateTime?" />
+    <property Name="NextFireTime" Converter="DateTimeToTicks" CSharpType="DateTime?" />
+    <property Name="StartTime" Converter="DateTimeToTicks" CSharpType="DateTime" />
+    <property Name="EndTime" Converter="DateTimeToTicks" CSharpType="DateTime?" />
+  </entity>
+  <entity Name="TaskSchedule">
+    <property Name="TriggerType" Converter="EnumToString" CSharpType="TriggerTypeEnum" />
+    <property Name="Status" Converter="EnumToString" CSharpType="TriggerState" />
+    <property Name="IntervalType" Converter="EnumToString" CSharpType="TimeSpanParseRule" />
+    <property Name="HttpMethod" Converter="EnumToString" CSharpType="HttpMethod" />
+  </entity>
+  <namespace Name="HttpMethod">Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http</namespace>
+  <namespace Name="TimeSpanParseRule">Quartz</namespace>
+  <namespace Name="TriggerState">Quartz</namespace>
+  <namespace Name="TriggerTypeEnum">Quartz.Enums</namespace>
+  <namespace Name="LogLevel">Quartz.Logging</namespace>
+</config>

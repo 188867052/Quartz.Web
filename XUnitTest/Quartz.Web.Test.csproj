@@ -14,6 +14,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.0-beta1-final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -28,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AspNetCore.Extensions\AspNetCore.Extensions.csproj" />
     <ProjectReference Include="..\MaterialUI\Quartz.Web.csproj" />
+    <ProjectReference Include="..\Quartz.Web\Quartz.Web.csproj" />
   </ItemGroup>
 
 </Project>

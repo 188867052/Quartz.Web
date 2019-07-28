@@ -19,9 +19,13 @@
         }
 
         private IJsonClassGeneratorConfig generator;
+
         public string MemberName { get; private set; }
+
         public string JsonMemberName { get; private set; }
+
         public JsonType Type { get; private set; }
+
         public IList<object> Examples { get; private set; }
 
         public void UpdateMemberName(string newMemberName)

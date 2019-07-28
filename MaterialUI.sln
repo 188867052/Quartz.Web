@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Extensions", "As
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Web.Test", "XUnitTest\Quartz.Web.Test.csproj", "{A7F36BB2-E926-45ED-BF97-04B398510AEB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Web", "MaterialUI\Quartz.Web.csproj", "{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Web", "Quartz.Web\Quartz.Web.csproj", "{B4D15912-38FF-4B65-AC17-09F53B1EC8E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{A7F36BB2-E926-45ED-BF97-04B398510AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7F36BB2-E926-45ED-BF97-04B398510AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7F36BB2-E926-45ED-BF97-04B398510AEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{441E7B10-5EC0-4B9B-8AAB-C17CDF1FE9FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D15912-38FF-4B65-AC17-09F53B1EC8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D15912-38FF-4B65-AC17-09F53B1EC8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D15912-38FF-4B65-AC17-09F53B1EC8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D15912-38FF-4B65-AC17-09F53B1EC8E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
