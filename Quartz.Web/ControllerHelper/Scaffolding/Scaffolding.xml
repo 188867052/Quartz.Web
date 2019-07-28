@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<config>
+  <entity Name="Icon" Summary="图标">
+    <property Name="Id" />
+    <property Name="Name" />
+    <property Name="Sort" Summary="排序" />
+  </entity>
+  <entity Name="QuartzBlobTriggers">
+    <property Name="SchedName" />
+    <property Name="TriggerName" />
+    <property Name="TriggerGroup" />
+    <property Name="BlobData" Summary="数据" />
+  </entity>
+  <entity Name="QuartzCalendars">
+    <property Name="SchedName" />
+    <property Name="CalendarName" />
+    <property Name="Calendar" />
+  </entity>
+  <entity Name="QuartzCronTriggers">
+    <property Name="SchedName" />
+    <property Name="TriggerName" />
+    <property Name="TriggerGroup" />
+    <property Name="CronExpression" />
+    <property Name="TimeZoneId" />
+  </entity>
+  <entity Name="QuartzFiredTriggers">
+    <property Name="SchedName" />
+    <property Name="EntryId" />
+    <property Name="FiredTime" />
+    <property Name="InstanceName" />
+    <property Name="IsNonconcurrent" />
+    <property Name="JobGroup" />
+    <property Name="JobName" />
+    <property Name="Priority" />
+    <property Name="RequestsRecovery" />
+    <property Name="SchedTime" />
+    <property Name="State" />
+    <property Name="TriggerGroup" />
+    <property Name="TriggerName" />
+  </entity>
+  <entity Name="QuartzJobDetails">
+    <property Name="SchedName" />
+    <property Name="JobName" />
+    <property Name="JobGroup" />
+    <property Name="Description" />
+    <property Name="IsDurable" />
+    <property Name="IsNonconcurrent" />
+    <property Name="IsUpdateData" />
+    <property Name="JobClassName" />
+    <property Name="JobData" />
+    <property Name="RequestsRecovery" />
+  </entity>
+  <entity Name="QuartzLocks">
+    <property Name="SchedName" />
+    <property Name="LockName" />
+  </entity>
+  <entity Name="QuartzLog" Summary="日志表">
+    <property Name="Id" Summary="主键" />
+    <property Name="CreateTime" Summary="创建时间" />
+    <property Name="Group" Summary="触发器组" />
+    <property Name="LogLevel" Converter="EnumToString" CSharpType="LogLevel" Summary="日志等级" />
+    <property Name="Message" Summary="日志记录" />
+    <property Name="Name" Summary="触发器名称" />
+    <property Name="TestData" Converter="EnumToString" CSharpType="HttpMethod" Summary="Http请求类型" />
+  </entity>
+  <entity Name="QuartzPausedTriggerGrps">
+    <property Name="SchedName" />
+    <property Name="TriggerGroup" />
+  </entity>
+  <entity Name="QuartzSchedulerState">
+    <property Name="SchedName" />
+    <property Name="InstanceName" />
+    <property Name="CheckinInterval" />
+    <property Name="LastCheckinTime" />
+  </entity>
+  <entity Name="QuartzSimpleTriggers">
+    <property Name="SchedName" />
+    <property Name="TriggerName" />
+    <property Name="TriggerGroup" />
+    <property Name="RepeatCount" />
+    <property Name="RepeatInterval" />
+    <property Name="TimesTriggered" />
+  </entity>
+  <entity Name="QuartzSimpropTriggers">
+    <property Name="SchedName" />
+    <property Name="TriggerName" />
+    <property Name="TriggerGroup" />
+    <property Name="BoolProp1" />
+    <property Name="BoolProp2" />
+    <property Name="DecProp1" />
+    <property Name="DecProp2" />
+    <property Name="IntProp1" />
+    <property Name="IntProp2" />
+    <property Name="LongProp1" />
+    <property Name="LongProp2" />
+    <property Name="StrProp1" />
+    <property Name="StrProp2" />
+    <property Name="StrProp3" />
+    <property Name="TimeZoneId" />
+  </entity>
+  <entity Name="QuartzTriggers">
+    <property Name="SchedName" />
+    <property Name="TriggerName" />
+    <property Name="TriggerGroup" />
+    <property Name="CalendarName" />
+    <property Name="Description" Summary="描述" />
+    <property Name="EndTime" Converter="DateTimeToTicks" CSharpType="DateTime?" Summary="结束时间" />
+    <property Name="JobData" Summary="数据" />
+    <property Name="JobGroup" Summary="分组" />
+    <property Name="JobName" Summary="名称" />
+    <property Name="MisfireInstr" />
+    <property Name="NextFireTime" Converter="DateTimeToTicks" CSharpType="DateTime?" Summary="下次执行时间" />
+    <property Name="PrevFireTime" Converter="DateTimeToTicks" CSharpType="DateTime?" Summary="上次执行时间" />
+    <property Name="Priority" Summary="优先级" />
+    <property Name="StartTime" Converter="DateTimeToTicks" CSharpType="DateTime" Summary="开始时间" />
+    <property Name="TriggerState" Summary="状态" />
+    <property Name="TriggerType" Summary="类型" />
+  </entity>
+  <namespace Name="HttpMethod">Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http</namespace>
+  <namespace Name="TimeSpanParseRule">Quartz</namespace>
+  <namespace Name="TriggerState">Quartz</namespace>
+  <namespace Name="TriggerTypeEnum">Quartz.Enums</namespace>
+  <namespace Name="LogLevel">Quartz.Logging</namespace>
+</config>

@@ -12,28 +12,47 @@
     public class JsonClassGenerator : IJsonClassGeneratorConfig
     {
         public string Example { get; set; }
+
         public string TargetFolder { get; set; }
+
         public string Namespace { get; set; }
+
         public string SecondaryNamespace { get; set; }
+
         public bool UseProperties { get; set; }
+
         public bool InternalVisibility { get; set; }
+
         public bool ExplicitDeserialization { get; set; }
+
         public bool NoHelperClass { get; set; }
+
         public string MainClass { get; set; }
+
         public bool SortMemberFields { get; set; }
+
         public bool UsePascalCase { get; set; }
+
         public bool UseNestedClasses { get; set; }
+
         public bool ApplyObfuscationAttributes { get; set; }
+
         public bool SingleFile { get; set; }
+
         public ICodeWriter CodeWriter { get; set; }
+
         public TextWriter OutputStream { get; set; }
+
         public bool AlwaysUseNullableValues { get; set; }
+
         public bool ExamplesInDocumentation { get; set; }
+
         public bool DeduplicateClasses { get; set; }
 
         public Action<string> FeedBack { get; set; }
 
         private bool used = false;
+
         public bool UseNamespaces { get { return this.Namespace != null; } }
 
         public string GenerateClasses()
@@ -343,6 +362,7 @@
         }
 
         public IList<JsonType> Types { get; private set; }
+
         private HashSet<string> Names = new HashSet<string>();
 
         private string CreateUniqueClassName(string name)
