@@ -59,8 +59,8 @@
 
                 var result = HttpUtility.HtmlEncode(await response.Content.ReadAsStringAsync());
 
-                stopwatch.Stop(); // 停止监视
-                double seconds = stopwatch.Elapsed.TotalSeconds;  // 总秒数
+                stopwatch.Stop();
+                long seconds = stopwatch.Elapsed.Ticks;
                 loginfo.EndTime = DateTime.Now;
                 loginfo.Seconds = seconds;
                 loginfo.Result = result.PadLeft(200);
@@ -77,7 +77,7 @@
                         {
                             CreateTime = DateTime.Now,
                             LogLevel = LogLevel.Info,
-                            TestData = (HttpMethod)(DateTime.Now.Second % 10),
+                            ExcuteTime = new DateTime(stopwatch.Elapsed.Ticks),
                             Message = result,
                             Name = context.JobDetail.Key.Name,
                             Group = context.JobDetail.Key.Group,

@@ -7,17 +7,23 @@ namespace Quartz.Entity
     {
         public string SchedName { get; set; }
 
+        /// <summary>
+        /// Trigger名称.
+        /// </summary>
         public string TriggerName { get; set; }
 
+        /// <summary>
+        /// Trigger分组.
+        /// </summary>
         public string TriggerGroup { get; set; }
 
         /// <summary>
-        /// 名称.
+        /// Job名称.
         /// </summary>
         public string JobName { get; set; }
 
         /// <summary>
-        /// 分组.
+        /// Job分组.
         /// </summary>
         public string JobGroup { get; set; }
 

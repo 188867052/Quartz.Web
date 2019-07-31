@@ -132,8 +132,8 @@
             { "QuartzLog.Group", "group" },
             { "QuartzLog.Message", "message" },
             { "QuartzLog.LogLevel", "log_level" },
+            { "QuartzLog.ExcuteTime", "excute_time" },
             { "QuartzLog.CreateTime", "create_time" },
-            { "QuartzLog.TestData", "test_data" },
         };
     }
 }

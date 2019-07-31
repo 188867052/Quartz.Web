@@ -14,16 +14,20 @@
         static DapperExtension()
         {
             DefaultTypeMap.MatchNamesWithUnderscores = true;
+            SqlMapper.AddTypeHandler(new DateTimeToTicksHandler());
         }
 
-        // TODO: primary key may not be id.
-        public static T Find<T>(int id)
+        // TODO: not support multiple key.
+        public static T Find<T>(object id)
         {
             using (Connection)
             {
                 string tableName = MetaData.Mapping[typeof(T).Name];
-                string sql = $"SELECT * FROM {tableName} WHERE id=@id";
-                return Connection.QueryFirstOrDefault<T>(sql, new { id });
+                var pk = MetaData.Mapping[$"{typeof(T).Name}.PrimaryKey"];
+                string sql = $"SELECT * FROM {tableName} WHERE {pk}=@{pk}";
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add(pk, id);
+                return Connection.QueryFirstOrDefault<T>(sql, parameters);
             }
         }
 

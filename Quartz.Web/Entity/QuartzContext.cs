@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Quartz.Logging;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Quartz.Entity
@@ -276,6 +275,10 @@ namespace Quartz.Entity
                     .HasColumnName("create_time")
                     .HasColumnType("datetime");
 
+                entity.Property(e => e.ExcuteTime)
+                    .HasConversion(new DateTimeToTicksConverter())
+                    .HasColumnName("excute_time");
+
                 entity.Property(e => e.Group)
                     .HasColumnName("group")
                     .HasMaxLength(50);
@@ -292,12 +295,6 @@ namespace Quartz.Entity
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.TestData)
-                    .HasConversion(new EnumToStringConverter<HttpMethod>())
-                    .IsRequired()
-                    .HasColumnName("test_data")
                     .HasMaxLength(50);
             });
 

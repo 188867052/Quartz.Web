@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Quartz.Logging;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Quartz.Entity
 {
@@ -36,13 +35,13 @@ namespace Quartz.Entity
         public LogLevel LogLevel { get; set; }
 
         /// <summary>
+        /// 执行时间.
+        /// </summary>
+        public DateTime? ExcuteTime { get; set; }
+
+        /// <summary>
         /// 创建时间.
         /// </summary>
         public DateTime CreateTime { get; set; }
-
-        /// <summary>
-        /// Http请求类型.
-        /// </summary>
-        public HttpMethod TestData { get; set; }
     }
 }

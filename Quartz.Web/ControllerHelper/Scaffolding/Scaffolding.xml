@@ -60,8 +60,8 @@
     <property Name="Group" Summary="触发器组" />
     <property Name="Message" Summary="日志记录" />
     <property Name="LogLevel" Converter="EnumToString" CSharpType="LogLevel" Summary="日志等级" />
+    <property Name="ExcuteTime" Converter="DateTimeToTicks" CSharpType="DateTime?" Summary="执行时间" />
     <property Name="CreateTime" Summary="创建时间" />
-    <property Name="TestData" Converter="EnumToString" CSharpType="HttpMethod" Summary="Http请求类型" />
   </entity>
   <entity Name="QuartzPausedTriggerGrps">
     <property Name="SchedName" />
@@ -100,10 +100,10 @@
   </entity>
   <entity Name="QuartzTriggers">
     <property Name="SchedName" />
-    <property Name="TriggerName" />
-    <property Name="TriggerGroup" />
-    <property Name="JobName" Summary="名称" />
-    <property Name="JobGroup" Summary="分组" />
+    <property Name="TriggerName" Summary="Trigger名称" />
+    <property Name="TriggerGroup" Summary="Trigger分组" />
+    <property Name="JobName" Summary="Job名称" />
+    <property Name="JobGroup" Summary="Job分组" />
     <property Name="Description" Summary="描述" />
     <property Name="NextFireTime" Converter="DateTimeToTicks" CSharpType="DateTime?" Summary="下次执行时间" />
     <property Name="PrevFireTime" Converter="DateTimeToTicks" CSharpType="DateTime?" Summary="上次执行时间" />

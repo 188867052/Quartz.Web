@@ -16,6 +16,8 @@ namespace Quartz.Web.Test
         [Fact]
         public void ManualRotatingCards()
         {
+            var log = Dapper.DapperExtension.Find<QuartzLog>(1);
+
             var modal = new ManualRotatingCard();
             var a = modal.ToHtml();
         }
