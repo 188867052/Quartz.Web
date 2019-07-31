@@ -40,7 +40,7 @@ namespace Quartz.Html
 
         protected abstract IList<ViewInstanceConstruction> CreateViewInstanceConstructions();
 
-        protected IHtmlContent Header()
+        protected virtual IHtmlContent Header()
         {
             IList<IHtmlContent> content = new List<IHtmlContent>
             {

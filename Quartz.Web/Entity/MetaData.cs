@@ -119,21 +119,21 @@
             { "QuartzLocks.SchedName", "sched_name" },
             { "QuartzLocks.LockName", "lock_name" },
 
-            { "QuartzLog.PrimaryKey", "id" },
-            { "QuartzLog", "quartz_log" },
-            { "QuartzLog.Id", "id" },
-            { "QuartzLog.Message", "message" },
-            { "QuartzLog.CreateTime", "create_time" },
-            { "QuartzLog.LogLevel", "log_level" },
-            { "QuartzLog.TestData", "test_data" },
-            { "QuartzLog.Name", "name" },
-            { "QuartzLog.Group", "group" },
-
             { "Icon.PrimaryKey", "id" },
             { "Icon", "Icon" },
             { "Icon.Id", "id" },
             { "Icon.Name", "name" },
             { "Icon.Sort", "sort" },
+
+            { "QuartzLog.PrimaryKey", "id" },
+            { "QuartzLog", "quartz_log" },
+            { "QuartzLog.Id", "id" },
+            { "QuartzLog.Name", "name" },
+            { "QuartzLog.Group", "group" },
+            { "QuartzLog.Message", "message" },
+            { "QuartzLog.LogLevel", "log_level" },
+            { "QuartzLog.CreateTime", "create_time" },
+            { "QuartzLog.TestData", "test_data" },
         };
     }
 }

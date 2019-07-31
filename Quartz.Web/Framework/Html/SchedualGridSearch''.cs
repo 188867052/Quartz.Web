@@ -1,15 +1,20 @@
 ﻿namespace Quartz.SearchFilterConfigurations
 {
     using System.Collections.Generic;
+    using AspNetCore.Extensions;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Quartz.Controllers;
     using Quartz.Entity;
     using Quartz.Files.Js;
     using Quartz.Html;
     using Quartz.Html.Buttons;
+    using Quartz.Html.Tags;
     using Quartz.Javascript;
     using Quartz.Models;
     using Quartz.Routes;
     using Quartz.ViewConfiguration.Schedule;
+    using TagHelper = AspNetCore.Extensions.TagHelper;
 
     public class SchedualGridSearch<TModel, TPostModel> : GridSearchPage<TModel, TPostModel>
          where TPostModel : SchedulePostModel
@@ -35,6 +40,13 @@
             {
                 new SchedualViewInstance(),
             };
+        }
+
+        protected override IHtmlContent Header()
+        {
+            var header = (TagHelperOutput)base.Header();
+            header.PostElement.AppendHtml(TagHelper.Create(Tag.meta, new TagAttributeList { { "http-equiv", "refresh" }, { Attr.Content, "60" }, }));
+            return header;
         }
 
         protected override void CreateButtons(IList<SimpleButton> buttons)

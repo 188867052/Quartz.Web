@@ -16,26 +16,6 @@ namespace Quartz.Entity
         public int Id { get; set; }
 
         /// <summary>
-        /// 日志记录.
-        /// </summary>
-        public string Message { get; set; }
-
-        /// <summary>
-        /// 创建时间.
-        /// </summary>
-        public DateTime CreateTime { get; set; }
-
-        /// <summary>
-        /// 日志等级.
-        /// </summary>
-        public LogLevel LogLevel { get; set; }
-
-        /// <summary>
-        /// Http请求类型.
-        /// </summary>
-        public HttpMethod TestData { get; set; }
-
-        /// <summary>
         /// 触发器名称.
         /// </summary>
         public string Name { get; set; }
@@ -44,5 +24,25 @@ namespace Quartz.Entity
         /// 触发器组.
         /// </summary>
         public string Group { get; set; }
+
+        /// <summary>
+        /// 日志记录.
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
+        /// 日志等级.
+        /// </summary>
+        public LogLevel LogLevel { get; set; }
+
+        /// <summary>
+        /// 创建时间.
+        /// </summary>
+        public DateTime CreateTime { get; set; }
+
+        /// <summary>
+        /// Http请求类型.
+        /// </summary>
+        public HttpMethod TestData { get; set; }
     }
 }

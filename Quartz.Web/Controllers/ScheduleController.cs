@@ -59,51 +59,66 @@
 
         public IActionResult GridStateChange(int index, int size)
         {
-            QuartzTriggersDataShape.Index(this.DbContext);
-            var list = this.DbContext.QuartzTriggers.PageToList(index, size, out int total);
+            using (this.DbContext)
+            {
+                QuartzTriggersDataShape.Index(this.DbContext);
+                var list = this.DbContext.QuartzTriggers.PageToList(index, size, out int total);
 
-            List<TaskScheduleModel> models = list.Select(item => new TaskScheduleModel(item)).ToList();
-            var grid = new SchedualGridConfiguration<TaskScheduleModel>();
-            var html = grid.Render(index, size, models, total);
+                List<TaskScheduleModel> models = list.Select(item => new TaskScheduleModel(item)).ToList();
+                var grid = new SchedualGridConfiguration<TaskScheduleModel>();
+                var html = grid.Render(index, size, models, total);
 
-            return this.HtmlResult(TagHelper.ToHtml(html));
+                return this.HtmlResult(TagHelper.ToHtml(html));
+            }
         }
 
         public IActionResult LogGridStateChange(int index, int size, string name, string group)
         {
-            var grid = new LogDialogGridConfiguration<QuartzLog>(name, group);
-            IQueryable<QuartzLog> query = this.DbContext.QuartzLog.AsNoTracking();
-            query = query.AddStringEqualFilter(name, o => o.Name);
-            query = query.AddStringEqualFilter(group, o => o.Group);
-            query = query.OrderByDescending(o => o.CreateTime);
+            using (this.DbContext)
+            {
+                var grid = new LogDialogGridConfiguration<QuartzLog>(name, group);
+                IQueryable<QuartzLog> query = this.DbContext.QuartzLog.AsNoTracking();
+                query = query.AddStringEqualFilter(name, o => o.Name);
+                query = query.AddStringEqualFilter(group, o => o.Group);
+                query = query.OrderByDescending(o => o.CreateTime);
 
-            IList<QuartzLog> models = query.PageToList(index, size, out int total);
-            var responsiveTable = grid.Render(index, size, models, total);
-            return this.HtmlResult(TagHelper.ToHtml(responsiveTable));
+                IList<QuartzLog> models = query.PageToList(index, size, out int total);
+                var responsiveTable = grid.Render(index, size, models, total);
+                return this.HtmlResult(TagHelper.ToHtml(responsiveTable));
+            }
         }
 
         public IActionResult LogDialog(string name, string group, int index, int size)
         {
-            IQueryable<QuartzLog> query = this.DbContext.QuartzLog.Where(o => o.Name == name && o.Group == group).OrderByDescending(o => o.CreateTime);
-            IList<QuartzLog> models = query.PageToList(index, size, out int total);
-            LogDialog dialog = new LogDialog(models, index, size, total, name, group);
-            return this.Dialog(dialog);
+            using (this.DbContext)
+            {
+                IQueryable<QuartzLog> query = this.DbContext.QuartzLog.Where(o => o.Name == name && o.Group == group).OrderByDescending(o => o.CreateTime);
+                IList<QuartzLog> models = query.PageToList(index, size, out int total);
+                LogDialog dialog = new LogDialog(models, index, size, total, name, group);
+                return this.Dialog(dialog);
+            }
         }
 
         public IActionResult DeleteDialog(string name, string group)
         {
-            var trigger = this.DbContext.QuartzTriggers.FirstOrDefault(o => o.TriggerName == name && o.TriggerGroup == group);
-            var dialog = new DeleteConfiguration(trigger);
-            return this.Dialog(dialog);
+            using (this.DbContext)
+            {
+                var trigger = this.DbContext.QuartzTriggers.FirstOrDefault(o => o.TriggerName == name && o.TriggerGroup == group);
+                var dialog = new DeleteConfiguration(trigger);
+                return this.Dialog(dialog);
+            }
         }
 
         public IActionResult Edit(string name, string group)
         {
-            QuartzTriggersDataShape.Index(this.DbContext);
-            var trigger = this.DbContext.QuartzTriggers.FirstOrDefault(o => o.TriggerName == name && o.TriggerGroup == group);
+            using (this.DbContext)
+            {
+                QuartzTriggersDataShape.Index(this.DbContext);
+                var trigger = this.DbContext.QuartzTriggers.FirstOrDefault(o => o.TriggerName == name && o.TriggerGroup == group);
 
-            var dialog = new EditScheduleDialog<EdieTaskScheduleModel, EdieTaskScheduleModel>(new EdieTaskScheduleModel(trigger));
-            return this.Dialog(dialog);
+                var dialog = new EditScheduleDialog<EdieTaskScheduleModel, EdieTaskScheduleModel>(new EdieTaskScheduleModel(trigger));
+                return this.Dialog(dialog);
+            }
         }
 
         public IActionResult ReplaceColumn(TriggerTypeEnum type)

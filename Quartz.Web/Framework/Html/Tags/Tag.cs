@@ -55,6 +55,7 @@ namespace Quartz.Html.Tags
         public const string Charset = "charset";
         public const string Checked = "checked";
         public const string Class = "class";
+        public const string Content = "content";
         public const string Data = "data";
         public const string DataColor = "data-color";
         public const string DataContainer = "data-container";

@@ -39,10 +39,11 @@
             };
 
             IList<Entity> list = new List<Entity>();
-            foreach (var entityType in entityTypes)
+
+            foreach (var table in databaseModel.Tables.OrderBy(o => o.Name))
             {
                 // TODO: may has issue.
-                var table = databaseModel.Tables.FirstOrDefault(o => o.Name.Replace("_", "").Equals(entityType.Name, StringComparison.InvariantCultureIgnoreCase));
+                var entityType = entityTypes.FirstOrDefault(o => table.Name.Replace("_", string.Empty).Equals(o.Name, StringComparison.InvariantCultureIgnoreCase));
                 var configEntity = ScaffoldConfig.Entities.FirstOrDefault(o => o.Name == entityType.Name);
                 Entity entity = new Entity
                 {
@@ -53,10 +54,10 @@
                 var properties = entityType.GetProperties();
 
                 IList<Scaffolding.Property> propertyList = new List<Scaffolding.Property>();
-                foreach (var property in properties)
+                foreach (var column in table.Columns)
                 {
                     // TODO: may has issue.
-                    var field = table.Columns.FirstOrDefault(o => o.Name.Replace("_", "").Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
+                    var property = properties.FirstOrDefault(o => o.Name.Equals(column.Name.Replace("_", string.Empty), StringComparison.InvariantCultureIgnoreCase));
                     var configProperty = configEntity?.Properties.FirstOrDefault(o => o.Name == property.Name);
                     var p = new Scaffolding.Property
                     {
@@ -75,7 +76,6 @@
 
             newConfig.Entities = list.ToArray();
             string xmlSerialized = Serialize(newConfig);
-
             File.WriteAllText(file, xmlSerialized, Encoding.UTF8);
         }
 

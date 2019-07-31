@@ -14,14 +14,13 @@ namespace Quartz.Html
 
         public static string GetNavbar()
         {
-            if (!string.IsNullOrEmpty(navCache))
+            if (string.IsNullOrEmpty(navCache))
             {
-                return navCache;
+                var div = TagHelper.Create(Tag.div, new TagAttribute(Attr.Class, "container"), Navigation.GetNavbarHeader() + Navigation.GetNavbarBody());
+                var nav = TagHelper.Create(Tag.nav, new TagAttribute(Attr.Class, "navbar navbar-primary navbar-transparent navbar-absolute"), div);
+                navCache = TagHelper.ToHtml(nav);
             }
 
-            var div = TagHelper.Create(Tag.div, new TagAttribute(Attr.Class, "container"), Navigation.GetNavbarHeader() + Navigation.GetNavbarBody());
-            var nav = TagHelper.Create(Tag.nav, new TagAttribute(Attr.Class, "navbar navbar-primary navbar-transparent navbar-absolute"), div);
-            navCache = TagHelper.ToHtml(nav);
             return navCache;
         }
 
@@ -41,7 +40,7 @@ namespace Quartz.Html
             };
             var span = TagHelper.Create(Tag.span, new TagAttribute(Attr.Class, "sr-only"), "Toggle navigation");
             var span1 = TagHelper.Create(Tag.span, new TagAttribute(Attr.Class, "icon-bar"));
-            var a = TagHelper.Create(Tag.a, aAttributes, "Material Kit Pro");
+            var a = TagHelper.Create(Tag.a, aAttributes, nameof(Quartz) + ".Web");
             var button = TagHelper.Create(Tag.button, attributes, span, span1, span1, span1);
             var div = TagHelper.Create(Tag.div, new TagAttribute(Attr.Class, "navbar-header"), button, a);
             return TagHelper.ToHtml(div);
