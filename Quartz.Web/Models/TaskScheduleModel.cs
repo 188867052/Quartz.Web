@@ -1,6 +1,7 @@
 ﻿namespace Quartz.Entity
 {
     using System;
+    using System.Globalization;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
     using Quartz;
