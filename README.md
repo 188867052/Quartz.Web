@@ -1,1 +1,1 @@
-Manage quartz windows services via the web
+Manage quartz triggers via the web
